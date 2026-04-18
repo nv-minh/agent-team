@@ -1,0 +1,27 @@
+---
+message_type: task_assignment
+message_id: msg-001
+timestamp: 2026-04-19T12:00:00Z
+from: techlead-orchestrator
+to: backend-expert
+task:
+  task_id: task-001
+  title: "Implement user authentication"
+  description: "Add JWT-based authentication to the API"
+  priority: high
+  context:
+    feature_branch: feature/auth
+    base_branch: main
+  deliverables:
+    - type: code
+      format: md
+      description: "Authentication implementation summary"
+    - type: test
+      format: md
+      description: "Test results"
+    - type: review
+      format: md
+      description: "Security review"
+deadline: 2026-04-19T14:00:00Z
+dependencies: []
+status: pending
