@@ -8,7 +8,13 @@
       "Bash(chmod +x /Users/abc/Desktop/EM-Skill/em-skill/commands/team-lead.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/arch-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/design-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/code-review-9.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/db-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/product-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/security-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/incident.sh)",
       "Bash(git -C /Users/abc/Desktop/EM-Skill status)",
       "Bash(git -C /Users/abc/Desktop/EM-Skill remote -v)",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"$\\(cat <<'EOF'\nInitial commit: EM-Skill Fullstack Engineering Agent System v1.1.0\n\nFeatures:\n- 16 specialized agents \\(8 core + 8 specialized\\) with duck: triggers\n- 16 end-to-end workflows \\(8 primary + 8 team\\)\n- 25+ reusable skills organized by category\n- 16 CLI commands \\(8 core + 8 team\\)\n- Team-in-a-box capability for full engineering team simulation\n- Iron Laws and quality gates\n- MCP integrations \\(GitHub, Context7, Exa, Memory, Playwright\\)\n- Browser automation and visual QA\n- Cross-session learning system\n\nTeam Agents:\n- Team Lead \\(duck:team-lead\\) - Orchestrator\n- Architect \\(duck:architect\\) - Architecture & technical design\n- Frontend Expert \\(duck:frontend\\) - React/Next.js, UI/UX\n- Senior Code Reviewer \\(duck:code-review\\) - 9-axis deep review\n- Database Expert \\(duck:database\\) - Schema, queries, fintech patterns\n- Product Manager \\(duck:product\\) - Requirements, GAP analysis\n- Security Reviewer \\(duck:security\\) - OWASP, STRIDE, blocking authority\n- Staff Engineer \\(duck:staff\\) - Root cause, cross-service impact\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push -u origin main)",
+      "Bash(git rm --cached -r Product-Manager-Skills agent-skills everything-claude-code get-shit-done gstack superpowers)",
+      "Bash(git commit -m \"$\\(cat <<'EOF'\nchore: remove other repos, keep only em-skill\n\n- Remove Product-Manager-Skills, agent-skills, everything-claude-code, get-shit-done, gstack, superpowers\n- Keep only em-skill directory with fullstack engineering agent system\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push origin main)",
+      "Bash(mv em-skill/* . 2>/dev/null; mv em-skill/.* . 2>/dev/null || true)"
     ]
   },
   "enableAllProjectMcpServers": true,

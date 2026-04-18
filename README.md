@@ -1,230 +1,195 @@
-<div align="center">
+# EM-Skill - Fullstack Engineering Agent/Skill/Workflow System
 
-# 🚀 EM-Skill - Fullstack Engineering Agent System
+> A comprehensive system of agents, skills, and workflows for fullstack engineering, synthesized from the best practices of 6 top AI agent/workflow repositories.
 
-### A Comprehensive System of Agents, Skills, and Workflows for Fullstack Engineering
+## Overview
 
-**Version:** 1.1.0 | **Last Updated:** April 2026
+EM-Skill provides a complete toolkit for fullstack engineering with:
+- **25-30 Skills** - Reusable patterns and practices
+- **8-12 Agents** - Specialized task handlers
+- **5-8 Workflows** - End-to-end processes
+- **Full Features** - Browser automation, MCP integrations, memory system
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Agents](https://img.shields.io/badge/Agents-16%20%288%20core%20%2B%208%20specialized%29-brightgreen)](#)
-[![Workflows](https://img.shields.io/badge/Workflows-16%20%288%20primary%20%2B%208%20team%29-orange)](#)
-[![Skills](https://img.shields.io/badge/Skills-25%2B-success)](#)
+## Quick Start
 
-[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Contributing](#-contributing)
+### Using Skills
 
----
-
-**Built from the best practices of 6 top AI agent/workflow repositories**
-
-[Product-Manager-Skills](https://github.com) • [agent-skills](https://github.com) • [everything-claude-code](https://github.com) • [get-shit-done](https://github.com) • [gstack](https://github.com) • [superpowers](https://github.com)
-
-</div>
-
----
-
-## 📋 Overview
-
-**EM-Skill** is a comprehensive fullstack engineering system that combines the power of specialized AI agents, reusable skills, and end-to-end workflows. It provides a complete toolkit for modern software development, from ideation to deployment.
-
-### 🎯 What Makes EM-Skill Different?
-
-- **Team-in-a-Box**: 8 specialized agents working together like a real engineering team
-- **Iron Laws**: Unbreakable principles that ensure code quality (TDD, Root Cause Analysis, Spec-Driven Development)
-- **Multi-Language Support**: JavaScript/TypeScript, Python, Go, Rust, Java, and more
-- **Browser Automation**: Built-in E2E testing and visual QA capabilities
-- **MCP Integrations**: GitHub, Context7, Exa, Memory, Playwright
-- **Cross-Session Learning**: Memory system that learns patterns across sessions
-
----
-
-## ✨ Features
-
-### 🤖 16 Specialized Agents
-
-| Core Agents (8) | Specialized Agents (8) |
-|-----------------|----------------------|
-| 📋 Planner | 👔 Team Lead (`duck:team-lead`) |
-| ⚡ Executor | 🏗️ Architect (`duck:architect`) |
-| 👁️ Code Reviewer | 🎨 Frontend Expert (`duck:frontend`) |
-| 🐛 Debugger | 🔍 Senior Code Reviewer (`duck:code-review`) |
-| 🧪 Test Engineer | 🗄️ Database Expert (`duck:database`) |
-| 🔒 Security Auditor | 📦 Product Manager (`duck:product`) |
-| 🎨 UI Auditor | 🔒 Security Reviewer (`duck:security`) |
-| ✅ Verifier | 👨‍💻 Staff Engineer (`duck:staff`) |
-
-### 🔄 16 End-to-End Workflows
-
-**Primary Workflows:**
-- `new-feature` - From idea to production
-- `bug-fix` - Investigate and fix bugs systematically
-- `refactoring` - Improve code quality
-- `security-audit` - Security assessment
-
-**Team Workflows:**
-- `team-review` - Full team orchestration
-- `architecture-review` - Architecture assessment
-- `design-review` - UI/UX design review
-- `code-review-9axis` - Deep 9-axis code review
-- `database-review` - Database assessment
-- `product-review` - Product requirements review
-- `security-review-advanced` - Advanced security (OWASP + STRIDE)
-- `incident-response` - Production incident handling
-
-### 🛠️ 25+ Reusable Skills
-
-**Foundation Skills:**
-1. Spec-Driven Development
-2. Brainstorming
-3. Context Engineering
-4. Writing Plans
-5. Systematic Debugging
-
-**Development Skills:**
-6. Test-Driven Development (TDD)
-7. Frontend Patterns
-8. Backend Patterns
-9. Incremental Implementation
-10. Subagent-Driven Development
-11. Source-Driven Development
-12. API Interface Design
-13. Security Hardening
-
-**Quality Skills:**
-14. Code Review (5-axis)
-15. Code Simplification
-16. Browser Testing
-17. Performance Optimization
-18. E2E Testing
-19. Security Audit
-20. API Testing
-
-**Workflow Skills:**
-21. Git Workflow
-22. CI/CD Automation
-23. Documentation
-24. Finishing Branch
-25. Deprecation & Migration
-
----
-
-## 🚀 Quick Start
-
-### Installation
+Invoke skills directly by name:
 
 ```bash
-# Clone the repository
-git clone https://github.com/nv-minh/superpower-agent.git
-cd superpower-agent
-
-# Copy EM-Skill to your project
-cp -r em-skill /path/to/your/project/
-```
-
-### Basic Usage
-
-#### Using Skills
-
-```bash
-# Invoke skills directly by name
+# Use brainstorming skill
 "Use the brainstorming skill to explore this feature idea"
-"Use the spec-driven-development skill to create a spec"
+
+# Use spec-driven-development skill
+"Use the spec-driven-development skill to create a spec for user authentication"
+
+# Use systematic-debugging skill
 "Use the systematic-debugging skill to investigate this bug"
 ```
 
-#### Using Agents
+### Using Agents
+
+Dispatch agents for specialized tasks:
 
 ```bash
-# Dispatch agents for specialized tasks
-"Agent: planner - Create implementation plan for feature X"
+# Use planner agent
+"Agent: planner - Create implementation plan for user authentication feature"
+
+# Use code-reviewer agent
 "Agent: code-reviewer - Review the changes in this PR"
+
+# Use debugger agent
 "Agent: debugger - Investigate this bug systematically"
 ```
 
-#### Using Workflows
+### Using Workflows
+
+Run end-to-end workflows:
 
 ```bash
-# Run end-to-end workflows
-"Workflow: new-feature - Take this feature from idea to production"
-"Workflow: bug-fix - Fix this bug systematically"
+# New feature workflow
+"Workflow: new-feature - Take user authentication from idea to production"
+
+# Bug fix workflow
+"Workflow: bug-fix - Fix the login bug systematically"
+
+# Security audit workflow
 "Workflow: security-audit - Audit the codebase for security issues"
 ```
 
-### CLI Commands
-
-EM-Skill provides 16 CLI commands for quick access:
-
-**Core Commands:**
-```bash
-em-skill quick <task>           # Execute quick tasks
-em-skill debug <bug>            # Systematic debugging
-em-skill review [target]        # 5-axis code review
-em-skill qa <url> [scope]       # QA testing
-em-skill ship                   # Ship workflow
-em-skill verify [spec]          # Verify implementation
-em-skill health                 # Project health check
-em-skill checkpoint <cmd>       # State management
-```
-
-**Team Commands:**
-```bash
-em-skill team-lead "task"       # Full team orchestration
-em-skill arch-review "task"     # Architecture review
-em-skill design-review "task"   # UI/UX design review
-em-skill code-review-9 "task"   # 9-axis deep review
-em-skill db-review "task"       # Database review
-em-skill product-review "task"  # Product review
-em-skill security-review "task" # Advanced security
-em-skill incident "task"        # Incident response
-```
-
----
-
-## 📚 Documentation
-
-| Document | Description |
-|----------|-------------|
-| [CLAUDE.md](./em-skill/CLAUDE.md) | Main configuration and system overview |
-| [README.md](./em-skill/README.md) | Detailed project documentation |
-| [HUONG_DAN_SU_DUNG.md](./em-skill/HUONG_DAN_SU_DUNG.md) | Vietnamese user guide |
-| [Commands README](./em-skill/commands/README.md) | CLI commands documentation |
-
-### Project Structure
+## Project Structure
 
 ```
 em-skill/
-├── skills/              # 25+ skills organized by category
-│   ├── foundation/      # Core foundational skills
-│   ├── development/     # Development workflow skills
-│   ├── quality/         # Quality assurance skills
-│   ├── workflow/        # Workflow and automation skills
-│   └── specialized/     # Language/framework-specific skills
-├── agents/              # 16 specialized agents
-│   ├── core/            # 8 core agents
-│   └── specialized/     # 8 specialized agents
-├── workflows/           # 16 end-to-end workflows
-│   ├── primary/         # 8 primary workflows
-│   └── team/            # 8 team workflows
-├── templates/           # Reusable templates
-├── hooks/              # Automation hooks
-├── commands/           # CLI commands
-└── CLAUDE.md           # Main configuration
+├── skills/                  # 25-30 skills organized by category
+│   ├── foundation/          # Core foundational skills (5)
+│   ├── development/         # Development workflow skills (8)
+│   ├── quality/             # Quality assurance skills (7)
+│   ├── workflow/            # Workflow and automation skills (5)
+│   └── specialized/         # Language/framework-specific skills
+├── agents/                  # 8-12 specialized agents
+├── workflows/               # 5-8 end-to-end workflows
+├── templates/               # Reusable templates
+│   ├── spec-template.md
+│   └── plan-template.md
+├── hooks/                   # Automation hooks
+├── commands/                # CLI commands
+└── CLAUDE.md                # Main configuration
 ```
 
----
+## Skills
 
-## 🔥 Iron Laws
+### Foundation Skills (5 skills)
 
-EM-Skill is built on unbreakable principles:
+1. **spec-driven-development** - Write specs before coding
+2. **brainstorming** - Explore ideas into designs
+3. **context-engineering** - Optimize agent context setup
+4. **writing-plans** - Break work into bite-sized tasks
+5. **systematic-debugging** - 4-phase debugging methodology
+
+### Development Skills (8 skills)
+
+6. **test-driven-development** - TDD RED-GREEN-REFACTOR
+7. **frontend-patterns** - React/Next.js/Vue patterns
+8. **backend-patterns** - API/Database patterns
+9. **incremental-implementation** - Vertical slice development
+10. **subagent-driven-development** - Fresh context per task
+11. **source-driven-development** - Code from official docs
+12. **api-interface-design** - Contract-first APIs
+13. **security-hardening** - OWASP Top 10 security
+
+### Quality Skills (7 skills)
+
+14. **code-review** - 5-axis review framework
+15. **code-simplification** - Reduce complexity
+16. **browser-testing** - DevTools MCP integration
+17. **performance-optimization** - Measure-first optimization
+18. **e2e-testing** - Playwright patterns
+19. **security-audit** - Vulnerability assessment
+20. **api-testing** - Integration testing
+
+### Workflow Skills (5 skills)
+
+21. **git-workflow** - Atomic commits
+22. **ci-cd-automation** - Feature flags, quality gates
+23. **documentation** - ADRs, API docs
+24. **finishing-branch** - Merge/PR decisions
+25. **deprecation-migration** - Code-as-liability mindset
+
+## Agents
+
+### Core Agents (8 agents)
+
+1. **planner** - Create detailed implementation plans
+2. **executor** - Execute with atomic commits
+3. **code-reviewer** - 5-axis code review
+4. **debugger** - Systematic debugging
+5. **test-engineer** - Test strategy & generation
+6. **security-auditor** - OWASP assessment
+7. **ui-auditor** - Visual QA
+8. **verifier** - Post-execution verification
+
+### Optional Agents (4 agents)
+
+9. **researcher** - Technical exploration
+10. **codebase-mapper** - Architecture analysis
+11. **integration-checker** - Cross-phase validation
+12. **performance-auditor** - Benchmarking
+
+## Workflows
+
+### Primary Workflows
+
+1. **new-feature** - From idea to production
+2. **bug-fix** - Investigate and fix bugs
+3. **refactoring** - Improve code quality
+4. **security-audit** - Security assessment
+
+### Support Workflows
+
+5. **project-setup** - Initialize new projects
+6. **documentation** - Generate and update docs
+7. **deployment** - Deploy and monitor
+8. **retro** - Learn and improve
+
+## Special Features
+
+### ✅ Browser Automation
+
+- Headless browser for E2E testing
+- DevTools MCP integration
+- Visual QA capabilities
+- Screenshot comparison
+
+### ✅ MCP Integrations
+
+- **GitHub** - Repository context
+- **Context7** - Documentation search
+- **Exa** - Web research
+- **Memory** - Cross-session learning
+- **Playwright** - Browser automation
+
+### ✅ Memory System
+
+- Learn patterns across sessions
+- Remember user preferences
+- Track project conventions
+- Build knowledge base
+
+## Iron Laws
 
 1. **TDD Iron Law**: NO PRODUCTION CODE WITHOUT FAILING TEST
 2. **Debugging Iron Law**: NO FIXES WITHOUT ROOT CAUSE
 3. **Skill Iron Law**: ALL SKILLS MUST HAVE FAILING TESTS
 4. **Spec Iron Law**: NO CODE WITHOUT SPEC (for features)
 
----
+## Development Lifecycle
 
-## 🛡️ Three-Tier Boundary System
+```
+DEFINE → PLAN → BUILD → VERIFY → REVIEW → SIMPLIFY → SHIP
+```
+
+## Three-Tier Boundary System
 
 ### Always Do
 - Run tests before commits
@@ -247,28 +212,44 @@ EM-Skill is built on unbreakable principles:
 - Skip code review
 - Push to main without tests
 
----
-
-## 🌐 Tech Stack Support
+## Tech Stack Support
 
 ### Languages
-JavaScript/TypeScript • Python • Go • Rust • Java • Kotlin • PHP • C# • C++
+- JavaScript/TypeScript
+- Python
+- Go
+- Rust
+- Java
+- Kotlin
+- PHP
+- C#
+- C++
 
 ### Frontend Frameworks
-React • Next.js • Vue • Svelte • Angular
+- React
+- Next.js
+- Vue
+- Svelte
+- Angular
 
 ### Backend Frameworks
-Node.js (Express, Fastify) • Python (Django, Flask, FastAPI) • Go (Gin, Echo) • Java (Spring Boot) • PHP (Laravel)
+- Node.js (Express, Fastify)
+- Python (Django, Flask, FastAPI)
+- Go (Gin, Echo)
+- Java (Spring Boot)
+- PHP (Laravel)
 
-### Databases
-PostgreSQL • MySQL • MongoDB • Redis
+## Quality Gates
 
-### Testing
-Jest • Playwright • Cypress • pytest
+- [ ] All skills have YAML frontmatter
+- [ ] All agents have completion markers
+- [ ] All workflows have verification steps
+- [ ] Documentation is complete
+- [ ] Tests are passing
+- [ ] Code review is done
+- [ ] Security audit is passed
 
----
-
-## 📖 Usage Examples
+## Usage Examples
 
 ### Example 1: Building a New Feature
 
@@ -309,19 +290,43 @@ Jest • Playwright • Cypress • pytest
 "Agent: code-reviewer - Review the bug fix"
 ```
 
----
+## Source Repositories
 
-## 🔧 Development Lifecycle
+EM-Skill synthesizes best practices from:
 
-```
-DEFINE → PLAN → BUILD → VERIFY → REVIEW → SIMPLIFY → SHIP
-```
+1. **Product-Manager-Skills** (47 skills)
+   - 3-tier architecture
+   - Coaching approach
+   - Interactive flows
 
----
+2. **agent-skills** (20 skills)
+   - Development lifecycle
+   - Iron laws
+   - 5-axis code review
 
-## 🤝 Contributing
+3. **everything-claude-code** (185+ skills)
+   - Multi-language support
+   - Framework-specific patterns
+   - MCP integrations
 
-We welcome contributions! When adding new skills or agents:
+4. **get-shit-done** (GSD) - 24 agents, 50+ commands
+   - Spec-driven development
+   - Atomic commits
+   - Multi-layer QA
+
+5. **gstack** (28 skills)
+   - Team-in-a-box
+   - Velocity multiplier
+   - Browser-in-CLI
+
+6. **superpowers** (16 skills)
+   - Iron laws
+   - Subagent-driven development
+   - Systematic debugging
+
+## Contributing
+
+When adding new skills or agents:
 
 1. Follow the established format
 2. Include YAML frontmatter
@@ -329,45 +334,17 @@ We welcome contributions! When adding new skills or agents:
 4. Test thoroughly
 5. Document clearly
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
+## Version
+
+Current version: 1.1.0
+Last updated: 2026-04-19
+
+**Total Counts:** Agents: 16 (8 core + 8 specialized), Workflows: 16 (8 primary + 8 team)
+
+## License
+
+MIT License - Feel free to use and adapt for your projects
 
 ---
-
-## 📊 Quality Gates
-
-- [ ] All skills have YAML frontmatter
-- [ ] All agents have completion markers
-- [ ] All workflows have verification steps
-- [ ] Documentation is complete
-- [ ] Tests are passing
-- [ ] Code review is done
-- [ ] Security audit is passed
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-EM-Skill synthesizes best practices from:
-
-1. **Product-Manager-Skills** (47 skills) - 3-tier architecture, coaching approach
-2. **agent-skills** (20 skills) - Development lifecycle, Iron Laws
-3. **everything-claude-code** (185+ skills) - Multi-language support
-4. **get-shit-done** (GSD) - Spec-driven development, atomic commits
-5. **gstack** (28 skills) - Team-in-a-box, velocity multiplier
-6. **superpowers** (16 skills) - Iron Laws, subagent-driven development
-
----
-
-<div align="center">
 
 **Built with ❤️ from the best of 6 top AI agent/workflow repositories**
-
-[⬆ Back to Top](#-em-skill---fullstack-engineering-agent-system)
-
-</div>
