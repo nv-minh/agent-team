@@ -1,0 +1,24 @@
+Expected tmux session structure for distributed orchestration:
+
+Session: claude-work
+Windows:
+  0: orchestrator (active)
+  1: backend
+  2: frontend
+  3: database
+
+Directory structure:
+/tmp/claude-work-reports/
+├── backend/
+├── frontend/
+├── database/
+└── techlead/
+
+/tmp/claude-work-queue/
+├── pending/
+├── processing/
+└── completed/
+
+/tmp/claude-work-logs/
+
+/tmp/claude-work-sync/
