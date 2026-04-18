@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/abc/Desktop/EM-Skill/get-shit-done/get-shit-done/workflows/ | grep -E \"\\\\.\\(js|ts|json\\)$\" | head -10)",
+      "Bash(tree em-skill -L -I 'node_modules' 2>/dev/null || find em-skill -type d | sort)",
+      "Bash(chmod +x /Users/abc/Desktop/EM-Skill/em-skill/hooks/*.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/*.sh 2>/dev/null; chmod +x /Users/abc/Desktop/EM-Skill/em-skill/hooks/pre-commit /Users/abc/Desktop/EM-Skill/em-skill/hooks/commit-msg /Users/abc/Desktop/EM-Skill/em-skill/hooks/pre-push /Users/abc/Desktop/EM-Skill/em-skill/commands/*.sh 2>/dev/null; echo \"Made scripts executable\")",
+      "Bash(chmod +x /Users/abc/Desktop/EM-Skill/em-skill/hooks/pre-commit /Users/abc/Desktop/EM-Skill/em-skill/hooks/commit-msg /Users/abc/Desktop/EM-Skill/em-skill/hooks/pre-push && chmod +x /Users/abc/Desktop/EM-Skill/em-skill/commands/*.sh && echo \"✓ All scripts made executable\")",
+      "Bash(chmod +x /Users/abc/Desktop/EM-Skill/em-skill/commands/team-lead.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/arch-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/design-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/code-review-9.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/db-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/product-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/security-review.sh /Users/abc/Desktop/EM-Skill/em-skill/commands/incident.sh)",
+      "Bash(git -C /Users/abc/Desktop/EM-Skill status)",
+      "Bash(git -C /Users/abc/Desktop/EM-Skill remote -v)",
+      "Bash(git add .)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "postgresql"
+  ]
+}
