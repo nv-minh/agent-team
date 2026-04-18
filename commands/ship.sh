@@ -19,6 +19,36 @@ echo -e "${BLUE}🚢 EM-Skill Ship Workflow${NC}"
 echo "========================="
 echo ""
 
+# Function to show usage
+show_usage() {
+    echo "Usage:"
+    echo "  em-skill ship [options]"
+    echo ""
+    echo "Options:"
+    echo "  --dry-run    # Run through workflow without making changes"
+    echo "  --no-test     # Skip test execution"
+    echo ""
+    echo "This command will:"
+    echo "  1. Check for uncommitted changes"
+    echo "  2. Detect and merge base branch"
+    echo "  3. Run tests"
+    echo "  4. Review changes"
+    echo "  5. Bump VERSION"
+    echo "  6. Update CHANGELOG"
+    echo "  7. Commit changes"
+    echo "  8. Push to remote"
+    echo "  9. Create pull request"
+    echo ""
+    exit 1
+}
+
+# Check if we're in a git repository
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+    echo -e "${RED}❌ Error: Not in a git repository${NC}"
+    echo ""
+    exit 1
+fi
+
 # Check git status
 if [ -n "$(git status --porcelain)" ]; then
     echo -e "${YELLOW}⚠ Uncommitted changes detected${NC}"

@@ -1,31 +1,27 @@
 #!/bin/bash
-# code-review-9.sh - DEPRECATED: Use code-review-deep instead
-# This wrapper is maintained for backward compatibility
+# code-review-deep.sh - Deep 9-axis code review with Senior Code Reviewer and Security Reviewer
+# Usage: em-skill code-review-deep [pr_or_code_description]
 
 set -e
 
-echo "⚠️  DEPRECATED: Use 'em-skill code-review-deep' instead"
-echo "This wrapper will be removed in v2.0.0"
-echo ""
-
-# Execute the new command
-exec "$(dirname "$0")/code-review-deep.sh" "$@"
+# Description
+echo "🔍 Code Review (Deep) - Comprehensive Code Quality Assessment"
 echo ""
 echo "This command performs a comprehensive 9-axis code review involving:"
 echo "  - Senior Code Reviewer (9-axis review: Correctness, Readability, Architecture, Security, Performance, Testing, Maintainability, Scalability, Documentation)"
 echo "  - Security Reviewer (OWASP Top 10, vulnerability assessment)"
 echo ""
 
-# Check if PR/code description is provided
+# Input validation
 if [ -z "$1" ]; then
-    echo "❌ Error: Please provide a PR or code description"
+    echo "❌ Error: Missing required argument"
     echo ""
-    echo "Usage: em-skill code-review-9 \"[PR URL or code description]\""
+    echo "Usage: em-skill code-review-deep \"[PR URL or code description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill code-review-9 \"Review PR #123 for payment processing\""
-    echo "  em-skill code-review-9 \"Review authentication module for security issues\""
-    echo "  em-skill code-review-9 \"Assess code quality of user service refactoring\""
+    echo "  em-skill code-review-deep \"Review PR #123 for payment processing\""
+    echo "  em-skill code-review-deep \"Review authentication module for security issues\""
+    echo "  em-skill code-review-deep \"Assess code quality of user service refactoring\""
     exit 1
 fi
 
@@ -35,11 +31,11 @@ echo "📋 Code: $CODE_DESCRIPTION"
 echo ""
 
 # Create workflow document
-WORKFLOW_FILE=".planning/code-review-9axis-workflow.md"
+WORKFLOW_FILE=".planning/code-review-deep-workflow.md"
 mkdir -p .planning
 
 cat > "$WORKFLOW_FILE" << EOF
-# Code Review (9-Axis) Workflow
+# Code Review (Deep) Workflow
 
 **Date:** $(date +%Y-%m-%d)
 **Code:** $CODE_DESCRIPTION
@@ -189,7 +185,7 @@ echo "✅ Workflow document created: $WORKFLOW_FILE"
 echo ""
 
 # Trigger Senior Code Reviewer agent
-echo "🚀 Starting 9-Axis Code Review..."
+echo "🚀 Starting Deep Code Review..."
 echo ""
 echo "Trigger: Agent: senior-code-reviewer - Perform 9-axis review for: $CODE_DESCRIPTION"
 echo "Then: Agent: security-reviewer - Perform security assessment"

@@ -1,5 +1,6 @@
 ---
 name: planner
+trigger: duck:planner
 description: Creates detailed implementation plans from specs and requirements. Use when starting a new feature, breaking down work, or needing a structured approach.
 ---
 

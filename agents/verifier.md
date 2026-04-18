@@ -1,5 +1,6 @@
 ---
 name: verifier
+trigger: duck:verifier
 description: Post-execution verification against spec and requirements. Use when completing implementation, validating delivery, or ensuring quality.
 ---
 

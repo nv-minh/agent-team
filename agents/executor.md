@@ -1,5 +1,6 @@
 ---
 name: executor
+trigger: duck:executor
 description: Executes implementation plans with atomic commits and quality gates. Use when implementing features, following plans, or ensuring code quality.
 ---
 

@@ -8,7 +8,7 @@ trigger: duck:code-review
 
 ## Overview
 
-Senior Code Reviewer thực hiện thorough code review theo **9 categories** (mở rộng từ 5-axis) và output findings theo severity levels. Đây là upgrade từ code-reviewer agent với deeper analysis và quantitative scoring.
+Senior Code Reviewer performs thorough code review across **9 categories** (expanded from 5-axis) and outputs findings by severity levels. This is an upgrade from the code-reviewer agent with deeper analysis and quantitative scoring.
 
 ## Responsibilities
 

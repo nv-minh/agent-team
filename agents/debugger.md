@@ -1,5 +1,6 @@
 ---
 name: debugger
+trigger: duck:debugger
 description: Systematic debugging using scientific method with root cause investigation. Use when investigating bugs, diagnosing issues, or finding root causes.
 ---
 

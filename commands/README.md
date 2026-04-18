@@ -1,13 +1,24 @@
 # EM-Skill Commands
 
-CLI commands để tăng tốc các workflows thường gặp.
+CLI commands to accelerate common workflows.
 
 Source: GSD + gstack + superpowers best practices
+
+---
+
+## ⚠️ Deprecation Notice
+
+**`code-review-9.sh` is deprecated.** Use `code-review-deep.sh` instead.
+
+The command `em-skill code-review-9` will be removed in v2.0.0.
+Migrate to: `em-skill code-review-deep`
+
+---
 
 ## Commands Available
 
 ### 1. quick.sh ⚡
-Execute quick tasks với minimal overhead.
+Execute quick tasks with minimal overhead.
 
 **Usage:**
 ```bash
@@ -32,8 +43,59 @@ em-skill quick update dependencies
 
 ---
 
+## Command Selection Guide
+
+### Quick Decision Tree
+
+```
+What type of task?
+│
+├─ Quick fix (< 5 min)?
+│  └─ Use: quick.sh
+│
+├─ Bug investigation?
+│  └─ Use: debug.sh
+│
+├─ Code review needed?
+│  ├─ Quick review (staged)?
+│  │  └─ Use: review.sh
+│  │
+│  └─ Deep review (PR/commit)?
+│     └─ Use: code-review-deep.sh
+│
+├─ QA testing?
+│  └─ Use: qa.sh
+│
+├─ Ready to ship?
+│  └─ Use: ship.sh
+│
+├─ Verify implementation?
+│  └─ Use: verify.sh
+│
+├─ Check project health?
+│  └─ Use: health.sh
+│
+├─ Save/restore state?
+│  └─ Use: checkpoint.sh
+│
+└─ Team review needed?
+   └─ Use team-lead.sh
+```
+
+---
+
+## Deprecated Commands
+
+The following commands are deprecated and will be removed in v2.0.0:
+
+| Old Command | New Command | Migration |
+|-------------|-------------|-----------|
+| `code-review-9.sh` | `code-review-deep.sh` | Update scripts and aliases |
+
+---
+
 ### 2. debug.sh 🐛
-Systematic debugging với root cause investigation.
+Systematic debugging with root cause investigation.
 
 **Usage:**
 ```bash
@@ -48,10 +110,10 @@ em-skill debug "Memory leak in WebSocket handler"
 ```
 
 **Process:**
-1. INVESTIGATE - Reproduce và collect data
-2. ANALYZE - Examine code và patterns
-3. HYPOTHESIZE - Form và test hypothesis
-4. IMPLEMENT - Fix root cause với regression test
+1. INVESTIGATE - Reproduce and collect data
+2. ANALYZE - Examine code and patterns
+3. HYPOTHESIZE - Form and test hypothesis
+4. IMPLEMENT - Fix root cause with regression test
 
 **Iron Law:** NO FIXES WITHOUT ROOT CAUSE
 
@@ -74,11 +136,11 @@ em-skill review --file src/auth/login.ts
 ```
 
 **5 Axes:**
-1. Correctness - Code đúng logic?
-2. Readability - Code dễ hiểu?
-3. Architecture - Tuân thủ kiến trúc?
-4. Security - Có lỗ hổng?
-5. Performance - Có vấn đề hiệu suất?
+1. Correctness - Is code logic correct?
+2. Readability - Is code easy to understand?
+3. Architecture - Does it follow architecture?
+4. Security - Are there vulnerabilities?
+5. Performance - Are there performance issues?
 
 ---
 
@@ -198,7 +260,7 @@ em-skill health
 ---
 
 ### 8. checkpoint.sh 💾
-Save và restore working state.
+Save and restore working state.
 
 **Usage:**
 ```bash
@@ -298,20 +360,36 @@ em-skill design-review "Review mobile app navigation design"
 
 ---
 
-### 12. code-review-9.sh 🔍
+### 12. code-review-deep.sh 🔍 (PRIMARY)
+**⚠️ Note:** `code-review-9.sh` is deprecated. Use this command instead.
+
 Deep 9-axis code review with Senior Code Reviewer and Security Reviewer.
+
+**Usage:**
+```bash
+em-skill code-review-deep "[PR or code description]"
+```
+
+**Examples:**
+```bash
+em-skill code-review-deep "Review PR #123 for payment processing"
+em-skill code-review-deep "Review authentication module for security"
+em-skill code-review-deep "Assess code quality of user service refactoring"
+```
+
+---
+
+### 12b. code-review-9.sh 🔍 (DEPRECATED)
+⚠️ **DEPRECATED:** Use `code-review-deep.sh` instead.
+
+This wrapper is maintained for backward compatibility and will be removed in v2.0.0.
 
 **Usage:**
 ```bash
 em-skill code-review-9 "[PR or code description]"
 ```
 
-**Examples:**
-```bash
-em-skill code-review-9 "Review PR #123 for payment processing"
-em-skill code-review-9 "Review authentication module for security"
-em-skill code-review-9 "Assess code quality of user service refactoring"
-```
+Automatically redirects to `code-review-deep.sh`.
 
 **9 Axes:**
 1. Correctness ✅
@@ -439,6 +517,40 @@ em-skill incident "Payment processing failures"
 
 ---
 
+## Command Selection Guide
+
+### Code Review Decision Tree
+
+```
+Need to review code?
+│
+├─ Quick review of staged changes?
+│  └─ Use: review.sh (5-axis review)
+│
+├─ Comprehensive review for PR/commit?
+│  └─ Use: code-review-deep.sh (9-axis + security)
+│
+└─ Security-focused review?
+   └─ Use: security-review.sh (OWASP + STRIDE)
+```
+
+### Security Review Decision Tree
+
+```
+Need security assessment?
+│
+├─ General security audit?
+│  └─ Use: security-audit workflow
+│
+├─ Advanced security review (OWASP + STRIDE)?
+│  └─ Use: security-review.sh
+│
+└─ Production security incident?
+   └─ Use: incident.sh
+```
+
+---
+
 ## Command Integration Table
 
 | Command | Uses Agent(s) | Uses Workflow | Purpose |
@@ -454,15 +566,19 @@ em-skill incident "Payment processing failures"
 | **team-lead** | **team-lead + all** | **team-review** | **Full team orchestration** |
 | **arch-review** | **architect + staff** | **architecture-review** | **Architecture assessment** |
 | **design-review** | **product + frontend** | **design-review** | **UI/UX design review** |
-| **code-review-9** | **code-review + security** | **code-review-9axis** | **9-axis deep review** |
+| **code-review-deep** ⭐ | **code-review + security** | **code-review-9axis** | **9-axis deep review** |
+| code-review-9 ⚠️ | *(deprecated wrapper)* | *(deprecated)* | *(Use code-review-deep)* |
 | **db-review** | **database + architect** | **database-review** | **Database assessment** |
 | **product-review** | **product + architect** | **product-review** | **Product requirements review** |
 | **security-review** | **security + staff** | **security-review-advanced** | **Advanced security** |
 | **incident** | **staff + security** | **incident-response** | **Incident handling** |
 
+⭐ = Primary command
+⚠️ = Deprecated
+
 ---
 
-## Cài đặt Commands
+## Installing Commands
 
 **All 16 commands (8 core + 8 team) are installed using the same methods.**
 
@@ -505,11 +621,14 @@ alias em-skill-checkpoint='bash /path/to/em-skill/commands/checkpoint.sh'
 alias em-skill-team-lead='bash /path/to/em-skill/commands/team-lead.sh'
 alias em-skill-arch-review='bash /path/to/em-skill/commands/arch-review.sh'
 alias em-skill-design-review='bash /path/to/em-skill/commands/design-review.sh'
-alias em-skill-code-review-9='bash /path/to/em-skill/commands/code-review-9.sh'
+alias em-skill-code-review-deep='bash /path/to/em-skill/commands/code-review-deep.sh'
 alias em-skill-db-review='bash /path/to/em-skill/commands/db-review.sh'
 alias em-skill-product-review='bash /path/to/em-skill/commands/product-review.sh'
 alias em-skill-security-review='bash /path/to/em-skill/commands/security-review.sh'
 alias em-skill-incident='bash /path/to/em-skill/commands/incident.sh'
+
+# Legacy (deprecated)
+alias em-skill-code-review-9='bash /path/to/em-skill/commands/code-review-9.sh'
 ```
 
 ---

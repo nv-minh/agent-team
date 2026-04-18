@@ -12,35 +12,66 @@ set -e
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}👁️ EM-Skill Code Review${NC}"
 echo "======================="
 echo ""
 
+# Function to show usage
+show_usage() {
+    echo "Usage:"
+    echo "  em-skill review              # Review staged changes"
+    echo "  em-skill review <branch>     # Review diff from branch"
+    echo "  em-skill review <commit>     # Review specific commit"
+    echo "  em-skill review --file <path> # Review specific file"
+    echo ""
+    echo "Examples:"
+    echo "  em-skill review main         # Review changes from main branch"
+    echo "  em-skill review HEAD~1       # Review last commit"
+    echo "  em-skill review --file src/app.ts # Review specific file"
+    exit 1
+}
+
 # Determine what to review
 if [ -z "$1" ]; then
     # Review staged changes
     echo "Reviewing staged changes..."
-    BASE=$(git diff --cached --name-only | wc -l)
+    BASE=$(git diff --cached --name-only 2>/dev/null | wc -l)
     if [ "$BASE" -eq 0 ]; then
-        echo "ℹ️  No staged changes found"
+        echo -e "${YELLOW}ℹ️  No staged changes found${NC}"
         echo ""
-        echo "Usage options:"
-        echo "  em-skill review              # Review staged changes"
-        echo "  em-skill review <branch>     # Review diff from branch"
-        echo "  em-skill review <commit>     # Review specific commit"
-        echo "  em-skill review --file <path> # Review specific file"
-        exit 1
+        show_usage
     fi
     REVIEW_TARGET="staged"
-    REVIEW_FILES=$(git diff --cached --name-only)
+    REVIEW_FILES=$(git diff --cached --name-only 2>/dev/null)
+elif [ "$1" = "--file" ]; then
+    # Review specific file
+    if [ -z "$2" ]; then
+        echo -e "${RED}❌ Error: --file requires a file path${NC}"
+        echo ""
+        show_usage
+    fi
+    if [ ! -f "$2" ]; then
+        echo -e "${RED}❌ Error: File not found: $2${NC}"
+        echo ""
+        exit 1
+    fi
+    REVIEW_TARGET="--file"
+    REVIEW_FILES="$2"
 else
+    # Review branch or commit
     REVIEW_TARGET="$1"
-    if [ "$1" = "--file" ]; then
-        REVIEW_FILES="$2"
-    else
-        REVIEW_FILES=$(git diff "$1" --name-only)
+    REVIEW_FILES=$(git diff "$1" --name-only 2>/dev/null)
+    if [ -z "$REVIEW_FILES" ]; then
+        echo -e "${RED}❌ Error: No changes found compared to '$1'${NC}"
+        echo ""
+        echo "Possible causes:"
+        echo "  - Branch/commit doesn't exist"
+        echo "  - No differences from specified target"
+        echo ""
+        exit 1
     fi
 fi
 

@@ -8,7 +8,7 @@ trigger: duck:staff
 
 ## Overview
 
-Staff Engineer agent thực hiện **deep technical investigation**, **root cause analysis**, và **cross-service impact analysis**. Đây là highest-level technical agent với broad system knowledge,擅长 giải quyết các vấn đề phức tạp mà vượt quá khả năng của các specialized agents khác.
+Staff Engineer agent performs **deep technical investigation**, **root cause analysis**, and **cross-service impact analysis**. This is the highest-level technical agent with broad system knowledge, specializing in resolving complex issues that exceed the capabilities of other specialized agents.
 
 ## Responsibilities
 

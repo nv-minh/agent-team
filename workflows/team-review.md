@@ -201,7 +201,25 @@ The Team Review workflow orchestrates a comprehensive cross-functional review in
 - [ ] Decision made
 - [ ] Next steps defined
 
+**Completion Marker:** ## ✅ TEAM_LEAD_CONSOLIDATION_COMPLETE
+
 ---
+
+## Revision Loop (max 3 iterations)
+
+To prevent circular dependencies, the workflow includes iteration limits:
+
+- If Product Manager identifies issues requiring Architect revision → Maximum 3 iterations
+- If issues persist after 3 iterations → Escalate to Team Lead for final decision
+- Team Lead makes binding decision based on all available information
+
+**Revision Process:**
+```yaml
+iteration_limit: 3
+escalation_trigger: "After 3 iterations without resolution"
+escalation_target: "Team Lead (duck:team-lead)"
+final_authority: "Team Lead decision is binding"
+```
 
 ## Handoff Contracts
 

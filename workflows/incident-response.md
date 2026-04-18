@@ -7,10 +7,23 @@ description: Production incident handling with Staff Engineer and Security Revie
 
 ## Overview
 
-The Incident Response workflow provides systematic production incident handling, combining the Staff Engineer's root cause analysis expertise with the Security Reviewer's security investigation capabilities. This workflow ensures incidents are investigated thoroughly and resolved effectively.
+The Incident Response workflow provides systematic production incident handling, combining the Staff Engineer's root cause analysis expertise with the Security Reviewer's security investigation capabilities.
 
-## When to Use
+## Modular Components
 
+This workflow is split into focused components for better maintainability and token efficiency:
+
+- **Overview:** [workflows/incident/overview.md](workflows/incident/overview.md)
+- **Stage 1:** [Initial Assessment & Triage](workflows/incident/initial-triage.md) - Staff Engineer
+- **Stage 2:** [Security Investigation](workflows/incident/security-investigation.md) - Security Reviewer (if applicable)
+- **Stage 3:** [Root Cause Analysis](workflows/incident/root-cause-analysis.md) - Staff Engineer
+- **Stage 4:** [Cross-Service Impact Analysis](workflows/incident/cross-service-impact.md) - Staff Engineer
+- **Stage 5:** [Resolution & Verification](workflows/incident/resolution-verification.md) - Staff Engineer + Security Reviewer
+- **Stage 6:** [Postmortem & Prevention](workflows/incident/postmortem-prevention.md) - Staff Engineer + Security Reviewer
+
+## Quick Reference
+
+### When to Use
 - Production outages
 - Performance degradation
 - Security incidents
@@ -18,152 +31,26 @@ The Incident Response workflow provides systematic production incident handling,
 - Critical bugs in production
 - Customer-impacting failures
 
-## Workflow Stages
+### Workflow Stages
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│  TRIAGE → SECURITY → ROOT CAUSE → IMPACT → RESOLUTION → POSTMORTEM  │
+│    1         2           3            4          5            6       │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
-### Stage 1: Initial Assessment & Triage (Staff Engineer)
+### Agent Triggers
+- Stage 1: `duck:staff` - Initial assessment and triage
+- Stage 2: `duck:security` - Security investigation (if applicable)
+- Stage 3: `duck:staff` - Root cause analysis
+- Stage 4: `duck:staff` - Cross-service impact analysis
+- Stage 5: `duck:staff` + `duck:security` - Resolution and verification
+- Stage 6: `duck:staff` + `duck:security` - Postmortem and prevention
 
-**Agent:** `duck:staff`
-
-**Actions:**
-- Assess incident severity (P0/P1/P2/P3)
-- Understand incident scope
-- Identify affected services/users
-- Begin timeline reconstruction
-- Gather initial data
-
-**Input:**
-- Incident report/alert
-- Monitoring dashboards
-- Logs
-- User reports
-
-**Output:** Initial Incident Assessment
-
-**Quality Gate:**
-- [ ] Severity assessed
-- [ ] Scope identified
-- [ ] Timeline started
-- [ ] Initial data gathered
-
----
-
-### Stage 2: Security Investigation (if applicable)
-
-**Agent:** `duck:security`
-
-**Actions:**
-- Check for security breach
-- Assess if incident is security-related
-- Review audit logs
-- Check for unauthorized access
-- Assess data exposure
-
-**Trigger:** Any suspicion of security involvement
-
-**Output:** Security Investigation Report
-
-**Quality Gate:**
-- [ ] Security involvement assessed
-- [ ] Breach investigation completed (if applicable)
-- [ ] Audit logs reviewed
-- [ ] Data exposure assessed
-
----
-
-### Stage 3: Root Cause Analysis (Staff Engineer)
-
-**Agent:** `duck:staff`
-
-**Actions:**
-- Apply 5 Whys methodology
-- Create fishbone diagram
-- Reconstruct complete timeline
-- Identify contributing factors
-- Determine root cause
-
-**Input:**
-- All available logs
-- Metrics
-- Traces
-- Monitoring data
-- Team interviews
-
-**Output:** Root Cause Analysis Report
-
-**Quality Gate:**
-- [ ] 5 Whys completed
-- [ ] Root cause identified
-- [ ] Contributing factors documented
-- [ ] Timeline complete
-
----
-
-### Stage 4: Cross-Service Impact Analysis (Staff Engineer)
-
-**Agent:** `duck:staff`
-
-**Actions:**
-- Map affected services
-- Analyze dependency impact
-- Assess data integrity
-- Identify cascade effects
-- Document user impact
-
-**Input:**
-- System architecture
-- Service dependencies
-- Data flow diagrams
-
-**Output:** Impact Analysis Report
-
-**Quality Gate:**
-- [ ] Direct impact mapped
-- [ ] Indirect impact assessed
-- [ ] Dependencies analyzed
-- [ ] User impact documented
-
----
-
-### Stage 5: Resolution & Verification (Staff Engineer + Security Reviewer)
-
-**Agents:** `duck:staff` + `duck:security`
-
-**Actions:**
-- Implement fixes
-- Verify resolution
-- Assess if security patches needed
-- Document temporary workarounds
-- Plan permanent fixes
-
-**Output:** Resolution Report
-
-**Quality Gate:**
-- [ ] Issue resolved
-- [ ] Verification completed
-- [ ] Security reviewed (if applicable)
-- [ ] Documentation updated
-
----
-
-### Stage 6: Postmortem & Prevention (Staff Engineer + Security Reviewer)
-
-**Agents:** `duck:staff` + `duck:security`
-
-**Actions:**
-- Create blameless postmortem
-- Identify lessons learned
-- Create action items
-- Update runbooks
-- Improve monitoring/alerting
-
-**Output:** Incident Postmortem Report
-
-**Quality Gate:**
-- [ ] Postmortem completed
-- [ ] Lessons learned documented
-- [ ] Action items created
-- [ ] Prevention measures defined
-- [ ] Follow-up scheduled
+### Completion Marker
+## ✅ INCIDENT_RESPONSE_COMPLETE
 
 ---
 

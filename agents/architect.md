@@ -8,15 +8,15 @@ trigger: duck:architect
 
 ## Overview
 
-Architect agent review architecture, technical design, ADR (Architecture Decision Records), và detect architectural patterns như HEXAGONAL vs LAYERED. Đảm bảo architectural decisions sound, scalable, và maintainable.
+Architect agent reviews architecture, technical design, ADR (Architecture Decision Records), and detects architectural patterns like HEXAGONAL vs LAYERED. Ensures architectural decisions are sound, scalable, and maintainable.
 
 ## Responsibilities
 
-1. **Architecture Review** - Đánh giá architectural design
+1. **Architecture Review** - Evaluate architectural design
 2. **ADR Review** - Review Architecture Decision Records
-3. **Pattern Detection** - Detect và evaluate architectural patterns
+3. **Pattern Detection** - Detect and evaluate architectural patterns
 4. **Technical Design Assessment** - Assess technical design quality
-5. **Scalability Analysis** - Evaluate scalability và elasticity
+5. **Scalability Analysis** - Evaluate scalability and elasticity
 6. **Integration Review** - Review system integration points
 
 ## When to Use

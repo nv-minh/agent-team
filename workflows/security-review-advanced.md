@@ -7,10 +7,21 @@ description: Advanced security review with Security Reviewer and Staff Engineer 
 
 ## Overview
 
-The Security Review (Advanced) workflow provides comprehensive security assessment combining OWASP Top 10 evaluation with STRIDE threat modeling. It leverages the Security Reviewer's blocking authority and the Staff Engineer's deep technical investigation capabilities.
+The Security Review (Advanced) workflow provides comprehensive security assessment combining OWASP Top 10 evaluation with STRIDE threat modeling.
 
-## When to Use
+## Modular Components
 
+This workflow is split into focused components for better maintainability and token efficiency:
+
+- **Overview:** [workflows/security/overview.md](workflows/security/overview.md)
+- **Stage 1:** [OWASP Assessment](workflows/security/owasp-assessment.md) - Security Reviewer
+- **Stage 2:** [STRIDE Threat Modeling](workflows/security/stride-threat-modeling.md) - Security Reviewer + Staff Engineer
+- **Stage 3:** [Deep Investigation](workflows/security/deep-investigation.md) - Staff Engineer
+- **Stage 4:** Consolidation - Security Reviewer + Staff Engineer
+
+## Quick Reference
+
+### When to Use
 - Pre-deployment security assessment
 - Architecture security review
 - Application security audit
@@ -18,119 +29,24 @@ The Security Review (Advanced) workflow provides comprehensive security assessme
 - Threat modeling
 - Security incident postmortem
 
-## Workflow Stages
+### Workflow Stages
+```
+┌─────────────────────────────────────────────────────────┐
+│                                                         │
+│  OWASP → STRIDE → DEEP INVESTIGATION → CONSOLIDATION   │
+│   1        2              3                  4           │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+```
 
-### Stage 1: OWASP Top 10 Assessment (Security Reviewer)
+### Agent Triggers
+- Stage 1: `duck:security` - OWASP Top 10 assessment
+- Stage 2: `duck:security` + `duck:staff` - STRIDE threat modeling
+- Stage 3: `duck:staff` - Deep security investigation
+- Stage 4: Consolidation by Security Reviewer + Staff Engineer
 
-**Agent:** `duck:security`
-
-**Actions:**
-- Comprehensive OWASP Top 10 review:
-  - A01: Broken Access Control
-  - A02: Cryptographic Failures
-  - A03: Injection
-  - A04: Insecure Design
-  - A05: Security Misconfiguration
-  - A06: Vulnerable Components
-  - A07: Authentication Failures
-  - A08: Integrity Failures
-  - A09: Logging Failures
-  - A10: SSRF
-
-**Input:**
-- Code artifacts
-- Architecture diagrams
-- Infrastructure configuration
-- Security context
-
-**Output:** OWASP Assessment Report
-
-**Quality Gate:**
-- [ ] All OWASP categories assessed
-- [ ] Vulnerabilities identified
-- [ ] Severity classification applied
-- [ ] Security scorecard completed
-
-**BLOCKING:** CRITICAL/HIGH issues MUST block deployment
-
----
-
-### Stage 2: STRIDE Threat Modeling (Security Reviewer + Staff Engineer)
-
-**Agents:** `duck:security` + `duck:staff`
-
-**Actions:**
-- Create architecture diagram
-- Identify trust boundaries
-- Apply STRIDE to each component:
-  - **S**poofing: Identity impersonation
-  - **T**ampering: Data modification
-  - **R**epudiation: Denying actions
-  - **I**nformation Disclosure: Data exposure
-  - **D**enial of Service: Service unavailability
-  - **E**levation of Privilege: Unauthorized access
-
-**Input:**
-- System architecture
-- Data flows
-- Component list
-- Security context
-
-**Output:** STRIDE Threat Model
-
-**Quality Gate:**
-- [ ] Architecture diagram created
-- [ ] Trust boundaries identified
-- [ ] All STRIDE categories applied
-- [ ] Threats mitigated
-
----
-
-### Stage 3: Deep Security Investigation (Staff Engineer)
-
-**Agent:** `duck:staff`
-
-**Actions:**
-- Cross-service security impact analysis
-- Dependency security assessment
-- Supply chain vulnerability review
-- Infrastructure security evaluation
-- Security architecture review
-
-**Input:**
-- OWASP findings
-- STRIDE model
-- System context
-
-**Output:** Staff Security Investigation Report
-
-**Quality Gate:**
-- [ ] Cross-service impact analyzed
-- [ ] Dependencies assessed
-- [ ] Supply chain reviewed
-- [ ] Infrastructure evaluated
-
----
-
-### Stage 4: Consolidated Security Assessment
-
-**Agents:** `duck:security` + `duck:staff`
-
-**Actions:**
-- Merge OWASP and STRIDE findings
-- Identify security architecture issues
-- Prioritize by combined severity and impact
-- Create mitigation roadmap
-- Make final security decision
-
-**Output:** Consolidated Security Review Report
-
-**Quality Gate:**
-- [ ] All findings merged
-- [ ] Architecture issues identified
-- [ ] Priorities established
-- [ ] Mitigations defined
-- [ ] Decision documented
+### Completion Marker
+## ✅ SECURITY_REVIEW_ADVANCED_COMPLETE
 
 ---
 
