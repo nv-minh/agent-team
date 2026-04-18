@@ -121,7 +121,10 @@
       "Bash(mv EM-Skill/get-shit-done .)",
       "Bash(mv EM-Skill/gstack .)",
       "Bash(mv EM-Skill/superpowers .)",
-      "Bash(git add -A && git status --short)"
+      "Bash(git add -A && git status --short)",
+      "Bash(git commit -m \"$\\(cat <<'EOF'\nrefactor: Restructure skills and finalize system setup\n\nMajor changes:\n- Restructure skills from SKILL.md to descriptive filenames\n  - foundation/brainstorming/SKILL.md → brainstorming.md\n  - development/test-driven-development/SKILL.md → test-driven-development.md\n  - quality/code-review/SKILL.md → code-review.md\n  - All 25 skills restructured for better discoverability\n- Add new security-common skill for shared security patterns\n- Update agent definitions for distributed orchestration\n- Add new code-review-deep command\n- Update workflow definitions for team coordination\n- Add SETUP-COMPLETE.md documenting installation\n- Update Claude settings for skill/agent/workflow paths\n\nBenefits:\n- More intuitive skill file names\n- Better IDE/editor file recognition\n- Improved documentation structure\n- Complete system setup and verification\n\nAll E2E tests passing \\(8/8\\) ✅\nDistributed mode operational ✅\nClaude Code CLI integrated ✅\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(cd tests && ./run-e2e-tests.sh 2>&1 | tail -20)",
+      "Bash(source ~/.claude/em-skill.sh && em-status)"
     ]
   },
   "enableAllProjectMcpServers": true,
