@@ -72,25 +72,90 @@ elif command_exists npm && npm run lint >/dev/null 2>&1; then
     echo ""
 fi
 
-# 3. Unit Tests (if available)
+# 3. Unit Tests (if available) with TDD Auto-Retry
 if command_exists npm && npm run test:unit >/dev/null 2>&1; then
-    echo "🧪 Running unit tests..."
-    if npm run test:unit -- --passWithNoTests; then
-        echo -e "${GREEN}✓ Unit tests passed${NC}"
+    echo "🧪 Running unit tests with TDD auto-retry..."
+
+    # Source TDD retry wrapper
+    if [[ -f "./tests/tdd-retry-wrapper.sh" ]]; then
+        source "./tests/tdd-retry-wrapper.sh"
+
+        # Run tests with retry logic
+        if run_tdd_with_retry "npm run test:unit -- --passWithNoTests" 3; then
+            echo -e "${GREEN}✓ Unit tests passed${NC}"
+        else
+            local exit_code=$?
+            case $exit_code in
+                42)
+                    echo -e "${YELLOW}⚠ Tests failed - retry available${NC}"
+                    echo "   Error context has been saved for AI to fix"
+                    echo "   TDD Iron Law: NO PRODUCTION CODE WITHOUT FAILING TEST"
+                    exit 1
+                    ;;
+                43)
+                    echo -e "${RED}✗ Tests failed - max retries exceeded${NC}"
+                    echo "   Manual intervention required"
+                    echo "   Run './tests/tdd-context-manager.sh format' to see error details"
+                    echo "   TDD Iron Law: NO PRODUCTION CODE WITHOUT FAILING TEST"
+                    exit 1
+                    ;;
+                *)
+                    echo -e "${RED}✗ Test execution error${NC}"
+                    exit 1
+                    ;;
+            esac
+        fi
     else
-        echo -e "${RED}✗ Unit tests failed${NC}"
-        echo "   Please fix failing tests before committing"
-        echo "   TDD Iron Law: NO PRODUCTION CODE WITHOUT FAILING TEST"
-        exit 1
+        # Fallback to direct execution if wrapper not available
+        echo -e "${YELLOW}⚠ TDD wrapper not found, running tests directly${NC}"
+        if npm run test:unit -- --passWithNoTests; then
+            echo -e "${GREEN}✓ Unit tests passed${NC}"
+        else
+            echo -e "${RED}✗ Unit tests failed${NC}"
+            echo "   Please fix failing tests before committing"
+            echo "   TDD Iron Law: NO PRODUCTION CODE WITHOUT FAILING TEST"
+            exit 1
+        fi
     fi
     echo ""
 elif command_exists npm && npm run test >/dev/null 2>&1; then
-    echo "🧪 Running tests..."
-    if npm run test -- --passWithNoTests; then
-        echo -e "${GREEN}✓ Tests passed${NC}"
+    echo "🧪 Running tests with TDD auto-retry..."
+
+    # Source TDD retry wrapper
+    if [[ -f "./tests/tdd-retry-wrapper.sh" ]]; then
+        source "./tests/tdd-retry-wrapper.sh"
+
+        # Run tests with retry logic
+        if run_tdd_with_retry "npm run test -- --passWithNoTests" 3; then
+            echo -e "${GREEN}✓ Tests passed${NC}"
+        else
+            local exit_code=$?
+            case $exit_code in
+                42)
+                    echo -e "${YELLOW}⚠ Tests failed - retry available${NC}"
+                    echo "   Error context has been saved for AI to fix"
+                    exit 1
+                    ;;
+                43)
+                    echo -e "${RED}✗ Tests failed - max retries exceeded${NC}"
+                    echo "   Manual intervention required"
+                    exit 1
+                    ;;
+                *)
+                    echo -e "${RED}✗ Test execution error${NC}"
+                    exit 1
+                    ;;
+            esac
+        fi
     else
-        echo -e "${RED}✗ Tests failed${NC}"
-        exit 1
+        # Fallback to direct execution if wrapper not available
+        echo -e "${YELLOW}⚠ TDD wrapper not found, running tests directly${NC}"
+        if npm run test -- --passWithNoTests; then
+            echo -e "${GREEN}✓ Tests passed${NC}"
+        else
+            echo -e "${RED}✗ Tests failed${NC}"
+            exit 1
+        fi
     fi
     echo ""
 fi

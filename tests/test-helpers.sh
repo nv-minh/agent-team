@@ -463,6 +463,138 @@ count_files_by_ext() {
     find "$dir" -name "*.$ext" -type f | wc -l | tr -d ' '
 }
 
+################################################################################
+# TDD Auto-Retry Support Functions
+################################################################################
+
+# Run test with TDD auto-retry wrapper
+run_test_with_retry() {
+    local test_command=$1
+    local max_retries=${2:-3}
+
+    if [[ -f "./tests/tdd-retry-wrapper.sh" ]]; then
+        source "./tests/tdd-retry-wrapper.sh"
+        run_tdd_with_retry "$test_command" "$max_retries"
+    else
+        echo "Warning: TDD wrapper not found, running directly"
+        eval "$test_command"
+    fi
+}
+
+# Check if TDD retry context exists
+has_retry_context() {
+    [[ -f ".claude/tdd-context/test-latest-failure.json" ]]
+}
+
+# Get current retry count
+get_retry_count() {
+    local count_file=".claude/tdd-context/test-retry-count.txt"
+    if [[ -f "$count_file" ]]; then
+        cat "$count_file"
+    else
+        echo "0"
+    fi
+}
+
+# Format TDD failure for display
+format_tdd_failure() {
+    local failure_file=${1:-".claude/tdd-context/test-latest-failure.json"}
+
+    if [[ -f "./tests/tdd-context-manager.sh" ]]; then
+        ./tests/tdd-context-manager.sh format "$failure_file"
+    else
+        echo "Error: TDD context manager not found"
+        return 1
+    fi
+}
+
+# Log TDD phase transition
+log_tdd_phase() {
+    local phase=$1
+    local message=${2:-""}
+
+    case "$phase" in
+        RED)
+            echo -e "${RED}🔴 TDD RED PHASE${NC} - Test failing (expected)"
+            ;;
+        GREEN)
+            echo -e "${GREEN}🟢 TDD GREEN PHASE${NC} - Test passing"
+            ;;
+        REFACTOR)
+            echo -e "${YELLOW}🟡 TDD REFACTOR PHASE${NC} - Improving code"
+            ;;
+        *)
+            echo "Unknown TDD phase: $phase"
+            return 1
+            ;;
+    esac
+
+    if [[ -n "$message" ]]; then
+        echo "   $message"
+    fi
+}
+
+# Reset TDD retry context
+reset_tdd_context() {
+    if [[ -f "./tests/tdd-context-manager.sh" ]]; then
+        ./tests/tdd-context-manager.sh reset
+    else
+        echo "Warning: TDD context manager not found"
+        return 1
+    fi
+}
+
+# Show TDD retry status
+show_tdd_status() {
+    if [[ -f "./tests/tdd-context-manager.sh" ]]; then
+        ./tests/tdd-context-manager.sh status
+    else
+        echo "Warning: TDD context manager not found"
+        return 1
+    fi
+}
+
+# Export TDD functions
+export -f run_test_with_retry has_retry_context get_retry_count
+export -f format_tdd_failure log_tdd_phase reset_tdd_context show_tdd_status
+
+################################################################################
+# Utility Functions
+################################################################################
+
+# Get script path (works when sourced)
+get_script_path() {
+    echo "${BASH_SOURCE[0]}"
+}
+
+# Get project root directory
+get_project_root() {
+    local script_dir
+    script_dir=$(dirname "$(get_script_path)")
+    echo "$(cd "$script_dir/.." && pwd)"
+}
+
+# Check if tmux is available
+check_tmux() {
+    command -v tmux &> /dev/null
+}
+
+# Count files in directory
+count_files() {
+    local dir=$1
+    local pattern=${2:-"*"}
+
+    find "$dir" -name "$pattern" -type f | wc -l | tr -d ' '
+}
+
+# Get file count by extension
+count_files_by_ext() {
+    local dir=$1
+    local ext=$2
+
+    find "$dir" -name "*.$ext" -type f | wc -l | tr -d ' '
+}
+
 # Export functions for use in test scripts
 export -f start_test pass_test fail_test skip_test print_test_summary
 export -f setup_test_env cleanup_test_env

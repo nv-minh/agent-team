@@ -299,6 +299,160 @@ it('should throw error for invalid input', () => {
 - Tests that are always green (false positives)
 - Tests that are flaky (unreliable)
 
+## Auto-Retry Loop Mechanism
+
+EM-Skill includes an automatic retry mechanism that captures test failures and feeds them back to the AI for fixing, implementing the RED-GREEN-REFACTOR cycle with intelligent retry logic.
+
+### How It Works
+
+When a test fails, the system automatically:
+
+1. **Captures Error Context**
+   - Saves test output to JSON file
+   - Records exit code, timestamp, and retry count
+   - Stores git context (branch, commit)
+   - Persists in `.claude/tdd-context/` directory
+
+2. **Implements Exponential Backoff**
+   - Retry 1: Wait 1 second
+   - Retry 2: Wait 2 seconds
+   - Retry 3: Wait 4 seconds
+   - Max retries: 3 (then requires manual intervention)
+
+3. **Provides AI-Friendly Output**
+   - Formats failure details for AI consumption
+   - Includes test command, exit code, and error output
+   - Displays clear next steps for fixing the issue
+
+### Exit Codes
+
+The retry wrapper uses structured exit codes:
+
+- **0**: Success (tests passed)
+- **42**: Retry requested (test failed, will retry)
+- **43**: Max retries exceeded (manual intervention required)
+
+### Usage in Pre-Commit Hook
+
+The pre-commit hook automatically uses the retry wrapper:
+
+```bash
+# 3. Unit Tests with TDD Auto-Retry
+if command_exists npm && npm run test:unit >/dev/null 2>&1; then
+    echo "🧪 Running unit tests with TDD auto-retry..."
+
+    # Source TDD retry wrapper
+    if [[ -f "./tests/tdd-retry-wrapper.sh" ]]; then
+        source "./tests/tdd-retry-wrapper.sh"
+
+        # Run tests with retry logic
+        if run_tdd_with_retry "npm run test:unit -- --passWithNoTests" 3; then
+            echo "✓ Unit tests passed"
+        else
+            local exit_code=$?
+            case $exit_code in
+                42)
+                    echo "⚠ Tests failed - retry available"
+                    echo "   Error context has been saved for AI to fix"
+                    exit 1
+                    ;;
+                43)
+                    echo "✗ Tests failed - max retries exceeded"
+                    echo "   Manual intervention required"
+                    exit 1
+                    ;;
+            esac
+        fi
+    fi
+fi
+```
+
+### Manual Usage
+
+You can also use the retry wrapper manually:
+
+```bash
+# Run tests with retry
+./tests/tdd-retry-wrapper.sh run "npm test" 3
+
+# Check retry status
+./tests/tdd-context-manager.sh status
+
+# Format latest failure for AI
+./tests/tdd-context-manager.sh format
+
+# Reset retry context
+./tests/tdd-context-manager.sh reset
+```
+
+### AI Feedback Loop
+
+The system creates a seamless feedback loop for AI agents:
+
+1. **RED Phase**: Test fails → Wrapper captures error → Saves to JSON
+2. **AI Analysis**: AI reads JSON → Understands failure → Generates fix
+3. **GREEN Phase**: AI applies fix → Re-runs test → Wrapper checks result
+4. **Success**: Tests pass → Counter resets → Cycle complete
+
+### Error Context Format
+
+Failures are saved as JSON:
+
+```json
+{
+  "timestamp": "2026-04-19T13:00:00Z",
+  "retry_count": 1,
+  "max_retries": 3,
+  "exit_code": 1,
+  "test_command": "npm run test:unit -- --passWithNoTests",
+  "output": "Full test output with colors and formatting...",
+  "working_directory": "/Users/abc/Desktop/EM-Skill",
+  "git_branch": "feature/tdd-auto-retry",
+  "git_commit": "abc123def456"
+}
+```
+
+### Benefits
+
+- **No Manual Copy-Paste**: Error context automatically captured
+- **Exponential Backoff**: Reduces noise from flaky tests
+- **AI-Friendly Format**: Structured JSON for easy parsing
+- **Persistent Context**: Survives bash session restarts
+- **Clear Feedback**: Color-coded status messages
+
+### Troubleshooting
+
+**Problem**: Tests keep failing with same error
+
+**Solution**:
+```bash
+# Check the error details
+./tests/tdd-context-manager.sh format
+
+# Reset retry counter to start fresh
+./tests/tdd-context-manager.sh reset
+```
+
+**Problem**: Max retries exceeded
+
+**Solution**:
+```bash
+# View all failure files
+./tests/tdd-context-manager.sh list
+
+# Manual intervention required
+# Fix the issue manually, then reset
+./tests/tdd-context-manager.sh reset
+```
+
+**Problem**: Stale error context
+
+**Solution**:
+```bash
+# Clean up old failure files
+./tests/tdd-context-manager.sh cleanup
+```
+
 ## Verification
 
 After completing TDD cycle:
