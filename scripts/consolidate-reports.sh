@@ -173,11 +173,82 @@ collect_reports() {
 }
 
 ################################################################################
+# Check and summarize reports if needed
+################################################################################
+
+check_and_summarize_reports() {
+    local reports=("$@")
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+    source "$script_dir/token-config.sh"
+
+    log_info "Checking token counts of individual reports..."
+
+    local reports_to_summarize=()
+    local total_tokens=0
+
+    for report_spec in "${reports[@]}"; do
+        local agent="${report_spec%%:*}"
+        local report_file="${report_spec#*:}"
+
+        if [[ ! -f "$report_file" ]]; then
+            log_warning "Report file not found: $report_file"
+            continue
+        fi
+
+        # Estimate token count
+        local token_count=$("$script_dir/token-counter.sh" estimate "$report_file")
+        total_tokens=$((total_tokens + token_count))
+
+        log_info "  $agent: $token_count tokens"
+
+        # Check if exceeds threshold
+        if [[ $token_count -gt $SUMMARIZATION_THRESHOLD ]]; then
+            log_warning "    Exceeds threshold ($SUMMARIZATION_THRESHOLD), will summarize"
+            reports_to_summarize+=("$agent:$report_file")
+        fi
+    done
+
+    log_info "Total tokens before consolidation: $total_tokens"
+
+    # Summarize reports that exceed threshold
+    if [[ ${#reports_to_summarize[@]} -gt 0 ]]; then
+        log_info "Summarizing ${#reports_to_summarize[@]} reports..."
+
+        for report_spec in "${reports_to_summarize[@]}"; do
+            local agent="${report_spec%%:*}"
+            local report_file="${report_spec#*:}"
+            local summarized_file="${report_file%.md}.summarized.md"
+
+            log_info "  Summarizing $agent report..."
+
+            # Try Haiku first, fallback to rule-based
+            if ! "$script_dir/haiku-client.sh" summarize "$report_file" "$summarized_file" "$TARGET_SUMMARY_SIZE" 2>/dev/null; then
+                log_warning "    Haiku failed, using rule-based summarization"
+                "$script_dir/haiku-client.sh" summarize-rule-based "$report_file" "$summarized_file"
+            fi
+
+            # Update reports array to use summarized version
+            for i in "${!reports[@]}"; do
+                if [[ "${reports[$i]}" == "$report_spec" ]]; then
+                    reports[$i]="$agent:$summarized_file"
+                    break
+                fi
+            done
+        done
+    fi
+
+    # Return updated reports array
+    printf '%s\n' "${reports[@]}"
+}
+
+################################################################################
 # Consolidate reports
 ################################################################################
 
 consolidate() {
     local output_file=${1:-"$OUTPUT_DIR/consolidated-report-$(date +%Y%m%d-%H%M%S).md"}
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
     log_info "Consolidating reports..."
 
@@ -203,6 +274,10 @@ consolidate() {
     fi
 
     log_info "Found ${#reports[@]} reports to consolidate"
+
+    # Check and summarize reports if needed
+    local summarized_reports=($(check_and_summarize_reports "${reports[@]}"))
+    reports=("${summarized_reports[@]}")
 
     # Create consolidated report
     {
@@ -309,12 +384,37 @@ consolidate() {
 
     log_success "Consolidated report created: $output_file"
 
+    # Check token count of consolidated report
+    local consolidated_tokens=$("$script_dir/token-counter.sh" estimate "$output_file")
+    log_info "Consolidated report token count: $consolidated_tokens"
+
+    source "$script_dir/token-config.sh"
+
+    # Summarize consolidated report if exceeds threshold
+    if [[ $consolidated_tokens -gt $((TOKEN_BUDGET - SAFETY_MARGIN)) ]]; then
+        log_warning "Consolidated report exceeds safe budget, summarizing..."
+
+        local summarized_output_file="${output_file%.md}.summarized.md"
+
+        # Try Haiku first, fallback to rule-based
+        if ! "$script_dir/haiku-client.sh" summarize "$output_file" "$summarized_output_file" "$TARGET_SUMMARY_SIZE" 2>/dev/null; then
+            log_warning "Haiku failed, using rule-based summarization"
+            "$script_dir/haiku-client.sh" summarize-rule-based "$output_file" "$summarized_output_file"
+        fi
+
+        log_success "Summarized consolidated report: $summarized_output_file"
+
+        # Update output_file to point to summarized version
+        output_file="$summarized_output_file"
+    fi
+
     # Show summary
     echo ""
     log_info "Report Summary:"
     echo "  File: $output_file"
     echo "  Agents: ${#reports[@]}"
     echo "  Size: $(du -h "$output_file" | cut -f1)"
+    echo "  Tokens: $("$script_dir/token-counter.sh" estimate "$output_file")"
 
     return 0
 }

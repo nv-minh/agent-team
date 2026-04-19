@@ -351,6 +351,13 @@ handoff:
   - to: "frontend-expert"
     context: "Login API latency will be optimized from 2.3s to <500ms"
     action: "Review frontend loading states for current latency"
+
+# Summarization Metadata (Optional - added by token summarization system)
+summarized: false  # true if report has been summarized
+# original_token_count: 150000  # Only present if summarized=true
+# summarized_token_count: 80000  # Only present if summarized=true
+# summarization_method: "haiku"  # haiku|rule_based - Only present if summarized=true
+# summarization_timestamp: "2026-04-19T12:00:00Z"  # Only present if summarized=true
 ---
 ```
 
