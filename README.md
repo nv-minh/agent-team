@@ -5,10 +5,10 @@
 ## Overview
 
 EM-Skill provides a complete toolkit for fullstack engineering with:
-- **29 Quick Commands** - `em:*` and `em:wl-*` prefixes for instant access
-  - 11 agent commands (`em:planner`, `em:backend`, etc.)
-  - 6 core workflow commands (`em:new-feature`, `em:bug-fix`, etc.)
-  - 12 specialized workflow commands (`em:wl-architecture-review`, etc.)
+- **29 Quick Commands** - Organized by type for easy access
+  - 11 **Agent Commands** (`em:agent-*`) - Call specialist AI agents
+  - 6 **Core Workflow Commands** (`em:*`) - Everyday workflows
+  - 12 **Specialized Workflow Commands** (`em:wl-*`) - Advanced multi-agent workflows
 - **25+ Skills** - Reusable patterns and practices (brainstorming, TDD, debugging, etc.)
 - **22 Agents** - Specialized task handlers (planner, backend, frontend, database, etc.)
 - **18 Workflows** - End-to-end processes (new-feature, bug-fix, security-audit, etc.)
@@ -330,42 +330,47 @@ Get started with EM-Skill in 5 minutes!
 
 ### First Steps
 
-#### 1. Use Quick Commands (1 minute)
+#### 1. Use Agent Commands (1 minute)
 
-**The fastest way** - Use `em:*` commands:
+**Call specialist AI agents**:
 
 ```bash
 # Planning
-"Use the em:planner skill to create implementation plan for user authentication"
+"Use the em:agent-planner skill to create implementation plan for user authentication"
 
 # Backend
-"Use the em:backend skill to review API performance"
+"Use the em:agent-backend-expert skill to review API performance"
 
 # Frontend
-"Use the em:frontend skill to review React components"
+"Use the em:agent-frontend-expert skill to review React components"
 
-# Full workflow
-"Use the em:new-feature skill to implement user authentication"
+# Database
+"Use the em:agent-database-expert skill to optimize database queries"
 ```
 
 **Or use direct invocation:**
 ```bash
-/em:planner Create implementation plan for user authentication
-/em:backend Review API performance
-/em:new-feature Implement user authentication
+/em:agent-planner Create implementation plan for user authentication
+/em:agent-backend-expert Review API performance
+/em:agent-frontend-expert Review React components
 ```
 
-#### 2. Explore Core Skills (1 minute)
+#### 2. Use Core Workflows (1 minute)
+
+**End-to-end workflows for everyday tasks:**
 
 ```bash
-# Use brainstorming to explore ideas
-"Use the brainstorming skill to explore a user authentication feature"
+# Implement feature
+"Use the em:new-feature skill to implement user authentication"
 
-# Create a specification
-"Use the spec-driven-development skill to create a spec for user authentication"
+# Fix bugs
+"Use the em:bug-fix skill to fix login timeout"
+
+# Improve quality
+"Use the em:refactor skill to improve code quality"
 ```
 
-#### 3. Try Distributed Mode (3 minutes)
+#### 3. Try Distributed Mode (2 minutes)
 
 For complex tasks requiring multiple specialist agents:
 
@@ -378,6 +383,7 @@ tmux attach -t claude-work:orchestrator
 
 # 3. Trigger distributed investigation
 "Use the em:distributed skill to investigate authentication bug across entire stack"
+```
 
 # 4. View consolidated report
 cat /tmp/claude-work-reports/techlead/consolidated-report.md
@@ -420,19 +426,19 @@ cat /tmp/claude-work-reports/techlead/consolidated-report.md
 
 ### Quick Access Commands
 
-**Agents (11 commands):**
+**Agent Commands (11 commands) - Call Specialists:**
 ```bash
-/em:planner       - Create implementation plans
-/em:architect     - Architecture & technical design
-/em:backend       - Backend specialist (API, DB, performance)
-/em:frontend      - Frontend specialist (React, Next.js, UI/UX)
-/em:database      - Database specialist (schema, queries)
-/em:code-review   - 5-axis code review
-/em:debug         - Systematic debugging
-/em:security      - OWASP security audit
-/em:test          - Test strategy & generation
-/em:performance   - Benchmarking & optimization
-/em:research      - Technical research & exploration
+/em:agent-planner              - Create implementation plans
+/em:agent-architect            - Architecture & technical design
+/em:agent-backend-expert       - Backend specialist (API, DB, performance)
+/em:agent-frontend-expert      - Frontend specialist (React, Next.js, UI/UX)
+/em:agent-database-expert      - Database specialist (schema, queries)
+/em:agent-code-reviewer        - 5-axis code review
+/em:agent-debugger             - Systematic debugging
+/em:agent-security-auditor     - OWASP security audit
+/em:agent-test-engineer        - Test strategy & generation
+/em:agent-performance-auditor  - Benchmarking & optimization
+/em:agent-researcher           - Technical research & exploration
 ```
 
 **Workflows (6 commands):**
@@ -463,18 +469,25 @@ cat /tmp/claude-work-reports/techlead/consolidated-report.md
 
 ### Usage Examples
 
-**Method 1: Use skill syntax (Recommended)**
+**Agent Commands:**
 ```bash
-Use the em:planner skill to create implementation plan for JWT auth
-Use the em:backend skill to optimize database queries
-Use the em:new-feature skill to implement user authentication
+Use the em:agent-planner skill to create implementation plan for JWT auth
+Use the em:agent-backend-expert skill to optimize database queries
+Use the em:agent-frontend-expert skill to review React components
 ```
 
-**Method 2: Direct invocation**
+**Core Workflow Commands:**
 ```bash
-/em:planner Create implementation plan for JWT auth
-/em:backend Optimize database queries
-/em:new-feature Implement user authentication
+Use the em:new-feature skill to implement user authentication
+Use the em:bug-fix skill to fix login timeout
+Use the em:refactor skill to improve code quality
+```
+
+**Specialized Workflow Commands:**
+```bash
+Use the em:wl-architecture-review skill to review architecture
+Use the em:wl-code-review-9axis skill to conduct deep code review
+Use the em:wl-security-review skill to conduct threat modeling
 ```
 
 ### When to use EM:* vs Full Commands?
