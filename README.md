@@ -153,17 +153,17 @@ The Codebase-Mapper Agent extracts project conventions and persists them to a kn
 **Quick Start:**
 ```bash
 # Extract and persist project knowledge
-Agent: codebase-mapper - Analyze this project and save conventions
+/em:codebase-mapper Analyze this project and save conventions
 
 # View knowledge base
 cat .claude/knowledge/project-conventions.md
 cat .claude/knowledge/coding-style.md
 
 # Update knowledge when conventions change
-Agent: codebase-mapper - Update knowledge base
+/em:codebase-mapper Update knowledge base
 
 # Agents automatically use knowledge
-Agent: frontend-expert - Create user profile component
+/em:frontend-expert Create user profile component
 # Agent automatically loads and follows project conventions
 ```
 
@@ -403,11 +403,37 @@ export PATH="$PATH:$EM_SKILL_HOME/distributed"
 
 EM-Team works with Claude Code CLI out of the box. Simply invoke skills, agents, or workflows in your conversation:
 
+**Discovery & Market Intelligence (NEW in v1.2.0):**
 ```bash
-# Example invocations
-"Use the brainstorming skill to explore authentication"
-"Agent: em-planner - Create plan for user auth"
-"Workflow: em-new-feature - Implement authentication"
+# Validate product ideas with YC framework
+/office-hours I have an idea for a AI-powered code reviewer
+
+# Run complete discovery workflow
+/em-discovery-process We need to improve our checkout conversion rate
+
+# Capture project learnings
+/em-learn We just completed a major refactoring project
+
+# Coordinate multi-phase reviews
+/em-autoplan Coordinate reviews for our new authentication feature
+```
+
+**Development:**
+```bash
+# Skills - invoke directly
+/brainstorming Explore authentication options
+/spec-driven-development Create spec for payment system
+/systematic-debugging Investigate login timeout bug
+
+# Agents - use /em: prefix
+/em:planner Create plan for user auth
+/em:backend-expert Review API performance
+/em:frontend-expert Refactor React components
+
+# Workflows - use /em: or /em:wl- prefix
+/em:new-feature Implement authentication from idea to production
+/em:bug-fix Fix login timeout systematically
+/em:wl-architecture-review Review microservices architecture
 ```
 
 ### Verification Checklist
@@ -512,47 +538,66 @@ Get started with EM-Team in 5 minutes!
 
 ### First Steps
 
-#### 1. Use Agent Commands (1 minute)
+#### 1. Discovery & Market Intelligence (NEW in v1.2.0)
 
-**Call specialist AI agents**:
+**Validate ideas before building (optional but recommended):**
+
+```bash
+# Validate product idea (30 minutes)
+/office-hours I have an idea for a AI-powered code reviewer
+
+# Run discovery workflow (2-4 weeks)
+/em-discovery-process We need to improve our checkout conversion
+
+# Capture learnings from completed projects
+/em-learn We just completed a major refactoring project
+
+# Coordinate multi-phase reviews
+/em-autoplan Coordinate reviews for our new authentication feature
+```
+
+**Or use other discovery skills:**
+```bash
+/jobs-to-be-done Understand customer motivation
+/lean-ux-canvas Frame business problem properly
+/opportunity-solution-tree Explore solution options
+/pol-probe Design lightweight validation experiment
+```
+
+#### 2. Use Agents for Specialized Tasks
+
+**Call specialist AI agents:**
 
 ```bash
 # Planning
-"Use the em:agent-planner skill to create implementation plan for user authentication"
+/em:planner Create implementation plan for user authentication
 
 # Backend
-"Use the em:agent-backend-expert skill to review API performance"
+/em:backend-expert Review API performance
 
 # Frontend
-"Use the em:agent-frontend-expert skill to review React components"
+/em:frontend-expert Review React components
 
 # Database
-"Use the em:agent-database-expert skill to optimize database queries"
+/em:database-expert Optimize database queries
 ```
 
-**Or use direct invocation:**
-```bash
-/em:agent-planner Create implementation plan for user authentication
-/em:agent-backend-expert Review API performance
-/em:agent-frontend-expert Review React components
-```
-
-#### 2. Use Core Workflows (1 minute)
+#### 3. Use Core Workflows
 
 **End-to-end workflows for everyday tasks:**
 
 ```bash
 # Implement feature
-"Use the em:new-feature skill to implement user authentication"
+/em:new-feature Implement user authentication from idea to production
 
 # Fix bugs
-"Use the em:bug-fix skill to fix login timeout"
+/em:bug-fix Fix login timeout systematically
 
 # Improve quality
-"Use the em:refactor skill to improve code quality"
+/em:refactor Improve code quality in this module
 ```
 
-#### 3. Try Distributed Mode (2 minutes)
+#### 4. Try Distributed Mode (Optional)
 
 For complex tasks requiring multiple specialist agents:
 
@@ -564,7 +609,7 @@ For complex tasks requiring multiple specialist agents:
 tmux attach -t claude-work:orchestrator
 
 # 3. Trigger distributed investigation
-"Use the em:distributed skill to investigate authentication bug across entire stack"
+/em:distributed Investigate authentication bug across entire stack
 ```
 
 # 4. View consolidated report
@@ -1252,47 +1297,73 @@ DEFINE → PLAN → BUILD → VERIFY → REVIEW → SIMPLIFY → SHIP
 
 ## 🚀 Usage
 
-### Standard Agent/Skill/Workflow Usage
+### Standard Agent/Skill/Workflow Usage (Updated v1.2.0)
 
-#### Using Skills
+#### Option 1: Discovery-First Approach (Recommended)
+
+**Validate ideas before building:**
+
+```bash
+# Step 1: Validate product idea
+/office-hours I have an idea for a AI-powered code reviewer for startups
+
+# Step 2: Run discovery (if score 8-10 or 5-7)
+/em-discovery-process We need to improve our checkout conversion rate
+
+# Step 3: Coordinate reviews
+/em-autoplan Coordinate reviews for our new authentication feature
+
+# Step 4: Create implementation plan
+/em:planner Create plan for authentication feature
+
+# Step 5: Execute
+/em:executor Execute plan with atomic commits
+
+# Step 6: Capture learnings
+/em:learn Capture patterns, pitfalls, and ADRs from this project
+```
+
+#### Option 2: Direct Development
+
+**Skip discovery, build directly:**
 
 ### Example 1: Building a New Feature
 
 ```bash
 # Step 1: Brainstorm the feature
-"Use the brainstorming skill to explore a user authentication feature"
+/brainstorming Explore a user authentication feature
 
 # Step 2: Create a spec
-"Use the spec-driven-development skill to create a spec for authentication"
+/spec-driven-development Create a spec for authentication
 
 # Step 3: Write a plan
-"Use the writing-plans skill to break down the implementation"
+/writing-plans Break down the implementation
 
 # Step 4: Execute the plan
-"Use the subagent-driven-development skill to implement the plan"
+/subagent-driven-development Implement the plan
 
 # Step 5: Review the code
-"Agent: em-code-reviewer - Review the authentication implementation"
+/em:code-reviewer Review the authentication implementation
 
 # Step 6: Deploy
-"Workflow: em-deployment - Deploy the authentication feature"
+/em:deployment Deploy the authentication feature
 ```
 
 ### Example 2: Fixing a Bug
 
 ```bash
 # Step 1: Debug systematically
-"Use the systematic-debugging skill to investigate the login bug"
+/systematic-debugging Investigate the login bug
 
 # Step 2: Fix the root cause
 # (After root cause is identified)
-"Use the test-driven-development skill to fix the bug"
+/test-driven-development Fix the bug
 
 # Step 3: Verify the fix
-"Use the api-testing skill to verify the login endpoint works"
+/api-testing Verify the login endpoint works
 
 # Step 4: Code review
-"Agent: em-code-reviewer - Review the bug fix"
+/em:code-reviewer Review the bug fix
 ```
 
 ### Example 3: Distributed Investigation (Complex Tasks)
@@ -1304,6 +1375,19 @@ For complex tasks requiring multiple specialist agents:
 cd /path/to/em-team
 ./scripts/distributed-orchestrator.sh start
 
+# Attach to orchestrator window
+tmux attach -t claude-work:orchestrator
+
+# Trigger distributed investigation
+/em:distributed Investigate authentication bug across entire stack
+
+# View consolidated report
+cat /tmp/claude-work-reports/techlead/consolidated-report.md
+
+# Stop when done
+./scripts/distributed-orchestrator.sh stop
+```
+
 # This creates a tmux session with multiple agent windows:
 # - orchestrator (Tech Lead)
 # - backend (Backend Expert)
@@ -1314,7 +1398,7 @@ cd /path/to/em-team
 tmux attach -t claude-work:orchestrator
 
 # Trigger investigation
-"Agent: em-techlead-orchestrator - Investigate authentication bug across the entire stack"
+/em:techlead-orchestrator Investigate authentication bug across the entire stack
 
 # The orchestrator will:
 # 1. Analyze the task
@@ -1402,7 +1486,7 @@ EM-Team includes specialized workflows for distributed execution:
 
 **1. Distributed Investigation Workflow**
 ```bash
-"Workflow: em-distributed-investigation - Investigate authentication bug with distributed agents"
+/em:distributed-investigation Investigate authentication bug with distributed agents
 ```
 - Spawns specialist agents (backend, frontend, database)
 - Parallel investigation across codebase
@@ -1410,7 +1494,7 @@ EM-Team includes specialized workflows for distributed execution:
 
 **2. Distributed Development Workflow**
 ```bash
-"Workflow: em-distributed-development - Implement feature with distributed team"
+/em:distributed-development Implement feature with distributed team
 ```
 - Spec creation with Tech Lead
 - Parallel implementation by specialists
