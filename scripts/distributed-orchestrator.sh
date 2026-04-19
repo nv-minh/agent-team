@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Distributed Orchestrator for EM-Skill
+# Distributed Orchestrator for EM-Team
 #
 # Description: Creates and manages tmux sessions for distributed agent execution
 # Usage: ./distributed-orchestrator.sh [command]
@@ -321,7 +321,7 @@ status() {
 
 show_help() {
     cat << EOF
-Distributed Orchestrator for EM-Skill
+Distributed Orchestrator for EM-Team
 
 Usage: $0 [command] [options]
 

@@ -1,7 +1,7 @@
 ---
 name: em:code-review
-description: 5-axis code review - EM-Skill Agent
-tags: [code-review, quality, em-skill]
+description: 5-axis code review - EM-Team Agent
+tags: [code-review, quality, em-team]
 always_available: true
 ---
 

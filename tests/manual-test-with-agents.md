@@ -11,7 +11,7 @@ This guide provides step-by-step instructions for manually testing the distribut
 - ✅ tmux installed (`tmux -V`)
 - ✅ Bash shell
 - ✅ Claude Code CLI available
-- ✅ EM-Skill repository checked out
+- ✅ EM-Team repository checked out
 
 ---
 
@@ -21,7 +21,7 @@ This guide provides step-by-step instructions for manually testing the distribut
 
 1. **Navigate to the project root:**
    ```bash
-   cd /path/to/em-skill
+   cd /path/to/em-team
    ```
 
 2. **Start the distributed orchestration:**
@@ -337,7 +337,7 @@ The consolidated report should include:
 
 3. **Optional: Preserve reports for review:**
    ```bash
-   cp -r /tmp/claude-work-reports ~/em-skill-test-reports
+   cp -r /tmp/claude-work-reports ~/em-team-test-reports
    ```
 
 4. **Optional: Clean up all artifacts:**

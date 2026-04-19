@@ -1,7 +1,7 @@
 ---
 name: em:bug-fix
-description: Fix bugs systematically - EM-Skill Workflow
-tags: [workflow, bug-fix, debugging, em-skill]
+description: Fix bugs systematically - EM-Team Workflow
+tags: [workflow, bug-fix, debugging, em-team]
 always_available: true
 ---
 

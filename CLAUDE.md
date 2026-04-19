@@ -1,8 +1,8 @@
-# EM-Skill - Fullstack Engineering Agent/Skill/Workflow System
+# EM-Team - Fullstack Engineering Agent/Skill/Workflow System
 
 ## Overview
 
-EM-Skill is a comprehensive system of agents, skills, and workflows for fullstack engineering, synthesized from the best practices of 6 top AI agent/workflow repositories:
+EM-Team is a comprehensive system of agents, skills, and workflows for fullstack engineering, synthesized from the best practices of 6 top AI agent/workflow repositories:
 
 - **Product-Manager-Skills** (47 skills) - 3-tier architecture, coaching approach, interactive flows
 - **agent-skills** (20 skills) - Development lifecycle, Iron Laws, 5-axis code review
@@ -14,7 +14,7 @@ EM-Skill is a comprehensive system of agents, skills, and workflows for fullstac
 ## Project Structure
 
 ```
-em-skill/
+em-team/
 ├── skills/              # ~25-30 skills
 │   ├── foundation/      # Core foundational skills
 │   ├── development/     # Development workflow skills

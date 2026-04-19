@@ -2,13 +2,13 @@
 
 ## Overview
 
-EM-Skill includes multiple skill systems from different sources. This guide explains when to use each system and how they integrate.
+EM-Team includes multiple skill systems from different sources. This guide explains when to use each system and how they integrate.
 
 ## Skill Systems
 
 ### Main Skills (`skills/`)
 
-**Primary skill library for EM-Skill.**
+**Primary skill library for EM-Team.**
 
 **Use these for:**
 - Foundation patterns (TDD, spec-driven development, systematic debugging)
@@ -30,9 +30,9 @@ skills/
 **Naming Convention:** Skills are named descriptively (e.g., `spec-driven-development.md` instead of `SKILL.md`)
 
 **When to Use:**
-- Default choice for all EM-Skill workflows
-- When implementing features using EM-Skill agents
-- When following EM-Skill development lifecycle
+- Default choice for all EM-Team workflows
+- When implementing features using EM-Team agents
+- When following EM-Team development lifecycle
 
 ---
 
@@ -121,7 +121,7 @@ everything-claude-code/
 
 **Integration:**
 - Standalone repository with its own workflows
-- Can be referenced alongside EM-Skill
+- Can be referenced alongside EM-Team
 - Maintained separately
 
 ---
@@ -130,7 +130,7 @@ everything-claude-code/
 
 | Scenario | Use This System | Why |
 |----------|-----------------|-----|
-| **New feature development** | Main `skills/` | EM-Skill primary skills |
+| **New feature development** | Main `skills/` | EM-Team primary skills |
 | **Product requirement analysis** | Product-Manager-Skills | Business-focused skills |
 | **Framework-specific work** | everything-claude-code | Specialized framework expertise |
 | **Legacy agent-skills reference** | agent-skills (deprecated) | Backward compatibility |
@@ -142,7 +142,7 @@ everything-claude-code/
 
 ## Integration Patterns
 
-### Pattern 1: EM-Skill Standard Workflow
+### Pattern 1: EM-Team Standard Workflow
 
 ```yaml
 flow:
@@ -160,7 +160,7 @@ flow:
   1. Use "Product-Manager-Skills/skills/user-story" for requirements
   2. Use "agents/product-manager" for validation
   3. Use main "skills/foundation/spec-driven-development" for technical spec
-  4. Continue with EM-Skill standard workflow
+  4. Continue with EM-Team standard workflow
 ```
 
 ### Pattern 3: Framework-Specific Workflow
@@ -170,7 +170,7 @@ flow:
   1. Use "everything-claude-code/skills/[framework]-patterns" for framework expertise
   2. Use main "skills/development/test-driven-development" adapted for framework
   3. Use framework-specific testing from everything-claude-code
-  4. Continue with EM-Skill quality gates
+  4. Continue with EM-Team quality gates
 ```
 
 ---
@@ -243,7 +243,7 @@ skills:
 ## FAQ
 
 **Q: Which skill system should I use by default?**
-A: Use main `skills/` for all EM-Skill workflows.
+A: Use main `skills/` for all EM-Team workflows.
 
 **Q: When should I use Product-Manager-Skills?**
 A: When Product Manager agent is involved or when business analysis is needed.
@@ -261,4 +261,4 @@ A: Check `skills/` directory structure or use `find skills/ -name "*.md"`.
 
 **Guide Version:** 1.0.0
 **Last Updated:** 2026-04-19
-**Maintained By:** EM-Skill Project
+**Maintained By:** EM-Team Project

@@ -443,4 +443,4 @@ expects:
 
 **Workflow Version:** 1.0.0
 **Last Updated:** 2026-04-19
-**Compatible with:** All EM-Skill agents
+**Compatible with:** All EM-Team agents

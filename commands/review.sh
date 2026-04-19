@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EM-Skill Review Command
+# EM-Team Review Command
 # Source: GSD + agent-skills code review
 #
 # Trigger 5-axis code review
@@ -15,22 +15,22 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}👁️ EM-Skill Code Review${NC}"
+echo -e "${BLUE}👁️ EM-Team Code Review${NC}"
 echo "======================="
 echo ""
 
 # Function to show usage
 show_usage() {
     echo "Usage:"
-    echo "  em-skill review              # Review staged changes"
-    echo "  em-skill review <branch>     # Review diff from branch"
-    echo "  em-skill review <commit>     # Review specific commit"
-    echo "  em-skill review --file <path> # Review specific file"
+    echo "  em-team review              # Review staged changes"
+    echo "  em-team review <branch>     # Review diff from branch"
+    echo "  em-team review <commit>     # Review specific commit"
+    echo "  em-team review --file <path> # Review specific file"
     echo ""
     echo "Examples:"
-    echo "  em-skill review main         # Review changes from main branch"
-    echo "  em-skill review HEAD~1       # Review last commit"
-    echo "  em-skill review --file src/app.ts # Review specific file"
+    echo "  em-team review main         # Review changes from main branch"
+    echo "  em-team review HEAD~1       # Review last commit"
+    echo "  em-team review --file src/app.ts # Review specific file"
     exit 1
 }
 
@@ -83,9 +83,9 @@ echo ""
 
 # Create review document
 REVIEW_ID=$(date +%s)
-REVIEW_FILE=".em-skill/review-$REVIEW_ID.md"
+REVIEW_FILE=".em-team/review-$REVIEW_ID.md"
 
-mkdir -p .em-skill
+mkdir -p .em-team
 
 cat > "$REVIEW_FILE" << EOF
 # Code Review Report
@@ -93,7 +93,7 @@ cat > "$REVIEW_FILE" << EOF
 **ID:** $REVIEW_ID
 **Date:** $(date)
 **Target:** $REVIEW_TARGET
-**Reviewer:** EM-Skill Code-Reviewer Agent
+**Reviewer:** EM-Team Code-Reviewer Agent
 
 ## 5-Axis Review Framework
 
@@ -220,4 +220,4 @@ echo ""
 echo '  "Agent: code-reviewer - Review the changes in this PR"'
 echo ""
 echo "Or use:"
-echo "  em-skill review-run $REVIEW_ID"
+echo "  em-team review-run $REVIEW_ID"

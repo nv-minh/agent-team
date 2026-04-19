@@ -1,6 +1,6 @@
-# EM-Skill Documentation
+# EM-Team Documentation
 
-Welcome to the EM-Skill documentation hub. This directory contains comprehensive guides for the fullstack engineering agent/skill/workflow system.
+Welcome to the EM-Team documentation hub. This directory contains comprehensive guides for the fullstack engineering agent/skill/workflow system.
 
 ---
 
@@ -110,7 +110,7 @@ Documentation is available in:
 
 ### By Task
 
-**Setting up EM-Skill:**
+**Setting up EM-Team:**
 → [Getting Started Guide](guides/getting-started.md)
 
 **Using skills:**
@@ -170,4 +170,4 @@ Need help?
 
 **Last Updated:** 2026-04-19
 **Documentation Version:** 1.0.0
-**Maintained By:** EM-Skill Team
+**Maintained By:** EM-Team Team

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Token Configuration for EM-Skill Distributed Mode
+# Token Configuration for EM-Team Distributed Mode
 # Defines thresholds and budgets for token management
 
 ################################################################################
@@ -92,7 +92,7 @@ MAX_ORIGINAL_FILES=10
 DEBUG_TOKENS=false
 
 # Log file for token operations
-TOKEN_LOG_FILE="/tmp/em-skill-token.log"
+TOKEN_LOG_FILE="/tmp/em-team-token.log"
 
 ################################################################################
 # Helper Functions

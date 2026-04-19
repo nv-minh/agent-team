@@ -1,7 +1,7 @@
 ---
 name: em:database
-description: Database specialist (schema, queries, fintech) - EM-Skill Agent
-tags: [database, sql, nosql, schema, em-skill]
+description: Database specialist (schema, queries, fintech) - EM-Team Agent
+tags: [database, sql, nosql, schema, em-team]
 always_available: true
 ---
 

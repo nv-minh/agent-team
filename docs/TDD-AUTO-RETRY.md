@@ -83,7 +83,7 @@ Max: 3 retries (then stop)
   "exit_code": 1,
   "test_command": "npm run test:unit -- --passWithNoTests",
   "output": "Full test output with colors...",
-  "working_directory": "/Users/abc/Desktop/EM-Skill",
+  "working_directory": "/Users/abc/Desktop/EM-Team",
   "git_branch": "feature/tdd-auto-retry",
   "git_commit": "abc123def456"
 }

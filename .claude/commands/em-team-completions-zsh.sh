@@ -1,5 +1,5 @@
-#compdef em-skill
-# EM-Skill ZSH Completion
+#compdef em-team
+# EM-Team ZSH Completion
 
 # Skills
 _em_skill_skills() {
@@ -113,7 +113,7 @@ _em_skill() {
 }
 
 _em_skill_show_commands() {
-    echo "🎯 EM-Skill Commands (use /command):"
+    echo "🎯 EM-Team Commands (use /command):"
     echo ""
     echo "Skills (type /skill name):"
     echo "  /brainstorming - Explore ideas into designs"
@@ -200,6 +200,6 @@ alias '/'='_em_skill_show_commands'
 alias '/em-'='_em_skill_show_commands'
 
 # Register completion
-compdef _em_skill em-skill
+compdef _em_skill em-team
 
-echo "✅ EM-Skill zsh completions loaded! Type '/' to see all commands."
+echo "✅ EM-Team zsh completions loaded! Type '/' to see all commands."

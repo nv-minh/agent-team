@@ -612,4 +612,4 @@ decision: staff-engineer leads incident response
 
 **Agent Version:** 1.0.0
 **Last Updated:** 2026-04-19
-**Compatible with:** All EM-Skill workflows
+**Compatible with:** All EM-Team workflows

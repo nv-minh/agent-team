@@ -1,6 +1,6 @@
-# Quick Start Guide - EM-Skill
+# Quick Start Guide - EM-Team
 
-Get up and running with EM-Skill in 5 minutes.
+Get up and running with EM-Team in 5 minutes.
 
 ---
 

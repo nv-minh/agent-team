@@ -772,4 +772,4 @@ ls -la /tmp/claude-work-reports/*/
 
 **Workflow Version:** 1.0.0
 **Last Updated:** 2026-04-19
-**Compatible with:** EM-Skill Distributed Orchestration
+**Compatible with:** EM-Team Distributed Orchestration

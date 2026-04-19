@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document defines the standard report format for all agents in the EM-Skill distributed orchestration system. Standardized reports enable the Tech Lead to consolidate findings from multiple agents.
+This document defines the standard report format for all agents in the EM-Team distributed orchestration system. Standardized reports enable the Tech Lead to consolidate findings from multiple agents.
 
 ## Report Structure
 
@@ -639,4 +639,4 @@ validation_rules:
 
 **Protocol Version:** 1.0.0
 **Last Updated:** 2026-04-19
-**Compatible with:** EM-Skill Distributed Orchestration
+**Compatible with:** EM-Team Distributed Orchestration

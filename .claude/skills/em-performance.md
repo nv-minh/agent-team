@@ -1,7 +1,7 @@
 ---
 name: em:performance
-description: Benchmarking & optimization - EM-Skill Agent
-tags: [performance, optimization, benchmarking, em-skill]
+description: Benchmarking & optimization - EM-Team Agent
+tags: [performance, optimization, benchmarking, em-team]
 always_available: true
 ---
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EM-Skill Health Command
+# EM-Team Health Command
 # Source: GSD project health check
 #
 # Diagnose project health and identify issues
@@ -15,16 +15,16 @@ RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🏥 EM-Skill Health Check${NC}"
+echo -e "${BLUE}🏥 EM-Team Health Check${NC}"
 echo "======================="
 echo ""
 
 HEALTH_ID=$(date +%s)
-HEALTH_FILE=".em-skill/health-$HEALTH_ID.md"
+HEALTH_FILE=".em-team/health-$HEALTH_ID.md"
 SCORE=0
 MAX_SCORE=0
 
-mkdir -p .em-skill
+mkdir -p .em-team
 
 # Function to add score
 add_score() {
@@ -168,9 +168,9 @@ else
     add_score 0 10
 fi
 
-# 10. EM-Skill Integration
-echo -n "⚡ EM-Skill... "
-if [ -f "CLAUDE.md" ] || [ -d ".em-skill" ]; then
+# 10. EM-Team Integration
+echo -n "⚡ EM-Team... "
+if [ -f "CLAUDE.md" ] || [ -d ".em-team" ]; then
     echo -e "${GREEN}Integrated${NC}"
     add_score 5 5
 else
@@ -248,8 +248,8 @@ $(test -f .git/hooks/pre-commit && echo "✓ Git hooks installed" || echo "⚠ G
 ### 🚀 CI/CD
 $(test -d .github/workflows && echo "✓ CI/CD configured" || echo "⚠ CI/CD not configured")
 
-### ⚡ EM-Skill
-$(test -f CLAUDE.md && echo "✓ EM-Skill integrated" || echo "⚠ EM-Skill not integrated")
+### ⚡ EM-Team
+$(test -f CLAUDE.md && echo "✓ EM-Team integrated" || echo "⚠ EM-Team not integrated")
 
 ---
 
@@ -286,13 +286,13 @@ cat >> "$HEALTH_FILE" << EOF
 
 ### Install Git Hooks
 \`\`\`bash
-cp em-skill/hooks/* .git/hooks/
+cp em-team/hooks/* .git/hooks/
 chmod +x .git/hooks/*
 \`\`\`
 
-### Setup EM-Skill
+### Setup EM-Team
 \`\`\`bash
-cp em-skill/CLAUDE.md ./
+cp em-team/CLAUDE.md ./
 \`\`\`
 
 ### Run Full Test Suite
@@ -307,7 +307,7 @@ EOF
 echo "✓ Health report saved: $HEALTH_FILE"
 echo ""
 echo "To improve health, consider:"
-echo "  - Install git hooks: cp em-skill/hooks/* .git/hooks/"
+echo "  - Install git hooks: cp em-team/hooks/* .git/hooks/"
 echo "  - Setup CI/CD: Add .github/workflows/"
 echo "  - Add tests: npm run test"
 echo "  - Add documentation: Create README.md"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # arch-review.sh - Architecture review with Architect and Staff Engineer
-# Usage: em-skill arch-review [architecture_description]
+# Usage: em-team arch-review [architecture_description]
 
 set -e
 
@@ -16,12 +16,12 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Please provide an architecture description"
     echo ""
-    echo "Usage: em-skill arch-review \"[architecture description]\""
+    echo "Usage: em-team arch-review \"[architecture description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill arch-review \"Review hexagonal architecture for user service\""
-    echo "  em-skill arch-review \"Assess microservices decomposition strategy\""
-    echo "  em-skill arch-review \"Review event-driven architecture for payment processing\""
+    echo "  em-team arch-review \"Review hexagonal architecture for user service\""
+    echo "  em-team arch-review \"Assess microservices decomposition strategy\""
+    echo "  em-team arch-review \"Review event-driven architecture for payment processing\""
     exit 1
 fi
 

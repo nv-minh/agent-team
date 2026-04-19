@@ -1,7 +1,7 @@
 ---
 name: em:planner
-description: Create implementation plans - EM-Skill Agent
-tags: [planning, architecture, em-skill]
+description: Create implementation plans - EM-Team Agent
+tags: [planning, architecture, em-team]
 always_available: true
 ---
 

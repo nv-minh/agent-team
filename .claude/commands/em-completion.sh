@@ -1,10 +1,10 @@
 #!/bin/bash
-# EM-Skill Quick Completions
+# EM-Team Quick Completions
 # Works with both bash and zsh
 
 # Show all commands when user types /
 _em_show_all_commands() {
-    echo "🎯 EM-Skill Commands (65+ commands available):"
+    echo "🎯 EM-Team Commands (65+ commands available):"
     echo ""
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo "📚 SKILLS (25 commands) - No prefix needed"
@@ -106,5 +106,5 @@ alias 'em-show'='_em_show_all_commands'
 # Make the function available for completion
 typeset -f _em_show_all_commands > /dev/null
 
-echo "✅ EM-Skill completions loaded!"
+echo "✅ EM-Team completions loaded!"
 echo "   Type '/' to see all 65+ commands"

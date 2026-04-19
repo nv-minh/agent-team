@@ -1,6 +1,6 @@
 #!/bin/bash
 # security-review.sh - Advanced security review with Security Reviewer and Staff Engineer
-# Usage: em-skill security-review [security_description]
+# Usage: em-team security-review [security_description]
 
 set -e
 
@@ -16,12 +16,12 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Please provide a security description"
     echo ""
-    echo "Usage: em-skill security-review \"[security description]\""
+    echo "Usage: em-team security-review \"[security description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill security-review \"Perform OWASP assessment on payment system\""
-    echo "  em-skill security-review \"STRIDE threat modeling for API gateway\""
-    echo "  em-skill security-review \"Security review for authentication service\""
+    echo "  em-team security-review \"Perform OWASP assessment on payment system\""
+    echo "  em-team security-review \"STRIDE threat modeling for API gateway\""
+    echo "  em-team security-review \"Security review for authentication service\""
     exit 1
 fi
 

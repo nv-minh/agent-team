@@ -46,7 +46,7 @@ teardown_orchestrator_tests() {
     fi
 
     # Clean up test directories
-    rm -rf /tmp/em-skill-test-*
+    rm -rf /tmp/em-team-test-*
 }
 
 ################################################################################

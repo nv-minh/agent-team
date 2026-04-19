@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EM-Skill Quick Command
+# EM-Team Quick Command
 # Source: GSD quick task execution
 #
 # Execute quick tasks with minimal overhead
@@ -15,25 +15,25 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}⚡ EM-Skill Quick Task${NC}"
+echo -e "${BLUE}⚡ EM-Team Quick Task${NC}"
 echo "======================"
 echo ""
 
 # Check for task description
 if [ -z "$1" ]; then
-    echo "Usage: em-skill quick <task-description>"
+    echo "Usage: em-team quick <task-description>"
     echo ""
     echo "Examples:"
-    echo "  em-skill quick fix typo in README"
-    echo "  em-skill quick add error handling to auth"
-    echo "  em-skill quick update dependencies"
+    echo "  em-team quick fix typo in README"
+    echo "  em-team quick add error handling to auth"
+    echo "  em-team quick update dependencies"
     echo ""
     echo "This executes the task with:"
     echo "  - No planning overhead"
     echo "  - Atomic commit on completion"
     echo "  - Essential quality gates only"
     echo ""
-    echo "For larger tasks, use: em-skill plan"
+    echo "For larger tasks, use: em-team plan"
     exit 1
 fi
 
@@ -45,8 +45,8 @@ echo "ID: $TASK_ID"
 echo ""
 
 # Create task file
-TASK_FILE=".em-skill/task-$TASK_ID.md"
-mkdir -p .em-skill
+TASK_FILE=".em-team/task-$TASK_ID.md"
+mkdir -p .em-team
 
 cat > "$TASK_FILE" << EOF
 # Quick Task: $TASK_DESC
@@ -78,4 +78,4 @@ echo "  2. Run tests: npm test"
 echo "  3. Run linter: npm run lint"
 echo "  4. Commit changes"
 echo ""
-echo "When done, run: em-skill quick-complete $TASK_ID"
+echo "When done, run: em-team quick-complete $TASK_ID"

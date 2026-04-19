@@ -1,6 +1,6 @@
 # Skills Overview
 
-Complete reference for all EM-Skill skills.
+Complete reference for all EM-Team skills.
 
 ## Foundation Skills
 - spec-driven-development

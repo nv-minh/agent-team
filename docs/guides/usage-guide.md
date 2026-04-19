@@ -1,6 +1,6 @@
-# EM-Skill Usage Guide
+# EM-Team Usage Guide
 
-Complete guide for using the EM-Skill fullstack engineering system.
+Complete guide for using the EM-Team fullstack engineering system.
 
 ---
 
@@ -19,7 +19,7 @@ Complete guide for using the EM-Skill fullstack engineering system.
 
 ## Overview
 
-EM-Skill provides three main ways to accomplish tasks:
+EM-Team provides three main ways to accomplish tasks:
 
 | Method | Description | Best For |
 |--------|-------------|----------|
@@ -596,7 +596,7 @@ cd tests
 ./test-distributed-orchestrator.sh
 
 # Check test environment
-ls /tmp/em-skill-test-*
+ls /tmp/em-team-test-*
 ```
 
 ---
@@ -631,7 +631,7 @@ cp workflows/new-feature.md workflows/my-custom-workflow.md
 
 ```yaml
 # Example GitHub Actions
-- name: Run EM-Skill Tests
+- name: Run EM-Team Tests
   run: |
     cd tests
     ./run-e2e-tests.sh

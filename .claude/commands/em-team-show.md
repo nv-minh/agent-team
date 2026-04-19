@@ -1,11 +1,11 @@
 ---
-name: em-skill-show
-description: Display all available EM-Skill commands (skills, agents, workflows)
+name: em-team-show
+description: Display all available EM-Team commands (skills, agents, workflows)
 ---
 
-# EM-Skill Command Display
+# EM-Team Command Display
 
-Shows all available EM-Skill commands organized by type:
+Shows all available EM-Team commands organized by type:
 
 ## Skills (25 commands)
 No prefix needed - just type the command name

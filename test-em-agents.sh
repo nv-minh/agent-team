@@ -1,5 +1,5 @@
 #!/bin/bash
-# EM-Skill Agent Test Script
+# EM-Team Agent Test Script
 # Run this to verify all agents are properly registered
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

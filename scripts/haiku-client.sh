@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Haiku Client for EM-Skill Token Summarization
+# Haiku Client for EM-Team Token Summarization
 # Summarizes reports using Claude Haiku model to reduce token count
 
 set -euo pipefail

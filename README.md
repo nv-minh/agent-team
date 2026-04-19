@@ -1,10 +1,10 @@
-# EM-Skill - Fullstack Engineering Agent/Skill/Workflow System
+# EM-Team - Fullstack Engineering Agent/Skill/Workflow System
 
 > A comprehensive system of agents, skills, and workflows for fullstack engineering, synthesized from the best practices of 6 top AI agent/workflow repositories.
 
 ## Overview
 
-EM-Skill provides a complete toolkit for fullstack engineering with:
+EM-Team provides a complete toolkit for fullstack engineering with:
 
 **🎯 Core Features (NEW in v1.2.0):**
 - **TDD Auto-Retry Loop** - Automated test failure capture with exponential backoff
@@ -133,7 +133,7 @@ Run multiple specialist agents simultaneously in isolated tmux sessions, each wi
 
 ### Prerequisites
 
-Before installing EM-Skill, ensure you have the following:
+Before installing EM-Team, ensure you have the following:
 
 #### Required
 - **Bash** - Shell environment (version 4.0+)
@@ -323,7 +323,7 @@ cd tests
 ```bash
 # Add to ~/.bashrc or ~/.zshrc
 
-# EM-Skill Configuration
+# EM-Team Configuration
 export EM_SKILL_HOME="$HOME/agent-team"
 export PATH="$PATH:$EM_SKILL_HOME/scripts"
 export PATH="$PATH:$EM_SKILL_HOME/distributed"
@@ -331,7 +331,7 @@ export PATH="$PATH:$EM_SKILL_HOME/distributed"
 
 #### Claude Code Integration
 
-EM-Skill works with Claude Code CLI out of the box. Simply invoke skills, agents, or workflows in your conversation:
+EM-Team works with Claude Code CLI out of the box. Simply invoke skills, agents, or workflows in your conversation:
 
 ```bash
 # Example invocations
@@ -408,7 +408,7 @@ rm -rf /tmp/claude-work-*
 ./scripts/distributed-orchestrator.sh start
 ```
 
-### Update EM-Skill
+### Update EM-Team
 
 ```bash
 # Navigate to project directory
@@ -438,7 +438,7 @@ rm -rf /tmp/claude-work-*
 
 ## 🚀 Quick Start
 
-Get started with EM-Skill in 5 minutes!
+Get started with EM-Team in 5 minutes!
 
 ### First Steps
 
@@ -664,7 +664,7 @@ Run end-to-end workflows:
 ## Project Structure
 
 ```
-em-skill/
+em-team/
 ├── skills/                  # 25-30 skills organized by category
 │   ├── foundation/          # Core foundational skills (5)
 │   ├── development/         # Development workflow skills (8)
@@ -697,7 +697,7 @@ em-skill/
 └── CLAUDE.md                # Main configuration
 ```
 
-> **Note:** EM-Skill includes multiple skill systems from different sources. See [Skill Systems Guide](docs/skill-systems-guide.md) for when to use each system.
+> **Note:** EM-Team includes multiple skill systems from different sources. See [Skill Systems Guide](docs/skill-systems-guide.md) for when to use each system.
 
 ---
 
@@ -705,7 +705,7 @@ em-skill/
 
 ### Distributed Agent Orchestration System
 
-EM-Skill includes a **distributed agent orchestration system** that solves token context overflow by running agents in separate tmux sessions.
+EM-Team includes a **distributed agent orchestration system** that solves token context overflow by running agents in separate tmux sessions.
 
 #### Problem Solved
 
@@ -1137,7 +1137,7 @@ For complex tasks requiring multiple specialist agents:
 
 ```bash
 # Start distributed orchestration
-cd /path/to/em-skill
+cd /path/to/em-team
 ./scripts/distributed-orchestrator.sh start
 
 # This creates a tmux session with multiple agent windows:
@@ -1234,7 +1234,7 @@ cat manual-test-with-agents.md
 
 ### Distributed Workflows
 
-EM-Skill includes specialized workflows for distributed execution:
+EM-Team includes specialized workflows for distributed execution:
 
 **1. Distributed Investigation Workflow**
 ```bash
@@ -1286,7 +1286,7 @@ See [Agent Template](templates/agent-invocation-template.md) for reference.
 
 ## Source Repositories
 
-EM-Skill synthesizes best practices from:
+EM-Team synthesizes best practices from:
 
 1. **Product-Manager-Skills** (47 skills)
    - 3-tier architecture
@@ -1354,7 +1354,7 @@ MIT License - Feel free to use and adapt for your projects
 
 ### What's Included
 
-EM-Skill is a comprehensive fullstack engineering system that includes:
+EM-Team is a comprehensive fullstack engineering system that includes:
 
 **Core Components:**
 - ✅ 25-30 Skills - Reusable development patterns
@@ -1388,7 +1388,7 @@ EM-Skill is a comprehensive fullstack engineering system that includes:
 ### File Organization
 
 ```
-em-skill/
+em-team/
 ├── 📚 Documentation (docs/)
 │   ├── guides/                    # Usage guides
 │   ├── architecture/              # System architecture

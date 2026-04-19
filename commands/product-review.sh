@@ -1,6 +1,6 @@
 #!/bin/bash
 # product-review.sh - Product/spec review with Product Manager and Architect
-# Usage: em-skill product-review [spec_or_requirement_description]
+# Usage: em-team product-review [spec_or_requirement_description]
 
 set -e
 
@@ -16,12 +16,12 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Please provide a spec or requirement description"
     echo ""
-    echo "Usage: em-skill product-review \"[spec or requirement description]\""
+    echo "Usage: em-team product-review \"[spec or requirement description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill product-review \"Review spec for new payment feature\""
-    echo "  em-skill product-review \"Validate requirements for user onboarding flow\""
-    echo "  em-skill product-review \"Assess market fit for subscription management\""
+    echo "  em-team product-review \"Review spec for new payment feature\""
+    echo "  em-team product-review \"Validate requirements for user onboarding flow\""
+    echo "  em-team product-review \"Assess market fit for subscription management\""
     exit 1
 fi
 

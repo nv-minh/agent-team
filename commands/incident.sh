@@ -1,6 +1,6 @@
 #!/bin/bash
 # incident.sh - Production incident response with Staff Engineer and Security Reviewer
-# Usage: em-skill incident [incident_description]
+# Usage: em-team incident [incident_description]
 
 set -e
 
@@ -16,13 +16,13 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Please provide an incident description"
     echo ""
-    echo "Usage: em-skill incident \"[incident description]\""
+    echo "Usage: em-team incident \"[incident description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill incident \"Production outage - API returning 500 errors\""
-    echo "  em-skill incident \"Database connection pool exhausted\""
-    echo "  em-skill incident \"Security alert - unusual login patterns\""
-    echo "  em-skill incident \"Payment processing failures\""
+    echo "  em-team incident \"Production outage - API returning 500 errors\""
+    echo "  em-team incident \"Database connection pool exhausted\""
+    echo "  em-team incident \"Security alert - unusual login patterns\""
+    echo "  em-team incident \"Payment processing failures\""
     exit 1
 fi
 

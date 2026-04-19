@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Session Sync Utility for EM-Skill Distributed Orchestration
+# Session Sync Utility for EM-Team Distributed Orchestration
 #
 # Description: Synchronizes context and data across distributed agent sessions
 # Usage: ./session-sync.sh [command] [options]
@@ -385,7 +385,7 @@ sync_status() {
 
 show_help() {
     cat << EOF
-Session Sync Utility for EM-Skill Distributed Orchestration
+Session Sync Utility for EM-Team Distributed Orchestration
 
 Usage: $0 [command] [options]
 

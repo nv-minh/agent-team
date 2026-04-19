@@ -1,7 +1,7 @@
 ---
 name: em:distributed
-description: Parallel distributed investigation - EM-Skill Workflow
-tags: [workflow, distributed, parallel, em-skill]
+description: Parallel distributed investigation - EM-Team Workflow
+tags: [workflow, distributed, parallel, em-team]
 always_available: true
 ---
 

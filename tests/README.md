@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains comprehensive test coverage for the EM-Skill distributed agent orchestration system.
+This directory contains comprehensive test coverage for the EM-Team distributed agent orchestration system.
 
 ---
 
@@ -219,4 +219,4 @@ When adding new tests:
 
 **Test Suite Version:** 1.0.0
 **Last Updated:** 2026-04-19
-**Maintained By:** EM-Skill Team
+**Maintained By:** EM-Team Team

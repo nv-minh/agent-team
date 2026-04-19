@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document defines the messaging protocol for distributed agent orchestration in EM-Skill. It enables communication between agents running in separate tmux sessions.
+This document defines the messaging protocol for distributed agent orchestration in EM-Team. It enables communication between agents running in separate tmux sessions.
 
 ## Message Types
 
@@ -587,4 +587,4 @@ chmod 600 /tmp/claude-work-queue/to-*/*.yaml
 
 **Protocol Version:** 1.0.0
 **Last Updated:** 2026-04-19
-**Compatible with:** EM-Skill Distributed Orchestration
+**Compatible with:** EM-Team Distributed Orchestration

@@ -1,7 +1,7 @@
 ---
 name: em:research
-description: Technical research & exploration - EM-Skill Agent
-tags: [research, exploration, learning, em-skill]
+description: Technical research & exploration - EM-Team Agent
+tags: [research, exploration, learning, em-team]
 always_available: true
 ---
 

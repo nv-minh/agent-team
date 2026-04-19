@@ -1,43 +1,52 @@
 ---
-name: em:team
-description: Full team review coordination - EM-Skill Workflow
-tags: [workflow, team, review, em-skill]
-always_available: true
+name: em-team
+description: EM-Team - Fullstack Engineering System available in this project
+version: 1.2.0
+location: local
 ---
 
-# EM:Team - Team Review
+# EM-Team - Available Locally
 
-Orchestrate full team review for comprehensive feedback.
+**Good news!** EM-Team is available in this project at `/Users/abc/Desktop/EM-Skill/`
 
-## Usage
+## What's Included
 
+- **25+ Skills** - Patterns & best practices
+- **16 Agents** - Specialized AI assistants
+- **18 Workflows** - End-to-end processes
+
+## Quick Start
+
+```bash
+# Use a skill
+"Use the brainstorming skill to explore ideas"
+
+# Use an agent
+"Agent: em-planner - Create implementation plan"
+
+# Use a workflow
+"Workflow: em-new-feature - From idea to production"
 ```
-Use the em:team skill to conduct team review for [feature/change]
-```
 
-## Examples
+## Documentation
 
-```
-Use the em:team skill to conduct team review for the authentication feature
-Use the em:team skill to conduct team review for the API redesign
-Use the em:team skill to conduct team review for the new database schema
-Use the em:team skill to conduct team review for the payment system
-```
+- `README.md` - Main documentation
+- `INSTALLATION.md` - Installation guide
+- `skills/SKILL-INDEX.md` - Complete skill index
+- `USAGE-FROM-ANY-REPO.md` - Usage guide
 
-## What This Does
+## Installation Status
 
-Invokes the **em-team-review workflow** to:
-- Coordinate multiple specialist agents
-- Gather comprehensive feedback
-- Review from multiple perspectives
-- Consolidate findings
-- Provide actionable recommendations
+✅ **EM-Team is installed and ready to use!**
 
-## Team Members
+- Location: `/Users/abc/Desktop/EM-Team`
+- Version: 1.1.0
+- Status: Production Ready
+- Tests: 8/8 E2E Passing
 
-- **em:architect** - Architecture review
-- **em:backend** - Backend review
-- **em:frontend** - Frontend review
-- **em:security** - Security review
-- **em:code-review** - Code quality review
-- **em:database** - Database review
+---
+
+**You can use EM-Team right now!** Just ask:
+- "Use the brainstorming skill to explore X"
+- "Agent: em-planner - Create plan for X"
+- "Workflow: em-new-feature - Implement X"

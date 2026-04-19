@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EM-Skill Debug Command
+# EM-Team Debug Command
 # Source: GSD + superpowers systematic debugging
 #
 # Systematic debugging with root cause investigation
@@ -16,18 +16,18 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🐛 EM-Skill Debug Session${NC}"
+echo -e "${BLUE}🐛 EM-Team Debug Session${NC}"
 echo "========================="
 echo ""
 
 # Check for bug description
 if [ -z "$1" ]; then
-    echo "Usage: em-skill debug <bug-description>"
+    echo "Usage: em-team debug <bug-description>"
     echo ""
     echo "Examples:"
-    echo "  em-skill debug \"User cannot login after password reset\""
-    echo "  em-skill debug \"API returns 500 when creating order\""
-    echo "  em-skill debug \"Memory leak in WebSocket handler\""
+    echo "  em-team debug \"User cannot login after password reset\""
+    echo "  em-team debug \"API returns 500 when creating order\""
+    echo "  em-team debug \"Memory leak in WebSocket handler\""
     echo ""
     echo "This starts a systematic debugging session:"
     echo "  1. INVESTIGATE - Reproduce and collect data"
@@ -40,9 +40,9 @@ fi
 
 BUG_DESC="$@"
 DEBUG_ID=$(date +%s)
-DEBUG_FILE=".em-skill/debug-$DEBUG_ID.md"
+DEBUG_FILE=".em-team/debug-$DEBUG_ID.md"
 
-mkdir -p .em-skill
+mkdir -p .em-team
 
 cat > "$DEBUG_FILE" << EOF
 # Debug Session: $BUG_DESC
@@ -174,6 +174,6 @@ echo "  - Collect logs and data"
 echo "  - Document findings"
 echo ""
 echo "When ready for next phase, run:"
-echo "  em-skill debug-analyze $DEBUG_ID"
-echo "  em-skill debug-hypothesize $DEBUG_ID"
-echo "  em-skill debug-fix $DEBUG_ID"
+echo "  em-team debug-analyze $DEBUG_ID"
+echo "  em-team debug-hypothesize $DEBUG_ID"
+echo "  em-team debug-fix $DEBUG_ID"

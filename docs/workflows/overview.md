@@ -1,6 +1,6 @@
 # Workflows Overview
 
-Complete catalog of EM-Skill workflows.
+Complete catalog of EM-Team workflows.
 
 ## Primary Workflows
 1. **new-feature** - From idea to production

@@ -1,6 +1,6 @@
-# 📦 EM-Skill Installation Guide
+# 📦 EM-Team Installation Guide
 
-Complete installation guide for EM-Skill - Fullstack Engineering Agent/Skill/Workflow System.
+Complete installation guide for EM-Team - Fullstack Engineering Agent/Skill/Workflow System.
 
 ---
 
@@ -201,7 +201,7 @@ Distributed Orchestration E2E Tests
 ==========================================
 
 [INFO] Setting up E2E test environment...
-[SUCCESS] E2E environment created at: /tmp/em-skill-e2e-test-XXXXX
+[SUCCESS] E2E environment created at: /tmp/em-team-e2e-test-XXXXX
 
 [TEST 1] E2E Test 1: Script Availability
 [PASS] E2E Test 1: Script Availability
@@ -275,7 +275,7 @@ claude-work: 5 windows (created Sun Apr 19 XX:XX:XX 2026)
 Add to your shell configuration (`~/.bashrc` or `~/.zshrc`):
 
 ```bash
-# EM-Skill Configuration
+# EM-Team Configuration
 export EM_SKILL_HOME="$HOME/agent-team"
 export PATH="$PATH:$EM_SKILL_HOME/scripts"
 export PATH="$PATH:$EM_SKILL_HOME/distributed"
@@ -390,7 +390,7 @@ cd tests
 ./run-e2e-tests.sh --verbose
 
 # Check test logs
-ls -la /tmp/em-skill-test-*
+ls -la /tmp/em-team-test-*
 
 # Run individual failing test
 ./test-distributed-orchestrator.sh
@@ -441,7 +441,7 @@ npm install -g @anthropic-ai/claude-code
 
 ---
 
-## 🔄 Update EM-Skill
+## 🔄 Update EM-Team
 
 ### Check for Updates
 
@@ -494,7 +494,7 @@ rm -rf /path/to/agent-team
 ```bash
 # Remove temporary directories
 rm -rf /tmp/claude-work-*
-rm -rf /tmp/em-skill-test-*
+rm -rf /tmp/em-team-test-*
 
 # Kill any remaining tmux sessions
 tmux kill-server
@@ -545,7 +545,7 @@ After successful installation:
 
 ### Tip 1: Always Run Tests First
 
-Before using EM-Skill for important tasks:
+Before using EM-Team for important tasks:
 ```bash
 cd tests && ./run-e2e-tests.sh
 ```
@@ -556,7 +556,7 @@ Begin with basic skills and agents before trying distributed mode.
 
 ### Tip 3: Read Documentation
 
-EM-Skill has comprehensive documentation. Read it to get the most out of the system.
+EM-Team has comprehensive documentation. Read it to get the most out of the system.
 
 ### Tip 4: Use Bilingual Support
 
@@ -610,4 +610,4 @@ Use this checklist to verify your installation:
 **Last Updated:** 2026-04-19
 **Status:** ✅ Ready for Production
 
-**Happy coding with EM-Skill!** 🚀
+**Happy coding with EM-Team!** 🚀

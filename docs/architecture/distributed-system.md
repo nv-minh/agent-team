@@ -1,6 +1,6 @@
 # Distributed System Architecture
 
-Complete architecture documentation for the EM-Skill Distributed Agent Orchestration System.
+Complete architecture documentation for the EM-Team Distributed Agent Orchestration System.
 
 ---
 

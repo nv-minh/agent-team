@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Session Coordinator for EM-Skill Distributed Orchestration
+# Session Coordinator for EM-Team Distributed Orchestration
 #
 # Description: High-level coordination logic for distributed agent sessions
 # Usage: ./session-coordinator.sh [command] [options]
@@ -387,7 +387,7 @@ EOF
 show_dashboard() {
     clear
     echo "╔══════════════════════════════════════════════════════════════════╗"
-    echo "║        EM-Skill Distributed Orchestration Dashboard             ║"
+    echo "║        EM-Team Distributed Orchestration Dashboard             ║"
     echo "║                    $(date '+%Y-%m-%d %H:%M:%S')                       ║"
     echo "╚══════════════════════════════════════════════════════════════════╝"
     echo ""
@@ -458,7 +458,7 @@ run_loop() {
 
 show_help() {
     cat << EOF
-Session Coordinator for EM-Skill Distributed Orchestration
+Session Coordinator for EM-Team Distributed Orchestration
 
 Usage: $0 [command] [options]
 

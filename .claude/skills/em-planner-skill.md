@@ -1,7 +1,7 @@
 ---
 name: em-planner
 description: Create detailed implementation plans. Shortcut for "Agent: em-planner"
-tags: [planning, architecture, implementation, em-skill]
+tags: [planning, architecture, implementation, em-team]
 always_available: true
 ---
 

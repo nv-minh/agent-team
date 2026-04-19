@@ -1,7 +1,7 @@
 ---
 name: em:incident
-description: Production incident response - EM-Skill Workflow
-tags: [workflow, incident, production, em-skill]
+description: Production incident response - EM-Team Workflow
+tags: [workflow, incident, production, em-team]
 always_available: true
 ---
 

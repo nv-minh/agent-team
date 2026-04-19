@@ -586,4 +586,4 @@ cat /tmp/claude-work-reports/techlead/consolidated-report-*.md
 
 **Workflow Version:** 1.0.0
 **Last Updated:** 2026-04-19
-**Compatible with:** EM-Skill Distributed Orchestration
+**Compatible with:** EM-Team Distributed Orchestration

@@ -301,7 +301,7 @@ it('should throw error for invalid input', () => {
 
 ## Auto-Retry Loop Mechanism
 
-EM-Skill includes an automatic retry mechanism that captures test failures and feeds them back to the AI for fixing, implementing the RED-GREEN-REFACTOR cycle with intelligent retry logic.
+EM-Team includes an automatic retry mechanism that captures test failures and feeds them back to the AI for fixing, implementing the RED-GREEN-REFACTOR cycle with intelligent retry logic.
 
 ### How It Works
 
@@ -406,7 +406,7 @@ Failures are saved as JSON:
   "exit_code": 1,
   "test_command": "npm run test:unit -- --passWithNoTests",
   "output": "Full test output with colors and formatting...",
-  "working_directory": "/Users/abc/Desktop/EM-Skill",
+  "working_directory": "/Users/abc/Desktop/EM-Team",
   "git_branch": "feature/tdd-auto-retry",
   "git_commit": "abc123def456"
 }

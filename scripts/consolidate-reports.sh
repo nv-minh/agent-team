@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Report Consolidator for EM-Skill Distributed Orchestration
+# Report Consolidator for EM-Team Distributed Orchestration
 #
 # Description: Collects and consolidates reports from multiple agent sessions
 # Usage: ./consolidate-reports.sh [command] [options]
@@ -529,7 +529,7 @@ validate() {
 
 show_help() {
     cat << EOF
-Report Consolidator for EM-Skill Distributed Orchestration
+Report Consolidator for EM-Team Distributed Orchestration
 
 Usage: $0 [command] [options]
 

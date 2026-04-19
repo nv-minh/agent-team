@@ -1,7 +1,7 @@
 ---
 name: em-frontend-expert
 description: Frontend specialist for React, Next.js, UI/UX. Shortcut for "Agent: em-frontend-expert"
-tags: [frontend, react, nextjs, ui, ux, em-skill]
+tags: [frontend, react, nextjs, ui, ux, em-team]
 always_available: true
 ---
 

@@ -46,7 +46,7 @@ teardown_coordinator_tests() {
     fi
 
     # Clean up test directories
-    rm -rf /tmp/em-skill-test-coordinator-*
+    rm -rf /tmp/em-team-test-coordinator-*
 }
 
 ################################################################################

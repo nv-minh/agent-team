@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# TDD Auto-Retry Wrapper for EM-Skill
+# TDD Auto-Retry Wrapper for EM-Team
 # Implements RED-GREEN-REFACTOR cycle with automatic retry logic
 # Exit codes: 0=success, 42=retry available, 43=max retries exceeded
 

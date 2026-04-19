@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EM-Skill Ship Command
+# EM-Team Ship Command
 # Source: GSD ship workflow
 #
 # Complete ship workflow: test, review, bump version, update changelog, commit, push, PR
@@ -15,14 +15,14 @@ RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🚢 EM-Skill Ship Workflow${NC}"
+echo -e "${BLUE}🚢 EM-Team Ship Workflow${NC}"
 echo "========================="
 echo ""
 
 # Function to show usage
 show_usage() {
     echo "Usage:"
-    echo "  em-skill ship [options]"
+    echo "  em-team ship [options]"
     echo ""
     echo "Options:"
     echo "  --dry-run    # Run through workflow without making changes"
@@ -97,9 +97,9 @@ echo ""
 
 # Create ship document
 SHIP_ID=$(date +%s)
-SHIP_FILE=".em-skill/ship-$SHIP_ID.md"
+SHIP_FILE=".em-team/ship-$SHIP_ID.md"
 
-mkdir -p .em-skill
+mkdir -p .em-team
 
 cat > "$SHIP_FILE" << EOF
 # Ship Workflow
@@ -248,4 +248,4 @@ echo "Or invoke ship agent:"
 echo '  "Agent: ship - Create PR, run review, prepare for merge"'
 echo ""
 echo "Quick ship (auto mode):"
-echo "  em-skill ship-auto"
+echo "  em-team ship-auto"

@@ -1,4 +1,4 @@
-# EM-Skill Commands
+# EM-Team Commands
 
 CLI commands to accelerate common workflows.
 
@@ -10,8 +10,8 @@ Source: GSD + gstack + superpowers best practices
 
 **`code-review-9.sh` is deprecated.** Use `code-review-deep.sh` instead.
 
-The command `em-skill code-review-9` will be removed in v2.0.0.
-Migrate to: `em-skill code-review-deep`
+The command `em-team code-review-9` will be removed in v2.0.0.
+Migrate to: `em-team code-review-deep`
 
 ---
 
@@ -22,14 +22,14 @@ Execute quick tasks with minimal overhead.
 
 **Usage:**
 ```bash
-em-skill quick <task-description>
+em-team quick <task-description>
 ```
 
 **Examples:**
 ```bash
-em-skill quick fix typo in README
-em-skill quick add error handling to auth
-em-skill quick update dependencies
+em-team quick fix typo in README
+em-team quick add error handling to auth
+em-team quick update dependencies
 ```
 
 **Use for:**
@@ -99,14 +99,14 @@ Systematic debugging with root cause investigation.
 
 **Usage:**
 ```bash
-em-skill debug <bug-description>
+em-team debug <bug-description>
 ```
 
 **Examples:**
 ```bash
-em-skill debug "User cannot login after password reset"
-em-skill debug "API returns 500 when creating order"
-em-skill debug "Memory leak in WebSocket handler"
+em-team debug "User cannot login after password reset"
+em-team debug "API returns 500 when creating order"
+em-team debug "Memory leak in WebSocket handler"
 ```
 
 **Process:**
@@ -124,15 +124,15 @@ Trigger 5-axis code review.
 
 **Usage:**
 ```bash
-em-skill review [target]
+em-team review [target]
 ```
 
 **Examples:**
 ```bash
-em-skill review              # Review staged changes
-em-skill review main         # Review diff from main
-em-skill review abc123       # Review specific commit
-em-skill review --file src/auth/login.ts
+em-team review              # Review staged changes
+em-team review main         # Review diff from main
+em-team review abc123       # Review specific commit
+em-team review --file src/auth/login.ts
 ```
 
 **5 Axes:**
@@ -149,14 +149,14 @@ Systematically QA test web application.
 
 **Usage:**
 ```bash
-em-skill qa <url> [scope]
+em-team qa <url> [scope]
 ```
 
 **Examples:**
 ```bash
-em-skill qa http://localhost:3000
-em-skill qa https://staging.example.com
-em-skill qa /dashboard critical
+em-team qa http://localhost:3000
+em-team qa https://staging.example.com
+em-team qa /dashboard critical
 ```
 
 **Scopes:**
@@ -180,7 +180,7 @@ Complete ship workflow.
 
 **Usage:**
 ```bash
-em-skill ship
+em-team ship
 ```
 
 **Process:**
@@ -206,14 +206,14 @@ Verify implementation against spec.
 
 **Usage:**
 ```bash
-em-skill verify [spec-file]
+em-team verify [spec-file]
 ```
 
 **Examples:**
 ```bash
-em-skill verify
-em-skill verify SPEC.md
-em-skill verify docs/auth-spec.md
+em-team verify
+em-team verify SPEC.md
+em-team verify docs/auth-spec.md
 ```
 
 **Verifies:**
@@ -236,7 +236,7 @@ Diagnose project health.
 
 **Usage:**
 ```bash
-em-skill health
+em-team health
 ```
 
 **Checks:**
@@ -249,7 +249,7 @@ em-skill health
 - Dependencies (vulnerabilities)
 - Git hooks installed
 - CI/CD configured
-- EM-Skill integration
+- EM-Team integration
 
 **Output:**
 - Health score (0-100)
@@ -264,15 +264,15 @@ Save and restore working state.
 
 **Usage:**
 ```bash
-em-skill checkpoint <command> [name]
+em-team checkpoint <command> [name]
 ```
 
 **Commands:**
 ```bash
-em-skill checkpoint save [name]      # Save current state
-em-skill checkpoint restore <name>   # Restore state
-em-skill checkpoint list             # List all checkpoints
-em-skill checkpoint delete <name>    # Delete checkpoint
+em-team checkpoint save [name]      # Save current state
+em-team checkpoint restore <name>   # Restore state
+em-team checkpoint list             # List all checkpoints
+em-team checkpoint delete <name>    # Delete checkpoint
 ```
 
 ---
@@ -284,14 +284,14 @@ Orchestrate full team review.
 
 **Usage:**
 ```bash
-em-skill team-lead "[task description]"
+em-team team-lead "[task description]"
 ```
 
 **Examples:**
 ```bash
-em-skill team-lead "Review new payment feature before implementation"
-em-skill team-lead "Architecture review for microservices migration"
-em-skill team-lead "Cross-functional review for checkout flow"
+em-team team-lead "Review new payment feature before implementation"
+em-team team-lead "Architecture review for microservices migration"
+em-team team-lead "Cross-functional review for checkout flow"
 ```
 
 **Orchestrates:**
@@ -312,14 +312,14 @@ Architecture review with Architect and Staff Engineer.
 
 **Usage:**
 ```bash
-em-skill arch-review "[architecture description]"
+em-team arch-review "[architecture description]"
 ```
 
 **Examples:**
 ```bash
-em-skill arch-review "Review hexagonal architecture for user service"
-em-skill arch-review "Assess microservices decomposition strategy"
-em-skill arch-review "Review event-driven architecture for payments"
+em-team arch-review "Review hexagonal architecture for user service"
+em-team arch-review "Assess microservices decomposition strategy"
+em-team arch-review "Review event-driven architecture for payments"
 ```
 
 **Reviews:**
@@ -338,14 +338,14 @@ UI/UX design review with Frontend Expert and Product Manager.
 
 **Usage:**
 ```bash
-em-skill design-review "[design description]"
+em-team design-review "[design description]"
 ```
 
 **Examples:**
 ```bash
-em-skill design-review "Review checkout flow UI design"
-em-skill design-review "Assess dashboard component design"
-em-skill design-review "Review mobile app navigation design"
+em-team design-review "Review checkout flow UI design"
+em-team design-review "Assess dashboard component design"
+em-team design-review "Review mobile app navigation design"
 ```
 
 **Reviews:**
@@ -367,14 +367,14 @@ Deep 9-axis code review with Senior Code Reviewer and Security Reviewer.
 
 **Usage:**
 ```bash
-em-skill code-review-deep "[PR or code description]"
+em-team code-review-deep "[PR or code description]"
 ```
 
 **Examples:**
 ```bash
-em-skill code-review-deep "Review PR #123 for payment processing"
-em-skill code-review-deep "Review authentication module for security"
-em-skill code-review-deep "Assess code quality of user service refactoring"
+em-team code-review-deep "Review PR #123 for payment processing"
+em-team code-review-deep "Review authentication module for security"
+em-team code-review-deep "Assess code quality of user service refactoring"
 ```
 
 ---
@@ -386,7 +386,7 @@ This wrapper is maintained for backward compatibility and will be removed in v2.
 
 **Usage:**
 ```bash
-em-skill code-review-9 "[PR or code description]"
+em-team code-review-9 "[PR or code description]"
 ```
 
 Automatically redirects to `code-review-deep.sh`.
@@ -411,14 +411,14 @@ Database review with Database Expert and Architect.
 
 **Usage:**
 ```bash
-em-skill db-review "[database description]"
+em-team db-review "[database description]"
 ```
 
 **Examples:**
 ```bash
-em-skill db-review "Review schema for payment ledger system"
-em-skill db-review "Assess query performance for reporting dashboard"
-em-skill db-review "Review migration strategy for user table split"
+em-team db-review "Review schema for payment ledger system"
+em-team db-review "Assess query performance for reporting dashboard"
+em-team db-review "Review migration strategy for user table split"
 ```
 
 **Reviews:**
@@ -438,14 +438,14 @@ Product/spec review with Product Manager and Architect.
 
 **Usage:**
 ```bash
-em-skill product-review "[spec or requirement description]"
+em-team product-review "[spec or requirement description]"
 ```
 
 **Examples:**
 ```bash
-em-skill product-review "Review spec for new payment feature"
-em-skill product-review "Validate requirements for user onboarding flow"
-em-skill product-review "Assess market fit for subscription management"
+em-team product-review "Review spec for new payment feature"
+em-team product-review "Validate requirements for user onboarding flow"
+em-team product-review "Assess market fit for subscription management"
 ```
 
 **Reviews:**
@@ -466,14 +466,14 @@ Advanced security review with Security Reviewer and Staff Engineer.
 
 **Usage:**
 ```bash
-em-skill security-review "[security description]"
+em-team security-review "[security description]"
 ```
 
 **Examples:**
 ```bash
-em-skill security-review "Perform OWASP assessment on payment system"
-em-skill security-review "STRIDE threat modeling for API gateway"
-em-skill security-review "Security review for authentication service"
+em-team security-review "Perform OWASP assessment on payment system"
+em-team security-review "STRIDE threat modeling for API gateway"
+em-team security-review "Security review for authentication service"
 ```
 
 **Assessment:**
@@ -494,15 +494,15 @@ Production incident response with Staff Engineer and Security Reviewer.
 
 **Usage:**
 ```bash
-em-skill incident "[incident description]"
+em-team incident "[incident description]"
 ```
 
 **Examples:**
 ```bash
-em-skill incident "Production outage - API returning 500 errors"
-em-skill incident "Database connection pool exhausted"
-em-skill incident "Security alert - unusual login patterns"
-em-skill incident "Payment processing failures"
+em-team incident "Production outage - API returning 500 errors"
+em-team incident "Database connection pool exhausted"
+em-team incident "Security alert - unusual login patterns"
+em-team incident "Payment processing failures"
 ```
 
 **Process:**
@@ -588,17 +588,17 @@ Need security assessment?
 mkdir -p ~/.local/bin
 
 # Symlink all commands
-ln -s $(pwd)/em-skill/commands/*.sh ~/.local/bin/em-skill-*
+ln -s $(pwd)/em-team/commands/*.sh ~/.local/bin/em-team-*
 
 # Create wrapper script
-cat > ~/.local/bin/em-skill << 'EOF'
+cat > ~/.local/bin/em-team << 'EOF'
 #!/bin/bash
 COMMAND="$1"
 shift
-~/.local/bin/em-skill-${COMMAND}.sh "$@"
+~/.local/bin/em-team-${COMMAND}.sh "$@"
 EOF
 
-chmod +x ~/.local/bin/em-skill
+chmod +x ~/.local/bin/em-team
 
 # Add to PATH (add to ~/.bashrc or ~/.zshrc)
 export PATH="$HOME/.local/bin:$PATH"
@@ -608,31 +608,31 @@ export PATH="$HOME/.local/bin:$PATH"
 ```bash
 # Add to ~/.bashrc or ~/.zshrc
 # Core commands
-alias em-skill-quick='bash /path/to/em-skill/commands/quick.sh'
-alias em-skill-debug='bash /path/to/em-skill/commands/debug.sh'
-alias em-skill-review='bash /path/to/em-skill/commands/review.sh'
-alias em-skill-qa='bash /path/to/em-skill/commands/qa.sh'
-alias em-skill-ship='bash /path/to/em-skill/commands/ship.sh'
-alias em-skill-verify='bash /path/to/em-skill/commands/verify.sh'
-alias em-skill-health='bash /path/to/em-skill/commands/health.sh'
-alias em-skill-checkpoint='bash /path/to/em-skill/commands/checkpoint.sh'
+alias em-team-quick='bash /path/to/em-team/commands/quick.sh'
+alias em-team-debug='bash /path/to/em-team/commands/debug.sh'
+alias em-team-review='bash /path/to/em-team/commands/review.sh'
+alias em-team-qa='bash /path/to/em-team/commands/qa.sh'
+alias em-team-ship='bash /path/to/em-team/commands/ship.sh'
+alias em-team-verify='bash /path/to/em-team/commands/verify.sh'
+alias em-team-health='bash /path/to/em-team/commands/health.sh'
+alias em-team-checkpoint='bash /path/to/em-team/commands/checkpoint.sh'
 
 # Team commands
-alias em-skill-team-lead='bash /path/to/em-skill/commands/team-lead.sh'
-alias em-skill-arch-review='bash /path/to/em-skill/commands/arch-review.sh'
-alias em-skill-design-review='bash /path/to/em-skill/commands/design-review.sh'
-alias em-skill-code-review-deep='bash /path/to/em-skill/commands/code-review-deep.sh'
-alias em-skill-db-review='bash /path/to/em-skill/commands/db-review.sh'
-alias em-skill-product-review='bash /path/to/em-skill/commands/product-review.sh'
-alias em-skill-security-review='bash /path/to/em-skill/commands/security-review.sh'
-alias em-skill-incident='bash /path/to/em-skill/commands/incident.sh'
+alias em-team-team-lead='bash /path/to/em-team/commands/team-lead.sh'
+alias em-team-arch-review='bash /path/to/em-team/commands/arch-review.sh'
+alias em-team-design-review='bash /path/to/em-team/commands/design-review.sh'
+alias em-team-code-review-deep='bash /path/to/em-team/commands/code-review-deep.sh'
+alias em-team-db-review='bash /path/to/em-team/commands/db-review.sh'
+alias em-team-product-review='bash /path/to/em-team/commands/product-review.sh'
+alias em-team-security-review='bash /path/to/em-team/commands/security-review.sh'
+alias em-team-incident='bash /path/to/em-team/commands/incident.sh'
 
 # Legacy (deprecated)
-alias em-skill-code-review-9='bash /path/to/em-skill/commands/code-review-9.sh'
+alias em-team-code-review-9='bash /path/to/em-team/commands/code-review-9.sh'
 ```
 
 ---
 
-**EM-Skill Version:** 1.1.0
+**EM-Team Version:** 1.1.0
 **Last Updated:** 2026-04-19
 **Total Commands:** 16 (8 core + 8 team)

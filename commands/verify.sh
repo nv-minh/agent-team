@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EM-Skill Verify Command
+# EM-Team Verify Command
 # Source: GSD verification workflow
 #
 # Verify built features against spec and requirements
@@ -15,7 +15,7 @@ RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}✅ EM-Skill Verification${NC}"
+echo -e "${BLUE}✅ EM-Team Verification${NC}"
 echo "======================="
 echo ""
 
@@ -24,7 +24,7 @@ SPEC_FILE="SPEC.md"
 if [ ! -f "$SPEC_FILE" ]; then
     echo -e "${YELLOW}⚠ No SPEC.md found in current directory${NC}"
     echo ""
-    echo "Usage: em-skill verify [spec-file]"
+    echo "Usage: em-team verify [spec-file]"
     echo ""
     echo "This verifies implementation against spec:"
     echo "  - Checks all objectives are met"
@@ -43,9 +43,9 @@ if [ ! -f "$SPEC_FILE" ]; then
 fi
 
 VERIFY_ID=$(date +%s)
-VERIFY_FILE=".em-skill/verify-$VERIFY_ID.md"
+VERIFY_FILE=".em-team/verify-$VERIFY_ID.md"
 
-mkdir -p .em-skill
+mkdir -p .em-team
 
 if [ -n "$SPEC_FILE" ]; then
     echo "Spec file: $SPEC_FILE"

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# TDD Context Manager for EM-Skill
+# TDD Context Manager for EM-Team
 # Manages failure context files and provides AI-readable summaries
 
 set -euo pipefail

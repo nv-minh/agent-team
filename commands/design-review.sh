@@ -1,6 +1,6 @@
 #!/bin/bash
 # design-review.sh - UI/UX design review with Frontend Expert and Product Manager
-# Usage: em-skill design-review [design_description]
+# Usage: em-team design-review [design_description]
 
 set -e
 
@@ -16,12 +16,12 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Please provide a design description"
     echo ""
-    echo "Usage: em-skill design-review \"[design description]\""
+    echo "Usage: em-team design-review \"[design description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill design-review \"Review checkout flow UI design\""
-    echo "  em-skill design-review \"Assess dashboard component design\""
-    echo "  em-skill design-review \"Review mobile app navigation design\""
+    echo "  em-team design-review \"Review checkout flow UI design\""
+    echo "  em-team design-review \"Assess dashboard component design\""
+    echo "  em-team design-review \"Review mobile app navigation design\""
     exit 1
 fi
 

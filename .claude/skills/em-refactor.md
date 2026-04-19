@@ -1,7 +1,7 @@
 ---
 name: em:refactor
-description: Improve code quality - EM-Skill Workflow
-tags: [workflow, refactor, quality, em-skill]
+description: Improve code quality - EM-Team Workflow
+tags: [workflow, refactor, quality, em-team]
 always_available: true
 ---
 

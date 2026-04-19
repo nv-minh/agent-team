@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Test Helper Functions for EM-Skill Distributed Orchestration Tests
+# Test Helper Functions for EM-Team Distributed Orchestration Tests
 #
 # Description: Shared test utilities and assertions
 # Source this file in test scripts: source ./test-helpers.sh
@@ -79,7 +79,7 @@ setup_test_env() {
     local test_name=$1
 
     # Create test-specific directories
-    export TEST_BASE_DIR="/tmp/em-skill-test-$test_name-$$"
+    export TEST_BASE_DIR="/tmp/em-team-test-$test_name-$$"
     export TEST_SHARED_DIR="$TEST_BASE_DIR/shared"
     export TEST_QUEUE_DIR="$TEST_BASE_DIR/queue"
     export TEST_LOG_DIR="$TEST_BASE_DIR/logs"

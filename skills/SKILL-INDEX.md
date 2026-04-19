@@ -1,12 +1,12 @@
-# EM-Skill System - Complete Skill Index
+# EM-Team System - Complete Skill Index
 
-**EM-Skill** is a comprehensive fullstack engineering system with 25+ skills, 16 agents, and 18 workflows synthesized from the best practices of 6 top AI agent repositories.
+**EM-Team** is a comprehensive fullstack engineering system with 25+ skills, 16 agents, and 18 workflows synthesized from the best practices of 6 top AI agent repositories.
 
 ---
 
-## 🎯 What is EM-Skill?
+## 🎯 What is EM-Team?
 
-EM-Skill provides three powerful ways to accelerate your development:
+EM-Team provides three powerful ways to accelerate your development:
 
 1. **Skills** - Reusable patterns & best practices for specific tasks
 2. **Agents** - Specialized AI assistants for domain expertise
@@ -172,7 +172,7 @@ Location: `workflows/`
 
 ## 🌐 Distributed Mode
 
-EM-Skill includes distributed orchestration for complex multi-domain tasks:
+EM-Team includes distributed orchestration for complex multi-domain tasks:
 
 ```bash
 # Start distributed mode
@@ -265,7 +265,7 @@ em-stop  # or: ./scripts/distributed-orchestrator.sh stop
 
 ## 🎯 Iron Laws
 
-EM-Skill follows these Iron Laws from best practices:
+EM-Team follows these Iron Laws from best practices:
 
 1. **TDD Iron Law**: NO PRODUCTION CODE WITHOUT FAILING TEST
 2. **Debugging Iron Law**: NO FIXES WITHOUT ROOT CAUSE
@@ -275,7 +275,7 @@ EM-Skill follows these Iron Laws from best practices:
 
 ## ✅ Installation Status
 
-- ✅ Repository: `/Users/abc/Desktop/EM-Skill`
+- ✅ Repository: `/Users/abc/Desktop/EM-Team`
 - ✅ Skills: 25 skills configured
 - ✅ Agents: 16 agents configured
 - ✅ Workflows: 18 workflows configured

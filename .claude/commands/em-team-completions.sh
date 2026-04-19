@@ -1,5 +1,5 @@
 #!/bin/bash
-# EM-Skill Command Completions
+# EM-Team Command Completions
 # Source this file in your ~/.bashrc or ~/.zshrc
 
 # Skills completions
@@ -113,15 +113,15 @@ _em_skill_complete() {
     esac
 }
 
-# Register completion for EM-Skill commands
-complete -F _em_skill_complete em-skill
+# Register completion for EM-Team commands
+complete -F _em_skill_complete em-team
 complete -F _em_skill_complete /
 
-# Show all EM-Skill commands when typing /
+# Show all EM-Team commands when typing /
 alias '/='='_em_skill_show_commands
 
 _em_skill_show_commands() {
-    echo "🎯 EM-Skill Commands (use /command):"
+    echo "🎯 EM-Team Commands (use /command):"
     echo ""
     echo "Skills (type /skill name):"
     _em_skill_skills | tr ' ' '\n' | while read line; do
@@ -144,4 +144,4 @@ _em_skill_show_commands() {
     echo "  /em-new-feature Implement user auth"
 }
 
-echo "✅ EM-Skill completions loaded! Type '/' to see all commands."
+echo "✅ EM-Team completions loaded! Type '/' to see all commands."

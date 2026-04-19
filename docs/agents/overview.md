@@ -1,6 +1,6 @@
 # Agents Overview
 
-Complete reference for all EM-Skill agents.
+Complete reference for all EM-Team agents.
 
 ## Core Agents
 1. **planner** - Create implementation plans

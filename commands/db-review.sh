@@ -1,6 +1,6 @@
 #!/bin/bash
 # db-review.sh - Database review with Database Expert and Architect
-# Usage: em-skill db-review [database_description]
+# Usage: em-team db-review [database_description]
 
 set -e
 
@@ -16,12 +16,12 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Please provide a database description"
     echo ""
-    echo "Usage: em-skill db-review \"[database description]\""
+    echo "Usage: em-team db-review \"[database description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill db-review \"Review schema for payment ledger system\""
-    echo "  em-skill db-review \"Assess query performance for reporting dashboard\""
-    echo "  em-skill db-review \"Review migration strategy for user table split\""
+    echo "  em-team db-review \"Review schema for payment ledger system\""
+    echo "  em-team db-review \"Assess query performance for reporting dashboard\""
+    echo "  em-team db-review \"Review migration strategy for user table split\""
     exit 1
 fi
 

@@ -1,7 +1,7 @@
 ---
 name: em:test
-description: Test strategy & generation - EM-Skill Agent
-tags: [testing, quality, tdd, em-skill]
+description: Test strategy & generation - EM-Team Agent
+tags: [testing, quality, tdd, em-team]
 always_available: true
 ---
 

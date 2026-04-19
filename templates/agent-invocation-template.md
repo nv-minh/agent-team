@@ -2,7 +2,7 @@
 
 ## Overview
 
-This template defines the standard invocation protocol for all EM-Skill reviewer agents. It ensures consistent behavior across agents and reduces token usage by eliminating redundant instructions.
+This template defines the standard invocation protocol for all EM-Team reviewer agents. It ensures consistent behavior across agents and reduces token usage by eliminating redundant instructions.
 
 ## Standard Invocation Process
 

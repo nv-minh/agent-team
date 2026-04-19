@@ -1,7 +1,7 @@
 ---
 name: em:new-feature
-description: Implement feature from idea to production - EM-Skill Workflow
-tags: [workflow, feature, implementation, em-skill]
+description: Implement feature from idea to production - EM-Team Workflow
+tags: [workflow, feature, implementation, em-team]
 always_available: true
 ---
 

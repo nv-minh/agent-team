@@ -1,4 +1,4 @@
-# EM-Skill - Fullstack Engineering Skill System
+# EM-Team - Fullstack Engineering Skill System
 
 **A comprehensive system of 25+ skills, 16 agents, and 18 workflows for fullstack engineering.**
 
@@ -47,7 +47,7 @@ See **[SKILL-INDEX.md](SKILL-INDEX.md)** for complete list and usage examples.
 
 ## 🚀 Installation
 
-Already installed at: `/Users/abc/Desktop/EM-Skill`
+Already installed at: `/Users/abc/Desktop/EM-Team`
 
 **Status:** ✅ Production Ready
 **Tests:** 8/8 E2E Passing

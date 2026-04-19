@@ -1,7 +1,7 @@
 ---
 name: em:security
-description: OWASP security audit - EM-Skill Agent
-tags: [security, owasp, audit, em-skill]
+description: OWASP security audit - EM-Team Agent
+tags: [security, owasp, audit, em-team]
 always_available: true
 ---
 

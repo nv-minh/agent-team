@@ -1,7 +1,7 @@
 ---
 name: em:architect
-description: Architecture & technical design - EM-Skill Agent
-tags: [architecture, design, em-skill]
+description: Architecture & technical design - EM-Team Agent
+tags: [architecture, design, em-team]
 always_available: true
 ---
 

@@ -1,6 +1,6 @@
-# EM-Skill Git Hooks
+# EM-Team Git Hooks
 
-Git hooks để enforce quality gates trong EM-Skill system.
+Git hooks để enforce quality gates trong EM-Team system.
 
 Source: agent-skills + GSD best practices
 
@@ -17,7 +17,7 @@ Chạy trước khi commit để đảm bảo code quality.
 
 **Cài đặt:**
 ```bash
-cp em-skill/hooks/pre-commit .git/hooks/
+cp em-team/hooks/pre-commit .git/hooks/
 chmod +x .git/hooks/pre-commit
 ```
 
@@ -54,7 +54,7 @@ Validates commit message format.
 
 **Cài đặt:**
 ```bash
-cp em-skill/hooks/commit-msg .git/hooks/
+cp em-team/hooks/commit-msg .git/hooks/
 chmod +x .git/hooks/commit-msg
 ```
 
@@ -70,7 +70,7 @@ Chạy trước khi push để đảm bảo everything ready.
 
 **Cài đặt:**
 ```bash
-cp em-skill/hooks/pre-push .git/hooks/
+cp em-team/hooks/pre-push .git/hooks/
 chmod +x .git/hooks/pre-push
 ```
 
@@ -78,7 +78,7 @@ chmod +x .git/hooks/pre-push
 
 ```bash
 # Copy tất cả hooks
-cp em-skill/hooks/* .git/hooks/
+cp em-team/hooks/* .git/hooks/
 
 # Make executable
 chmod +x .git/hooks/pre-commit
@@ -135,5 +135,5 @@ Mỗi hook có thể được customize cho project của bạn:
 
 ---
 
-**EM-Skill Version:** 1.0.0
+**EM-Team Version:** 1.0.0
 **Last Updated:** 2026-04-18

@@ -1,4 +1,4 @@
-# EM-Skill Commands - Complete Reference Guide
+# EM-Team Commands - Complete Reference Guide
 
 ## ✅ Tổng Cộng: 29 Commands
 

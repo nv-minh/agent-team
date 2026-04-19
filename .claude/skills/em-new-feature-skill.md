@@ -1,7 +1,7 @@
 ---
 name: em-new-feature
 description: Implement feature from idea to production. Shortcut for "Workflow: em-new-feature"
-tags: [workflow, feature, implementation, em-skill]
+tags: [workflow, feature, implementation, em-team]
 always_available: true
 ---
 

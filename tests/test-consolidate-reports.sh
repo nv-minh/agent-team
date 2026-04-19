@@ -40,7 +40,7 @@ setup_consolidate_tests() {
 teardown_consolidate_tests() {
     echo "Tearing down consolidate reports tests..."
     # Clean up any test directories
-    rm -rf /tmp/em-skill-test-consolidate-*
+    rm -rf /tmp/em-team-test-consolidate-*
 }
 
 ################################################################################

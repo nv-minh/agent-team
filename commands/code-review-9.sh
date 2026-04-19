@@ -4,7 +4,7 @@
 
 set -e
 
-echo "⚠️  DEPRECATED: Use 'em-skill code-review-deep' instead"
+echo "⚠️  DEPRECATED: Use 'em-team code-review-deep' instead"
 echo "This wrapper will be removed in v2.0.0"
 echo ""
 
@@ -20,12 +20,12 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Please provide a PR or code description"
     echo ""
-    echo "Usage: em-skill code-review-9 \"[PR URL or code description]\""
+    echo "Usage: em-team code-review-9 \"[PR URL or code description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill code-review-9 \"Review PR #123 for payment processing\""
-    echo "  em-skill code-review-9 \"Review authentication module for security issues\""
-    echo "  em-skill code-review-9 \"Assess code quality of user service refactoring\""
+    echo "  em-team code-review-9 \"Review PR #123 for payment processing\""
+    echo "  em-team code-review-9 \"Review authentication module for security issues\""
+    echo "  em-team code-review-9 \"Assess code quality of user service refactoring\""
     exit 1
 fi
 

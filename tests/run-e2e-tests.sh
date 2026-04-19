@@ -52,7 +52,7 @@ done
 # Test Environment Setup
 ################################################################################
 
-E2E_TEST_DIR="/tmp/em-skill-e2e-test-$$"
+E2E_TEST_DIR="/tmp/em-team-e2e-test-$$"
 E2E_SHARED_DIR="$E2E_TEST_DIR/shared"
 E2E_QUEUE_DIR="$E2E_TEST_DIR/queue"
 E2E_LOG_DIR="$E2E_TEST_DIR/logs"

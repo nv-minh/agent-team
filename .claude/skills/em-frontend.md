@@ -1,7 +1,7 @@
 ---
 name: em:frontend
-description: Frontend specialist (React, Next.js, UI/UX) - EM-Skill Agent
-tags: [frontend, react, nextjs, ui, ux, em-skill]
+description: Frontend specialist (React, Next.js, UI/UX) - EM-Team Agent
+tags: [frontend, react, nextjs, ui, ux, em-team]
 always_available: true
 ---
 

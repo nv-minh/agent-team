@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EM-Skill QA Command
+# EM-Team QA Command
 # Source: gstack browser testing + QA automation
 #
 # Systematically QA test a web application
@@ -15,18 +15,18 @@ RED='\033[0;31m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}🧪 EM-Skill QA Testing${NC}"
+echo -e "${BLUE}🧪 EM-Team QA Testing${NC}"
 echo "======================"
 echo ""
 
 # Check for URL
 if [ -z "$1" ]; then
-    echo "Usage: em-skill qa <url-or-path> [scope]"
+    echo "Usage: em-team qa <url-or-path> [scope]"
     echo ""
     echo "Examples:"
-    echo "  em-skill qa http://localhost:3000"
-    echo "  em-skill qa https://staging.example.com"
-    echo "  em-skill qa /dashboard critical"
+    echo "  em-team qa http://localhost:3000"
+    echo "  em-team qa https://staging.example.com"
+    echo "  em-team qa /dashboard critical"
     echo ""
     echo "Scopes:"
     echo "  full    - Complete QA test suite (default)"
@@ -47,9 +47,9 @@ fi
 URL="$1"
 SCOPE="${2:-full}"
 QA_ID=$(date +%s)
-QA_FILE=".em-skill/qa-$QA_ID.md"
+QA_FILE=".em-team/qa-$QA_ID.md"
 
-mkdir -p .em-skill
+mkdir -p .em-team
 
 cat > "$QA_FILE" << EOF
 # QA Test Report

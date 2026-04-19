@@ -1,7 +1,7 @@
 ---
 name: em:debug
-description: Systematic debugging - EM-Skill Agent
-tags: [debugging, troubleshooting, em-skill]
+description: Systematic debugging - EM-Team Agent
+tags: [debugging, troubleshooting, em-team]
 always_available: true
 ---
 

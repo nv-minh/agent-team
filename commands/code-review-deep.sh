@@ -1,6 +1,6 @@
 #!/bin/bash
 # code-review-deep.sh - Deep 9-axis code review with Senior Code Reviewer and Security Reviewer
-# Usage: em-skill code-review-deep [pr_or_code_description]
+# Usage: em-team code-review-deep [pr_or_code_description]
 
 set -e
 
@@ -16,12 +16,12 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Missing required argument"
     echo ""
-    echo "Usage: em-skill code-review-deep \"[PR URL or code description]\""
+    echo "Usage: em-team code-review-deep \"[PR URL or code description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill code-review-deep \"Review PR #123 for payment processing\""
-    echo "  em-skill code-review-deep \"Review authentication module for security issues\""
-    echo "  em-skill code-review-deep \"Assess code quality of user service refactoring\""
+    echo "  em-team code-review-deep \"Review PR #123 for payment processing\""
+    echo "  em-team code-review-deep \"Review authentication module for security issues\""
+    echo "  em-team code-review-deep \"Assess code quality of user service refactoring\""
     exit 1
 fi
 

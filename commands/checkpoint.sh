@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# EM-Skill Checkpoint Command
+# EM-Team Checkpoint Command
 # Source: superpowers state management
 #
 # Save and restore working state checkpoints
@@ -16,7 +16,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Checkpoint directory
-CHECKPOINT_DIR=".em-skill/checkpoints"
+CHECKPOINT_DIR=".em-team/checkpoints"
 mkdir -p "$CHECKPOINT_DIR"
 
 # Parse command
@@ -25,7 +25,7 @@ CHECKPOINT_NAME="${2:-$(date +%Y%m%d-%H%M%S)}"
 
 case $COMMAND in
     save)
-        echo -e "${BLUE}💾 EM-Skill Checkpoint: Save${NC}"
+        echo -e "${BLUE}💾 EM-Team Checkpoint: Save${NC}"
         echo "=============================="
         echo ""
         echo "Saving checkpoint: $CHECKPOINT_NAME"
@@ -63,11 +63,11 @@ EOF
         echo "  Uncommitted changes: $UNCOMMITTED"
         echo ""
         echo "To restore this checkpoint:"
-        echo "  em-skill checkpoint restore $CHECKPOINT_NAME"
+        echo "  em-team checkpoint restore $CHECKPOINT_NAME"
         ;;
 
     restore)
-        echo -e "${BLUE}📂 EM-Skill Checkpoint: Restore${NC}"
+        echo -e "${BLUE}📂 EM-Team Checkpoint: Restore${NC}"
         echo "================================"
         echo ""
         echo "Restoring checkpoint: $CHECKPOINT_NAME"
@@ -123,7 +123,7 @@ EOF
         ;;
 
     list)
-        echo -e "${BLUE}📋 EM-Skill Checkpoints${NC}"
+        echo -e "${BLUE}📋 EM-Team Checkpoints${NC}"
         echo "======================="
         echo ""
 
@@ -152,7 +152,7 @@ EOF
         ;;
 
     delete)
-        echo -e "${RED}🗑️  EM-Skill Checkpoint: Delete${NC}"
+        echo -e "${RED}🗑️  EM-Team Checkpoint: Delete${NC}"
         echo "================================"
         echo ""
         echo "Deleting checkpoint: $CHECKPOINT_NAME"
@@ -170,9 +170,9 @@ EOF
         ;;
 
     *)
-        echo "EM-Skill Checkpoint Command"
+        echo "EM-Team Checkpoint Command"
         echo ""
-        echo "Usage: em-skill checkpoint <command> [name]"
+        echo "Usage: em-team checkpoint <command> [name]"
         echo ""
         echo "Commands:"
         echo "  save [name]   - Save current state as checkpoint"
@@ -181,10 +181,10 @@ EOF
         echo "  delete <name> - Delete a checkpoint"
         echo ""
         echo "Examples:"
-        echo "  em-skill checkpoint save feature-start"
-        echo "  em-skill checkpoint restore feature-start"
-        echo "  em-skill checkpoint list"
-        echo "  em-skill checkpoint delete feature-start"
+        echo "  em-team checkpoint save feature-start"
+        echo "  em-team checkpoint restore feature-start"
+        echo "  em-team checkpoint list"
+        echo "  em-team checkpoint delete feature-start"
         echo ""
         echo "Note: Checkpoints only save git state (branch, commit)"
         echo "      They don't save uncommitted changes or files"

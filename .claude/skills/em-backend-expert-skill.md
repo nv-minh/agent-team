@@ -1,7 +1,7 @@
 ---
 name: em-backend-expert
 description: Backend specialist for API, database, and performance. Shortcut for "Agent: em-backend-expert"
-tags: [backend, api, database, performance, em-skill]
+tags: [backend, api, database, performance, em-team]
 always_available: true
 ---
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ################################################################################
-# Session Manager for EM-Skill Distributed Orchestration
+# Session Manager for EM-Team Distributed Orchestration
 #
 # Description: Manages tmux sessions for distributed agent execution
 # Usage: ./session-manager.sh [command] [options]
@@ -367,7 +367,7 @@ import_report() {
 
 show_help() {
     cat << EOF
-Session Manager for EM-Skill Distributed Orchestration
+Session Manager for EM-Team Distributed Orchestration
 
 Usage: $0 [command] [options]
 

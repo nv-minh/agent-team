@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Token Counter for EM-Skill Distributed Mode
+# Token Counter for EM-Team Distributed Mode
 # Estimates token counts using tiktoken or character-based fallback
 
 set -euo pipefail

@@ -1,6 +1,6 @@
-# Hướng Dẫn Sử Dụng EM-Skill
+# Hướng Dẫn Sử Dụng EM-Team
 
-Hướng dẫn hoàn chỉnh cho hệ thống kỹ thuật fullstack EM-Skill.
+Hướng dẫn hoàn chỉnh cho hệ thống kỹ thuật fullstack EM-Team.
 
 ---
 
@@ -19,7 +19,7 @@ Hướng dẫn hoàn chỉnh cho hệ thống kỹ thuật fullstack EM-Skill.
 
 ## Tổng quan
 
-EM-Skill cung cấp ba cách chính để hoàn thành tasks:
+EM-Team cung cấp ba cách chính để hoàn thành tasks:
 
 | Phương pháp | Mô tả | Tốt nhất cho |
 |-------------|---------|--------------|
@@ -596,7 +596,7 @@ cd tests
 ./test-distributed-orchestrator.sh
 
 # Kiểm tra test environment
-ls /tmp/em-skill-test-*
+ls /tmp/em-team-test-*
 ```
 
 ---
@@ -631,7 +631,7 @@ cp workflows/new-feature.md workflows/my-custom-workflow.md
 
 ```yaml
 # Ví dụ GitHub Actions
-- name: Chạy EM-Skill Tests
+- name: Chạy EM-Team Tests
   run: |
     cd tests
     ./run-e2e-tests.sh

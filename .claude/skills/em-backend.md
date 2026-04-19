@@ -1,7 +1,7 @@
 ---
 name: em:backend
-description: Backend specialist (API, database, performance) - EM-Skill Agent
-tags: [backend, api, database, performance, em-skill]
+description: Backend specialist (API, database, performance) - EM-Team Agent
+tags: [backend, api, database, performance, em-team]
 always_available: true
 ---
 

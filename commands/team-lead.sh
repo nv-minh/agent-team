@@ -1,6 +1,6 @@
 #!/bin/bash
 # team-lead.sh - Orchestrate full team review
-# Usage: em-skill team-lead [task_description]
+# Usage: em-team team-lead [task_description]
 
 set -e
 
@@ -21,12 +21,12 @@ echo ""
 if [ -z "$1" ]; then
     echo "❌ Error: Please provide a task description"
     echo ""
-    echo "Usage: em-skill team-lead \"[task description]\""
+    echo "Usage: em-team team-lead \"[task description]\""
     echo ""
     echo "Example:"
-    echo "  em-skill team-lead \"Review new payment feature before implementation\""
-    echo "  em-skill team-lead \"Architecture review for microservices migration\""
-    echo "  em-skill team-lead \"Cross-functional review for checkout flow redesign\""
+    echo "  em-team team-lead \"Review new payment feature before implementation\""
+    echo "  em-team team-lead \"Architecture review for microservices migration\""
+    echo "  em-team team-lead \"Cross-functional review for checkout flow redesign\""
     exit 1
 fi
 

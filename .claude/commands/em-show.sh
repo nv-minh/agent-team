@@ -1,10 +1,10 @@
 #!/bin/bash
-# EM-Skill Show All Commands
+# EM-Team Show All Commands
 # Simple display function - no completion magic
 
 cat << 'EOF'
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎯 EM-SKILL - ALL COMMANDS (65+ commands)
+🎯 EM-TEAM - ALL COMMANDS (65+ commands)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📚 SKILLS (25 commands) - Gõ trực tiếp:
@@ -115,8 +115,8 @@ cat << 'EOF'
 
   em-commands           - Show này (tất cả commands)
   em-help               - Show help & usage
-  cat /Users/abc/Desktop/EM-Skill/README.md
-  cat /Users/abc/Desktop/EM-Skill/QUICK-COMMANDS.md
+  cat /Users/abc/Desktop/EM-Team/README.md
+  cat /Users/abc/Desktop/EM-Team/QUICK-COMMANDS.md
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
