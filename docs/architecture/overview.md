@@ -1,6 +1,6 @@
 # EM-Team Architecture Overview
 
-Tổng quan kiến trúc hệ thống EM-Team v1.2.0.
+Tổng quan kiến trúc hệ thống EM-Team v3.0.0.
 
 ---
 
@@ -26,7 +26,7 @@ Tổng quan kiến trúc hệ thống EM-Team v1.2.0.
 │                                                              │
 │  ┌────────────┐  ┌────────────┐  ┌────────────┐           │
 │  │  Skills    │  │  Agents    │  │ Workflows  │           │
-│  │  (25+)     │  │  (22)      │  │  (18)      │           │
+│  │  (74)      │  │  (35)      │  │  (23)      │           │
 │  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘           │
 │        │                │                │                  │
 │        └────────────────┴────────────────┘                  │
@@ -85,25 +85,26 @@ persistence_layer:
 **Structure:**
 ```
 skills/
-├── foundation/        # Core foundational skills
-│   ├── brainstorming/
-│   ├── spec-driven-dev/
-│   ├── context-engineering/
-│   ├── writing-plans/
-│   └── systematic-debugging/
-├── development/       # Development workflow skills
-│   ├── test-driven-dev/
-│   ├── frontend-patterns/
-│   ├── backend-patterns/
-│   └── ...
-├── quality/          # Quality assurance skills
-│   ├── code-review/
-│   ├── security-audit/
-│   └── ...
-└── workflow/         # Workflow skills
-    ├── git-workflow/
-    ├── ci-cd-automation/
-    └── ...
+├── foundation/        # 6 core foundational skills
+├── development/       # 11 methodology skills
+├── expert-react/      # 4 React skills
+├── expert-vue/        # 3 Vue skills
+├── expert-go/         # 1 Go skill
+├── expert-nest/       # 1 NestJS skill
+├── expert-python/     # 3 Python skills
+├── expert-database/   # 3 Database skills
+├── expert-devops/     # 6 DevOps skills
+├── expert-mobile/     # 4 Mobile skills
+├── expert-spring/     # 1 Spring skill
+├── expert-frontend/   # 1 Frontend skill
+├── expert-backend/    # 2 Backend skills
+├── expert-rust/       # 1 Rust skill
+├── expert-typescript/ # 1 TypeScript skill
+├── drawio/            # 2 Drawio skills
+├── tauri/             # 1 Tauri skill
+├── quality/           # 12 quality assurance skills
+├── workflow/          # 6 workflow and automation skills
+└── additional/        # 5 product & discovery skills
 ```
 
 **Key Characteristics:**
@@ -119,22 +120,18 @@ skills/
 **Structure:**
 ```
 agents/
-├── core/             # 8 core agents
-│   ├── planner.md
-│   ├── executor.md
-│   ├── code-reviewer.md
-│   ├── debugger.md
-│   ├── test-engineer.md
-│   ├── security-auditor.md
-│   ├── ui-auditor.md
-│   └── verifier.md
-└── specialized/      # 14 specialized agents
-    ├── architect.md
-    ├── backend-expert.md
-    ├── frontend-expert.md
-    ├── database-expert.md
-    ├── techlead-orchestrator.md
-    └── ...
+├── core (8): planner, executor, code-reviewer, debugger,
+│   test-engineer, security-auditor, ui-auditor, verifier
+├── optional (4): researcher, codebase-mapper,
+│   integration-checker, performance-auditor
+├── specialized (9): team-lead, architect, frontend-expert,
+│   backend-expert, senior-code-reviewer, database-expert,
+│   product-manager, security-reviewer, staff-engineer
+├── v2.0+ (7): market-intelligence, learn, autoplan,
+│   techlead-orchestrator, design-reviewer, devex-reviewer,
+│   iron-law-enforcer
+└── expert (7): react-expert, vue-expert, nestjs-expert,
+    devops-expert, mobile-expert, spring-expert, rust-expert
 ```
 
 **Key Characteristics:**
@@ -151,19 +148,14 @@ agents/
 **Structure:**
 ```
 workflows/
-├── primary/          # Primary workflows
-│   ├── new-feature.md
-│   ├── bug-fix.md
-│   ├── refactoring.md
-│   └── security-audit.md
-├── support/          # Support workflows
-│   ├── project-setup.md
-│   ├── documentation.md
-│   └── deployment.md
-└── team/             # Team workflows
-    ├── team-review.md
-    ├── architecture-review.md
-    └── distributed-investigation.md
+├── primary/          # 4 primary workflows
+├── support/          # 6 support workflows
+├── master: six-phase-lifecycle
+├── team/             # 8 team workflows
+├── distributed/      # 2 distributed workflows
+├── product/          # 2 product workflows
+├── incident/         # 6 incident sub-workflows
+└── security/         # 3 security sub-workflows
 ```
 
 **Key Characteristics:**
@@ -301,7 +293,7 @@ integrations:
 ### File System Structure
 
 ```
-EM-Skill/
+EM-Team/
 ├── skills/           # Skill definitions
 ├── agents/           # Agent definitions
 ├── workflows/        # Workflow definitions
@@ -635,6 +627,6 @@ system_metrics:
 
 ---
 
-**Version:** 1.2.0
-**Last Updated:** 2026-04-19
+**Version:** 3.0.0
+**Last Updated:** 2026-05-07
 **Architecture Style:** Agent-Skill-Workflow (ASW)

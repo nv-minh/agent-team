@@ -1,11 +1,12 @@
 {
   "name": "em-team",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "EM-Team - Fullstack Engineering Agent/Skill/Workflow System",
   "private": true,
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "@octokit/rest": "^21.0.0"
+    "@octokit/rest": "^21.0.0",
+    "playwright": "^1.59.1"
   }
 }

@@ -10,16 +10,16 @@ EM-Team provides a complete toolkit for fullstack engineering with:
 - **Expert Skill Groups** - 15 expert groups covering React, Vue, Go, NestJS, Python, Database, DevOps, Mobile, Spring, Rust, TypeScript, Frontend, Backend, Drawio, Tauri
 - **27 New Skills** - Condensed from full-stack-skills, covering Docker, Kubernetes, Terraform, Flutter, React Native, Android, iOS, Spring Boot, and more
 - **7 New Expert Agents** - Dedicated agents for each major technology stack
-- **34 Agents Total** - Full coverage from planning to deployment
+- **35 Agents Total** - Full coverage from planning to deployment
 
 **📋 Quick Commands:**
 - **100+ Commands** - Organized by type for easy access
-  - 72 **Skills** - Reusable patterns and practices across 17 categories
+  - 74 **Skills** - Reusable patterns and practices across 17 categories
   - 35 **Agents** (`em:*`) - Specialized task handlers including 7 expert agents
   - 23 **Workflows** (`em:*` & `em:wl-*`) - End-to-end processes
 
 **🔧 Development Tools:**
-- **72 Skills** - Foundation, development, expert groups, quality, workflow, additional
+- **74 Skills** - Foundation, development, expert groups, quality, workflow, additional
 - **35 Agents** - Core, optional, specialized, expert (React, Vue, NestJS, DevOps, Mobile, Spring, Rust)
 - **23 Workflows** - New-feature, bug-fix, security-audit, team reviews, distributed, product
 
@@ -198,214 +198,97 @@ Run multiple specialist agents simultaneously in isolated tmux sessions, each wi
 
 ### Prerequisites
 
-Before installing EM-Team, ensure you have the following:
+- **Claude Code CLI** - AI coding assistant (required)
+- **python3** - For config.json updates (required, usually pre-installed)
+- **Bash** - Shell environment (required)
 
-#### Required
-- **Bash** - Shell environment (version 4.0+)
-- **tmux** - Terminal multiplexer (for distributed mode)
-- **Git** - Version control system
-- **Claude Code CLI** - AI coding assistant
+Optional: tmux (for distributed mode only)
 
-#### Optional (for enhanced features)
-- **Node.js** (v18+) - For some automation scripts
-- **Python** (v3.8+) - For additional utilities
-
-### Install Prerequisites
-
-#### macOS
-```bash
-# Install Homebrew if not already installed
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install tmux
-brew install tmux
-
-# Install Node.js (optional)
-brew install node
-
-# Install Python 3 (optional)
-brew install python@3.11
-```
-
-#### Ubuntu/Debian
-```bash
-# Update package list
-sudo apt update
-
-# Install tmux
-sudo apt install -y tmux
-
-# Install Node.js (optional)
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt install -y nodejs
-
-# Install Python 3 (optional)
-sudo apt install -y python3.11 python3-pip
-```
-
-#### Windows (WSL)
-```bash
-# Install Ubuntu on WSL
-wsl --install -d Ubuntu
-
-# Inside WSL, follow Ubuntu instructions above
-```
-
-### Installation Steps
-
-#### 1. Clone Repository
+### Install
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/nv-minh/agent-team.git
 cd agent-team
-```
 
-#### 2. Install Globally (One Command)
-
-```bash
+# 2. Install (one command — handles everything)
 bash install.sh
 ```
 
-This handles everything automatically:
+`install.sh` automatically:
 - Updates `~/.claude/config.json` — points skills/agents/workflows to EM-Team
-- Creates symlinks in `~/.claude/skills/em:*` — available in any Claude Code project
+- Creates 156 symlinks in `~/.claude/skills/em:*/SKILL.md` — available in any Claude Code project
+- Cleans up orphaned entries from previous installs
 - Preserves existing settings (model, max_tokens, etc.)
 
-#### 3. Verify Installation
+### Verify
 
 ```bash
-# Check config paths
-cat ~/.claude/config.json | grep -A1 "paths"
+# Check config paths point to EM-Team
+cat ~/.claude/config.json | grep "paths" -A2
 
-# Check skill symlinks
-ls ~/.claude/skills/em:* | wc -l
+# Check symlinks (should show 156 directories)
+ls -d ~/.claude/skills/em:* | wc -l
 
-# Open any project in Claude Code and try:
-/em:skill:style-switcher
+# Check no broken symlinks
+for d in ~/.claude/skills/em:*; do [ -L "$d/SKILL.md" ] && [ ! -e "$d/SKILL.md" ] && echo "BROKEN: $d"; done
 ```
 
 To uninstall: `bash uninstall.sh`
 
 See [INSTALLATION.md](INSTALLATION.md) for details and troubleshooting.
 
-### Configuration
+### Using EM-Team
 
-#### Environment Variables (Optional)
+Once installed, open **any project** in Claude Code and use the commands:
 
+**Quick Commands:**
 ```bash
-# Add to ~/.bashrc or ~/.zshrc
-
-# EM-Team Configuration
-export EM_SKILL_HOME="$HOME/agent-team"
-export PATH="$PATH:$EM_SKILL_HOME/scripts"
-export PATH="$PATH:$EM_SKILL_HOME/distributed"
+/em:quick fix typo in README
+/em:debug investigate login timeout
+/em:code-review review auth module
+/em:new-feature implement user authentication
 ```
 
-#### Claude Code Integration
-
-EM-Team works with Claude Code CLI out of the box. Simply invoke skills, agents, or workflows in your conversation:
-
-**Discovery & Market Intelligence (NEW in v1.2.0):**
+**Skills (74):**
 ```bash
-# Validate product ideas with YC framework
-/office-hours I have an idea for a AI-powered code reviewer
-
-# Run complete discovery workflow
-/em:discovery-process We need to improve our checkout conversion rate
-
-# Capture project learnings
-/em:learn We just completed a major refactoring project
-
-# Coordinate multi-phase reviews
-/em:autoplan Coordinate reviews for our new authentication feature
-```
-
-**Development:**
-```bash
-# Skills - invoke directly
 /em:skill:brainstorming Explore authentication options
 /em:skill:spec-driven-development Create spec for payment system
 /em:skill:systematic-debugging Investigate login timeout bug
-
-# Agents - use /em: prefix
-/em:planner Create plan for user auth
-/em:backend-expert Review API performance
-/em:frontend-expert Refactor React components
-
-# Workflows - use /em: or /em:wl- prefix
-/em:new-feature Implement authentication from idea to production
-/em:bug-fix Fix login timeout systematically
-/em:wl-architecture-review Review microservices architecture
+/em:skill:test-driven-development Implement feature with TDD
+/em:skill:react React patterns and best practices
+/em:skill:python-patterns Python patterns and best practices
 ```
 
-### Verification Checklist
-
-After installation, verify the following:
-
-- [ ] tmux is installed (`tmux -V`)
-- [ ] EM:* commands installed (`ls ~/.claude/skills/em:*`)
-- [ ] EM:* commands visible in system reminder
-- [ ] All scripts are executable
-- [ ] E2E tests pass (8/8 tests)
-- [ ] Distributed orchestration starts successfully
-- [ ] Session manager works
-
-### Troubleshooting Installation
-
-#### Issue: "command not found: tmux"
-
-**Solution:**
+**Agents (35):**
 ```bash
-# Install tmux
-# macOS
-brew install tmux
-
-# Ubuntu/Debian
-sudo apt install tmux
-
-# Verify installation
-tmux -V
+/em:planner Create implementation plan
+/em:architect Architecture & technical design
+/em:backend-expert Backend API, database, performance
+/em:frontend-expert React, Next.js, UI/UX
+/em:code-reviewer 5-axis code review
+/em:security OWASP security audit
+/em:react-expert React/Next.js expert
 ```
 
-#### Issue: "Permission denied: ./script.sh"
-
-**Solution:**
+**Workflows (23):**
 ```bash
-# Make scripts executable
-chmod +x scripts/*.sh
-chmod +x distributed/*.sh
-chmod +x tests/*.sh
+/em:new-feature Implement feature from idea to production
+/em:bug-fix Fix bugs systematically
+/em:refactor Improve code quality
+/em:security-audit Security assessment
+/em:team Full team review coordination
 ```
 
-#### Issue: "Tests failing"
+### Troubleshooting
 
-**Solution:**
-```bash
-# Check test logs
-cd tests
-./run-e2e-tests.sh --verbose
-
-# Run individual test
-./test-distributed-orchestrator.sh
-
-# Check environment
-echo $SHELL  # Should be /bin/bash or /bin/zsh
-```
-
-#### Issue: "Distributed mode won't start"
-
-**Solution:**
-```bash
-# Kill existing tmux sessions
-tmux kill-server
-
-# Remove old directories
-rm -rf /tmp/claude-work-*
-
-# Try again
-./scripts/distributed-orchestrator.sh start
-```
+| Issue | Fix |
+|-------|-----|
+| Skills not appearing | Restart Claude Code after install. Check: `ls ~/.claude/skills/em:*/SKILL.md` |
+| Broken symlinks | Run `bash install.sh` again — it auto-fixes broken links and cleans orphans |
+| config.json invalid | `jq . ~/.claude/config.json` — if broken, `rm ~/.claude/config.json && bash install.sh` |
+| Permission denied | `chmod +x install.sh && bash install.sh` |
+| Old flat em-* files in ~/.claude/skills/ | These are from an older install — `bash install.sh` cleans them automatically |
 
 ### Update EM-Team
 
@@ -521,7 +404,6 @@ cat /tmp/claude-work-reports/techlead/consolidated-report.md
 ### Next Steps
 
 1. 📖 **Read the Guides**
-   - [EM:* Commands Guide](EM-COLON-INSTALLATION.md) - Quick commands reference
    - [Quick Start Guide](docs/guides/getting-started.md) - Detailed setup guide
    - [Comprehensive Usage (EN)](docs/guides/usage-guide.md) - Full English documentation
    - [Hướng Dẫn Sử Dụng (VI)](docs/vi/huong-dan-su-dung.md) - Tài liệu tiếng Việt
@@ -637,7 +519,7 @@ Use the em:wl-security-review skill to conduct threat modeling
 - When you know which agent/workflow you need
 
 **Use full commands for:**
-- Accessing all 26 skills (including discovery skills)
+- Accessing all 74 skills (including discovery skills)
 - Using specific agents not in EM:* list
 - Discovery & market intelligence tasks
 - When you need more control
@@ -745,7 +627,7 @@ Run end-to-end workflows:
 
 ```
 em-team/
-├── skills/                  # 72 skills organized in 17 categories
+├── skills/                  # 74 skills organized in 17 categories
 │   ├── foundation/          # 6 core foundational skills
 │   ├── development/         # 11 methodology skills (TDD, architecture, etc.)
 │   ├── expert-react/        # 4 React skills (react, react-hooks, nextjs, redux)
@@ -763,7 +645,7 @@ em-team/
 │   ├── expert-typescript/   # 1 TypeScript skill (typescript-patterns)
 │   ├── drawio/              # 2 Drawio skills (architecture, flowchart)
 │   ├── tauri/               # 1 Tauri skill (tauri)
-│   ├── quality/             # 10 quality assurance skills
+│   ├── quality/             # 12 quality assurance skills
 │   ├── workflow/            # 6 workflow and automation skills
 │   └── additional/          # 5 product & discovery skills
 ├── agents/                  # 35 specialized agents
@@ -970,55 +852,51 @@ Distributed Mode:
 5. **writing-plans** - Break work into bite-sized tasks
 6. **systematic-debugging** - 4-phase debugging methodology
 
-### Development Skills (17 skills)
+### Development Skills (11 skills)
 
 7. **test-driven-development** - TDD RED-GREEN-REFACTOR
-8. **frontend-patterns** - React/Next.js/Vue patterns
-9. **backend-patterns** - API/Database/NestJS patterns
-10. **incremental-implementation** - Vertical slice development
-11. **subagent-driven-development** - Fresh context per task
-12. **source-driven-development** - Code from official docs
-13. **api-interface-design** - Contract-first APIs
-14. **security-hardening** - OWASP Top 10 security
-15. **typescript-patterns** - Type system, async, React/Next.js TS
-16. **python-patterns** - Python 3.10+ types, async, FastAPI, SQLAlchemy
-17. **go-patterns** - Error handling, concurrency, interfaces, testing
-18. **rust-patterns** - Ownership, traits, async tokio, smart pointers
-19. **architecture-zoom-out** - Higher-level code perspective
-20. **architecture-improvement** - Systematic module deepening
-21. **issue-generator** - Plans to structured vertical-slice issues
-22. **prd-generator** - Ideas to structured PRD documents
-23. **diagram** - Excalidraw, Mermaid, SVG diagram generation
+8. **incremental-implementation** - Vertical slice development
+9. **subagent-driven-development** - Fresh context per task
+10. **source-driven-development** - Code from official docs
+11. **security-hardening** - OWASP Top 10 security
+12. **architecture-zoom-out** - Higher-level code perspective
+13. **architecture-improvement** - Systematic module deepening
+14. **issue-generator** - Plans to structured vertical-slice issues
+15. **prd-generator** - Ideas to structured PRD documents
+16. **diagram** - Excalidraw, Mermaid, SVG diagram generation
+17. **figma-design** - Figma-to-code conversion with MCP server
 
-### Quality Skills (10 skills)
+### Quality Skills (12 skills)
 
-23. **code-review** - 5-axis review framework
-24. **code-simplification** - Reduce complexity
-25. **browser-testing** - DevTools MCP integration
-26. **performance-optimization** - Measure-first optimization
-27. **e2e-testing** - Playwright patterns
-28. **security-audit** - Vulnerability assessment
-29. **api-testing** - Integration testing
-30. **security-common** - OWASP reference and security checklist
-31. **ux-audit** - Behavioral UX audit with scored dimensions (NEW)
-32. **plan-tune** - Learn and tune output preferences (NEW)
+18. **code-review** - 5-axis review framework
+19. **code-simplification** - Reduce complexity
+20. **browser-testing** - DevTools MCP integration
+21. **performance-optimization** - Measure-first optimization
+22. **e2e-testing** - Playwright patterns
+23. **security-audit** - Vulnerability assessment
+24. **api-testing** - Integration testing
+25. **security-common** - OWASP reference and security checklist
+26. **ux-audit** - Behavioral UX audit with scored dimensions
+27. **plan-tune** - Learn and tune output preferences
+28. **flow-discovery** - Discovery flow pattern identification
+29. **test-generation** - Automated test generation strategies
 
 ### Workflow Skills (6 skills)
 
-33. **git-workflow** - Atomic commits
-34. **ci-cd-automation** - Feature flags, quality gates
-35. **documentation** - ADRs, API docs
-36. **finishing-branch** - Merge/PR decisions
-37. **deprecation-migration** - Code-as-liability mindset
-38. **style-switcher** - 13 personality styles + 3 density modes
+30. **git-workflow** - Atomic commits
+31. **ci-cd-automation** - Feature flags, quality gates
+32. **documentation** - ADRs, API docs
+33. **finishing-branch** - Merge/PR decisions
+34. **deprecation-migration** - Code-as-liability mindset
+35. **style-switcher** - 13 personality styles + 3 density modes
 
 ### Additional Skills (5 skills)
 
-39. **jobs-to-be-done** - JTBD framework for understanding user needs
-40. **lean-ux-canvas** - Lean UX hypothesis testing
-41. **opportunity-solution-tree** - Product opportunity mapping
-42. **pol-probe** - Product opportunity probe
-43. **office-hours** - YC-style brainstorming and idea validation
+36. **jobs-to-be-done** - JTBD framework for understanding user needs
+37. **lean-ux-canvas** - Lean UX hypothesis testing
+38. **opportunity-solution-tree** - Product opportunity mapping
+39. **pol-probe** - Product opportunity probe
+40. **office-hours** - YC-style brainstorming and idea validation
 
 ## Communication Styles (NEW)
 
@@ -1282,7 +1160,7 @@ git commit -m "feat: Add new feature"
 
 1. **TDD Iron Law**: NO PRODUCTION CODE WITHOUT FAILING TEST
 2. **Debugging Iron Law**: NO FIXES WITHOUT ROOT CAUSE
-3. **Skill Iron Law**: ALL SKILLS MUST HAVE FAILING TESTS
+3. **Review Iron Law**: NO MERGE WITHOUT REVIEW
 4. **Spec Iron Law**: NO CODE WITHOUT SPEC (for features)
 
 ## Development Lifecycle
@@ -1650,8 +1528,8 @@ Last updated: 2026-05-02
 - Agent Trace Store + MCP servers + operational rules
 
 **Total Counts:**
-- **Skills**: 72 (6 foundation + 11 development + 31 expert + 2 drawio + 1 tauri + 10 quality + 6 workflow + 5 additional)
-- **Agents**: 34 (8 core + 4 optional + 8 specialized + 7 v2.0+ + 7 expert)
+- **Skills**: 74 (6 foundation + 11 development + 31 expert + 2 drawio + 1 tauri + 12 quality + 6 workflow + 5 additional)
+- **Agents**: 35 (8 core + 4 optional + 9 specialized + 7 v2.0+ + 7 expert)
 - **Workflows**: 23 (4 primary + 6 support + 8 team + 2 distributed + 2 product + 1 master)
 - **Personality Styles**: 13 + 3 density modes
 
@@ -1668,9 +1546,9 @@ MIT License - Feel free to use and adapt for your projects
 EM-Team is a comprehensive fullstack engineering system that includes:
 
 **Core Components:**
-- ✅ 25-30 Skills - Reusable development patterns
-- ✅ 16 Agents - Specialized AI assistants
-- ✅ 18 Workflows - End-to-end processes
+- ✅ 74 Skills - Reusable development patterns
+- ✅ 35 Agents - Specialized AI assistants
+- ✅ 23 Workflows - End-to-end processes
 - ✅ Distributed orchestration system
 - ✅ Comprehensive test suite (120+ tests)
 - ✅ Bilingual documentation (English/Vietnamese)
@@ -1714,11 +1592,17 @@ em-team/
 │   └── consolidate-reports.sh      # Report consolidation
 ├── 🤖 Agents (agents/)
 │   ├── Core agents (8)
-│   └── Specialized agents (8)
+│   ├── Optional agents (4)
+│   ├── Specialized agents (9)
+│   ├── v2.0+ agents (7)
+│   └── Expert agents (7)
 ├── 🔄 Workflows (workflows/)
-│   ├── Primary workflows (8)
+│   ├── Primary workflows (4)
+│   ├── Support workflows (6)
 │   ├── Team workflows (8)
-│   └── Distributed workflows (2)
+│   ├── Distributed workflows (2)
+│   ├── Product workflows (2)
+│   └── Master workflow (1)
 ├── 🧪 Tests (tests/)
 │   ├── Unit tests (4 suites)
 │   ├── Integration tests (2 suites)
@@ -1736,17 +1620,15 @@ em-team/
 | **Quick Start** | See [Quick Start](#-quick-start) | Above |
 | **Usage Guide (EN)** | [docs/guides/usage-guide.md](docs/guides/usage-guide.md) | Full guide |
 | **Hướng Dẫn (VI)** | [docs/vi/huong-dan-su-dung.md](docs/vi/huong-dan-su-dung.md) | Guide tiếng Việt |
-| **Bilingual Ref** | [HUONG_DAN_SU_DUNG.md](HUONG_DAN_SU_DUNG.md) | Quick reference |
 | **Architecture** | [docs/architecture/distributed-system.md](docs/architecture/distributed-system.md) | System docs |
 | **Testing** | [tests/README.md](tests/README.md) | Test documentation |
 | **All Docs** | [docs/README.md](docs/README.md) | Documentation hub |
 
 ### Statistics
 
-- **Total Files:** 300+ files
-- **Code:** ~13,000 lines
+- **Total Files:** 200+ files
+- **Code:** ~10,000 lines
 - **Documentation:** ~5,000 lines
-- **Tests:** ~3,000 lines
 - **Languages:** 2 (English, Vietnamese)
 - **Test Coverage:** ~92% pass rate
 
@@ -1766,7 +1648,7 @@ em-team/
 
 ### Key Features Summary
 
-1. **72 Skills** - Reusable patterns across 17 categories including 15 expert groups
+1. **74 Skills** - Reusable patterns across 17 categories including 15 expert groups
 2. **35 Agents** - Core + optional + specialized + expert agents for every tech stack
 3. **23 Workflows** - End-to-end processes for complete project lifecycles
 4. **Distributed Mode** - Parallel agent execution

@@ -40,13 +40,13 @@ EM-Team/
 ├── skills/                 ← SKILL SOURCE FILES (nội dung đầy đủ 200-771 dòng)
 │   ├── foundation/         6 skills nền tảng
 │   │   └── alignment-session/alignment-session.md
-│   ├── development/        18 skills phát triển
+│   ├── development/        11 skills phát triển
 │   │   ├── backend-patterns/backend-patterns.md
 │   │   └── ...
-│   ├── quality/            10 skills chất lượng
+│   ├── quality/            12 skills chất lượng
 │   │   ├── code-review/code-review.md
 │   │   └── ...
-│   ├── workflow/           5 skills quy trình
+│   ├── workflow/           6 skills quy trình
 │   │   └── style-switcher/style-switcher.md
 │   └── additional/         5 product & discovery skills
 │       └── ...
@@ -104,7 +104,7 @@ EM-Team/
 Khi bạn mở Claude Code trong bất kỳ folder nào, Claude đọc file `CLAUDE.md` (nếu có). Đây là **hướng dẫn sử dụng** cho Claude.
 
 EM-Team's `CLAUDE.md` nói cho Claude biết:
-- Có 72 skills, 35 agents, 23 workflows sẵn sàng
+- Có 74 skills, 35 agents, 23 workflows sẵn sàng
 - Mỗi cái tên gì, làm gì
 - Iron Laws (luật bất di bất dịch)
 - Khi nào dùng skill, khi nào dùng agent, khi nào dùng workflow
@@ -401,8 +401,8 @@ Hai trục độc lập — đổi personality không ảnh hưởng density.
 ```
 CLAUDE.md (master config)
     ↓ referenced by
-    ├── Skills (43) ← use → References (security, testing, quality)
-    ├── Agents (28) ← use → Skills, collaborate with → other Agents
+    ├── Skills (74) ← use → References (security, testing, quality)
+    ├── Agents (35) ← use → Skills, collaborate with → other Agents
     └── Workflows (23) ← orchestrate → Agents + Skills
          ↑ inherit
     six-phase-lifecycle.md (master workflow)
@@ -459,7 +459,7 @@ CLAUDE.md (master config)
 
 ## Version History
 
-- **v3.0.0** (2026-05-02) — Expert group restructuring: 72 skills, 35 agents, 15 expert groups, 27 new skills, 7 new expert agents
+- **v3.0.0** (2026-05-02) — Expert group restructuring: 74 skills, 35 agents, 15 expert groups, 27 new skills, 7 new expert agents
 - **v2.2.0** (2026-05-01) — 7 new skills + NestJS patterns + related_skills + install mechanism
-- **v1.2.0** — Discovery & market intelligence
+- **v2.0.0** — Discovery & market intelligence
 - **v1.0.0** — Initial release

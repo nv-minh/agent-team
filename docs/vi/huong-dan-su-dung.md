@@ -25,8 +25,8 @@ EM-Team v3.0.0 cung cấp 130+ commands được tổ chức thành 3 danh mục
 
 | Phương pháp | Số lượng | Mô tả | Tốt nhất cho |
 |-------------|----------|-------|--------------|
-| **Skills** | 43 | Patterns và practices có thể tái sử dụng | Tasks phát triển cụ thể |
-| **Agents** | 31 | AI assistants chuyên biệt | Công việc chuyên môn phức tạp |
+| **Skills** | 74 | Patterns và practices có thể tái sử dụng | Tasks phát triển cụ thể |
+| **Agents** | 35 | AI assistants chuyên biệt | Công việc chuyên môn phức tạp |
 | **Workflows** | 23 | Quy trình end-to-end | Vòng đời dự án hoàn chỉnh |
 
 ### 🎯 Quick Start
@@ -151,10 +151,10 @@ EM-Team v3.0.0 có hệ thống điều khiển giao tiếp thống nhất với
 EM-Team v3.0.0 sử dụng cấu trúc command thống nhất:
 
 ```bash
-# Skills (43 commands) - Prefix em:skill:
+# Skills (74 commands) - Prefix em:skill:
 /em:skill:skill-name [task description]
 
-# Agents (31 commands) - Prefix em:
+# Agents (35 commands) - Prefix em:
 /em:agent-name [task description]
 
 # Workflows (23 commands) - Prefix em:
@@ -167,7 +167,7 @@ EM-Team v3.0.0 sử dụng cấu trúc command thống nhất:
 
 ### Tất cả Commands Available
 
-#### 📚 Skills (43 commands) - Prefix em:skill:
+#### 📚 Skills (74 commands) - Prefix em:skill:
 
 ```
 /em:skill:brainstorming          - Explore ideas into designs
@@ -210,7 +210,7 @@ EM-Team v3.0.0 sử dụng cấu trúc command thống nhất:
 /em:skill:style-switcher                - 13 personality + 3 density modes (MỚI)
 ```
 
-#### 🤖 Agents (31 commands) - Prefix em:
+#### 🤖 Agents (35 commands) - Prefix em:
 
 ```
 /em:planner               - Create implementation plans
@@ -241,6 +241,13 @@ EM-Team v3.0.0 sử dụng cấu trúc command thống nhất:
 /em:design-reviewer       - Visual design, 6-pillar UI audit (MỚI) 🎨
 /em:devex-reviewer        - Dev experience audit, TTHW (MỚI) 🎨
 /em:iron-law-enforcer     - Iron Law compliance gate (MỚI) 🔒
+/em:react-expert          - React/Next.js, hooks, state management (MỚI) ⚛️
+/em:vue-expert            - Vue 3, Composition API, Pinia (MỚI) 💚
+/em:nestjs-expert         - NestJS, TypeScript, GraphQL (MỚI) 🟢
+/em:devops-expert         - Docker, K8s, Terraform, CI/CD (MỚI) ☁️
+/em:mobile-expert         - Flutter, React Native, Android, iOS (MỚI) 📱
+/em:spring-expert         - Spring Boot, JPA, security (MỚI) 🍃
+/em:rust-expert           - Rust systems, ownership, async tokio (MỚI) 🦀
 ```
 
 #### 🔄 Workflows (23 commands) - Prefix em:
@@ -1079,16 +1086,16 @@ which em-show
 # Nếu không có, cài đặt lại
 
 # 2. Kiểm tra file permissions
-chmod +x /Users/abc/Desktop/EM-Skill/commands/*.sh
-chmod +x /Users/abc/Desktop/EM-Skill/scripts/*.sh
+chmod +x /Users/abc/Desktop/EM-Team/commands/*.sh
+chmod +x /Users/abc/Desktop/EM-Team/scripts/*.sh
 
 # 3. Kiểm tra PATH
-echo $PATH | grep EM-Skill
+echo $PATH | grep EM-Team
 # Nếu không có, add to PATH:
-export PATH="/Users/abc/Desktop/EM-Skill/commands:$PATH"
+export PATH="/Users/abc/Desktop/EM-Team/commands:$PATH"
 
 # 4. Verify command files exist
-ls -la /Users/abc/Desktop/EM-Skill/commands/
+ls -la /Users/abc/Desktop/EM-Team/commands/
 ```
 
 ### Problem 2: Distributed Mode Không Khởi Động
@@ -1108,8 +1115,8 @@ tmux -V
 tmux kill-server
 
 # 3. Verify script permissions
-chmod +x /Users/abc/Desktop/EM-Skill/scripts/distributed-orchestrator.sh
-chmod +x /Users/abc/Desktop/EM-Skill/distributed/*.sh
+chmod +x /Users/abc/Desktop/EM-Team/scripts/distributed-orchestrator.sh
+chmod +x /Users/abc/Desktop/EM-Team/distributed/*.sh
 
 # 4. Try again
 ./scripts/distributed-orchestrator.sh start
@@ -1248,18 +1255,18 @@ cat /tmp/em:team-test-logs/latest.log
 
 ### 🌐 Community
 
-- [GitHub Issues](https://github.com/nv-minh/EM-Team/issues) - Báo cáo issues
-- [GitHub Discussions](https://github.com/nv-minh/EM-Team/discussions) - Thảo luận
+- [GitHub Issues](https://github.com/nv-minh/agent-team/issues) - Báo cáo issues
+- [GitHub Discussions](https://github.com/nv-minh/agent-team/discussions) - Thảo luận
 - [Contributing Guide](CONTRIBUTING.md) - Đóng góp dự án
 
 ---
 
-**Phiên bản:** 2.2.0
-**Cập nhật lần cuối:** 2026-05-01
+**Phiên bản:** 3.0.0
+**Cập nhật lần cuối:** 2026-05-07
 **Tình trạng:** ✅ Production Ready
 
 **Cần trợ giúp?**
 - Kiểm tra [Xử lý sự cố](#xử-lý-sự-cố)
 - Đọc [Best Practices](#best-practices)
 - Xem [Use Cases](#use-cases-chi-tiết)
-- Report bugs tại [GitHub Issues](https://github.com/nv-minh/EM-Team/issues)
+- Report bugs tại [GitHub Issues](https://github.com/nv-minh/agent-team/issues)

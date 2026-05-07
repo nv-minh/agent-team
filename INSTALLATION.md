@@ -50,8 +50,8 @@ Once installed, open **any project** in Claude Code. All EM-Team skills are avai
 
 | Component | Source | Global Location |
 |-----------|--------|-----------------|
-| Agent/Workflow wrappers (33) | `EM-Team/.claude/skills/em:*.md` | `~/.claude/skills/em:*/SKILL.md` (symlinks) |
-| Skill wrappers (72) | `EM-Team/.claude/skills/em:skill-*.md` | `~/.claude/skills/em:skill:*/SKILL.md` (symlinks) |
+| Agent/Workflow wrappers (82) | `EM-Team/.claude/skills/em:*.md` | `~/.claude/skills/em:*/SKILL.md` (symlinks) |
+| Skill wrappers (74) | `EM-Team/.claude/skills/em:skill-*.md` | `~/.claude/skills/em:skill:*/SKILL.md` (symlinks) |
 | Agents (35) | `EM-Team/agents/*.md` | Referenced via `~/.claude/config.json` |
 | Workflows (23) | `EM-Team/workflows/*.md` | Referenced via `~/.claude/config.json` |
 
@@ -62,7 +62,7 @@ EM-Team repo is the **single source of truth**. Symlinks point back to it — up
 ## Verify
 
 ```bash
-# Check symlinks (should be 69 total: 33 em:* + 36 em:skill:*)
+# Check symlinks (should be 156 total: 82 em:* + 74 em:skill:*)
 ls ~/.claude/skills/em:*/SKILL.md ~/.claude/skills/em:skill:*/SKILL.md 2>/dev/null | wc -l
 
 # Check no orphaned entries (should be empty)

@@ -25,7 +25,7 @@ All EM-Skill agents and skills follow these principles (see `preambles/ethos.md`
 
 ```
 em-team/
-├── skills/              # 72 skills
+├── skills/              # 74 skills
 │   ├── foundation/      # 6 core foundational skills
 │   ├── development/     # 11 methodology skills (TDD, architecture, debugging, etc.)
 │   ├── expert-react/    # 4 React skills (react, react-hooks, nextjs, redux)
@@ -43,7 +43,7 @@ em-team/
 │   ├── expert-typescript/ # 1 TypeScript skill (typescript-patterns)
 │   ├── drawio/          # 2 Drawio skills (architecture, flowchart)
 │   ├── tauri/           # 1 Tauri skill (tauri)
-│   ├── quality/         # 10 quality assurance skills
+│   ├── quality/         # 12 quality assurance skills
 │   ├── workflow/        # 6 workflow and automation skills
 │   └── additional/      # 5 product & discovery skills
 ├── agents/              # 35 specialized agents (8 core + 4 optional + 9 specialized + 7 v2.0+ + 7 expert)
@@ -153,7 +153,7 @@ em-team/
 ### Tauri Skills (1 skill)
 51. **tauri** - Rust backend, frontend integration, plugins, mobile builds
 
-### Quality Skills (10 skills)
+### Quality Skills (12 skills)
 52. **code-review** - 5-axis review framework
 53. **code-simplification** - Reduce complexity
 54. **browser-testing** - DevTools MCP integration
@@ -164,21 +164,23 @@ em-team/
 59. **security-common** - OWASP reference and security checklist
 60. **ux-audit** - Behavioral UX audit with scored dimensions
 61. **plan-tune** - Learn and tune output preferences
+62. **flow-discovery** - Discovery flow pattern identification
+63. **test-generation** - Automated test generation strategies
 
 ### Workflow Skills (6 skills)
-62. **git-workflow** - Atomic commits
-63. **ci-cd-automation** - Feature flags, quality gates
-64. **documentation** - ADRs, API docs
-65. **finishing-branch** - Merge/PR decisions
-66. **deprecation-migration** - Code-as-liability mindset
-67. **style-switcher** - Unified personality styles (13) and density modes (3)
+64. **git-workflow** - Atomic commits
+65. **ci-cd-automation** - Feature flags, quality gates
+66. **documentation** - ADRs, API docs
+67. **finishing-branch** - Merge/PR decisions
+68. **deprecation-migration** - Code-as-liability mindset
+69. **style-switcher** - Unified personality styles (13) and density modes (3)
 
 ### Additional Skills (5 skills)
-68. **jobs-to-be-done** - JTBD framework for understanding user needs
-69. **lean-ux-canvas** - Lean UX hypothesis testing
-70. **opportunity-solution-tree** - Product opportunity mapping
-71. **pol-probe** - Product opportunity probe
-72. **office-hours** - YC-style brainstorming and idea validation
+70. **jobs-to-be-done** - JTBD framework for understanding user needs
+71. **lean-ux-canvas** - Lean UX hypothesis testing
+72. **opportunity-solution-tree** - Product opportunity mapping
+73. **pol-probe** - Product opportunity probe
+74. **office-hours** - YC-style brainstorming and idea validation
 
 ## Agent Categories
 
@@ -409,7 +411,7 @@ When adding new skills or agents:
 
 Current version: 3.0.0
 Last updated: 2026-05-02
-Changes: v3.0.0 — Expert group restructuring: 27 new skills from full-stack-skills, 7 new expert agents, 6 skills moved from development/ to expert-* groups. Total: 72 skills, 34 agents.
+Changes: v3.0.0 — Expert group restructuring: 27 new skills from full-stack-skills, 7 new expert agents, 6 skills moved from development/ to expert-* groups. Total: 74 skills, 35 agents.
 
 ## Automation
 

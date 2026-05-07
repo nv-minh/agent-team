@@ -2,263 +2,310 @@
 
 ## Overview
 
-EM-Team includes multiple skill systems from different sources. This guide explains when to use each system and how they integrate.
+EM-Team provides a unified skill system containing **74 skills** across **21 category directories**. Skills are the building blocks that give agents and workflows their domain expertise -- covering everything from foundational development practices to language-specific patterns, quality assurance, and workflow automation.
 
-## Skill Systems
+Each skill is a self-contained Markdown file with YAML frontmatter metadata and structured body sections. Skills are installed globally via `bash install.sh`, which creates symlinks in `~/.claude/skills/` so they are available in any Claude Code project.
 
-### Main Skills (`skills/`)
+**Version:** 3.0.0
+**Last Updated:** 2026-05-07
 
-**Primary skill library for EM-Team.**
+---
 
-**Use these for:**
-- Foundation patterns (TDD, spec-driven development, systematic debugging)
-- Development workflows (incremental implementation, subagent-driven development)
-- Quality assurance (code review, security audit, performance optimization)
-- Git/CI/CD automation (git workflow, CI/CD automation, finishing branch)
-- Language/framework patterns (TypeScript, Python, React, Next.js, Node.js, Django, NestJS)
-- Database patterns (migrations)
+## Directory Structure
 
-**Structure:**
 ```
 skills/
-├── foundation/       # Core foundational skills
-├── development/      # Development workflow skills
-├── quality/          # Quality assurance skills
-└── workflow/         # Git/CI/CD automation skills
+├── foundation/          # 6 skills  — Core methodology and planning
+├── development/         # 11 skills — Development workflows and architecture
+├── expert-react/        # 4 skills  — React ecosystem (React, Hooks, Next.js, Redux)
+├── expert-vue/          # 3 skills  — Vue ecosystem (Vue 3, Pinia, Vue Router)
+├── expert-go/           # 1 skill   — Go patterns
+├── expert-nest/         # 1 skill   — NestJS backend framework
+├── expert-python/       # 3 skills  — Python (patterns, FastAPI, Django)
+├── expert-database/     # 3 skills  — PostgreSQL, Redis, Elasticsearch
+├── expert-devops/       # 6 skills  — Docker, K8s, Terraform, Ansible, GitHub Actions
+├── expert-mobile/       # 4 skills  — Flutter, React Native, Android, iOS
+├── expert-spring/       # 1 skill   — Spring Boot
+├── expert-frontend/     # 1 skill   — Frontend UI patterns
+├── expert-backend/      # 2 skills  — Backend patterns, API design
+├── expert-rust/         # 1 skill   — Rust patterns
+├── expert-typescript/   # 1 skill   — TypeScript patterns
+├── drawio/              # 2 skills  — Architecture and flowchart diagrams
+├── tauri/               # 1 skill   — Tauri desktop/mobile framework
+├── quality/             # 12 skills — Code review, testing, security, UX audit
+├── workflow/            # 6 skills  — Git, CI/CD, documentation, style switching
+└── additional/          # 5 skills  — Product discovery and strategy
 ```
 
-**Naming Convention:** Skills are named descriptively (e.g., `spec-driven-development.md` instead of `SKILL.md`)
+### Directory Naming Convention
 
-**When to Use:**
-- Default choice for all EM-Team workflows
-- When implementing features using EM-Team agents
-- When following EM-Team development lifecycle
+- **`foundation/`** and **`development/`** -- process-oriented skills that apply to any tech stack
+- **`expert-*/`** -- technology-specific skills grouped by domain (react, vue, database, devops, etc.)
+- **`quality/`** -- verification, testing, and audit skills
+- **`workflow/`** -- automation, git, and communication skills
+- **`additional/`** -- product discovery and business analysis skills
 
 ---
 
-### Agent Skills (`agent-skills/skills/`)
+## Skill Format
 
-**Legacy skill system from the agent-skills repository.**
+Each skill consists of two files in its category subdirectory:
 
-**DEPRECATED - Migrate to main skills.**
+```
+skills/{category}/{skill-name}/
+├── SKILL.md           # Symlink to the source .md file
+└── {skill-name}.md    # Source file with full content
+```
 
-**Status:** This system is maintained for backward compatibility but new development should use main skills.
+### Source File Structure
 
-**Use these for:**
-- Legacy workflows that reference agent-skills
-- Temporary compatibility during migration
+Every source `.md` file follows this format:
 
-**Migration Path:**
-1. Identify agent-skills being used
-2. Find equivalent skill in main `skills/` directory
-3. Update references to point to main skills
-4. Remove agent-skills dependency
+```markdown
+---
+name: skill-name
+description: "Short description of when and why to use this skill"
+version: "2.0.0"
+category: "foundation"
+origin: "superpowers"
+tools: [Read, Write, Bash, Grep, Glob]
+triggers:
+  - "trigger phrase"
+  - "another trigger"
+intent: "What this skill aims to accomplish"
+scenarios:
+  - "Scenario where this skill applies"
+best_for: "Primary use case summary"
+estimated_time: "15-60 min"
+anti_patterns:
+  - "Common misuse to avoid"
+related_skills: [other-skill, another-skill]
+---
+
+# Skill Title
+
+## Overview
+Description of what the skill does and when to use it.
+
+## When to Use / When NOT to Use
+Guidance on applicability.
+
+## Process / Checklist
+Step-by-step instructions.
+
+## Coaching Notes
+Educational context and tips.
+
+## Verification
+How to confirm the skill was applied correctly.
+
+## Related Skills
+Cross-references to complementary skills.
+```
+
+### YAML Frontmatter Fields
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| `name` | Skill identifier | `test-driven-development` |
+| `description` | When and why to invoke | `"RED-GREEN-REFACTOR cycle..."` |
+| `version` | Skill version | `"2.0.0"` |
+| `category` | Directory category | `"development"` |
+| `origin` | Source repository it was synthesized from | `"superpowers"` |
+| `tools` | Required tool permissions | `[Read, Write, Bash]` |
+| `triggers` | Phrases that should invoke this skill | `["write tests", "TDD"]` |
+| `intent` | Goal of the skill | `"Ensure all code has tests"` |
+| `scenarios` | Applicable situations | `["Starting a new feature"]` |
+| `anti_patterns` | Misuse to avoid | `["Writing tests after code"]` |
+| `related_skills` | Cross-references | `["spec-driven-development"]` |
 
 ---
 
-### Product Manager Skills (`Product-Manager-Skills/skills/`)
+## How Skills Are Discovered
 
-**Product management and business analysis skills.**
+### Installation
 
-**Use these for:**
-- Requirements gathering
-- Market analysis
-- Product strategy
-- User story validation
-- GAP analysis
-- Product-market fit assessment
+Running `bash install.sh` from the EM-Team root performs three steps:
 
-**Structure:**
+1. **Configures `~/.claude/config.json`** -- sets the skills path to the EM-Team repo
+2. **Creates wrapper symlinks in `~/.claude/skills/`** -- each skill gets a directory like `~/.claude/skills/em:skill:brainstorming/SKILL.md`
+3. **Cleans up orphaned entries** -- removes broken or outdated symlinks from previous installs
+
+### Symlink Layout
+
 ```
-Product-Manager-Skills/skills/
-├── user-story/
-├── positioning-workshop/
-├── product-strategy-session/
-└── ... (47 total skills)
-```
-
-**Naming Convention:** Uses `SKILL.md` filename within category directories
-
-**When to Use:**
-- When Product Manager agent is invoked
-- For business requirement analysis
-- For product strategy work
-- When validating product-market fit
-
-**Integration:**
-- Referenced by `agents/product-manager.md`
-- Used in `workflows/product-review.md`
-- Integrated into `workflows/team-review.md` Stage 2
-
----
-
-### Everything Claude Code Skills (`everything-claude-code/`)
-
-**Comprehensive skill library from the everything-claude-code repository.**
-
-**Use these for:**
-- Multi-language support (185+ skills across languages)
-- Framework-specific patterns (React, Vue, Angular, Svelte, etc.)
-- Specialized workflows (SEO, Jira, Flutter, etc.)
-- Language-specific testing patterns
-- Framework-specific deployment
-
-**Structure:**
-```
-everything-claude-code/
-├── skills/          # 185+ framework and language skills
-├── commands/        # Framework-specific commands
-└── rules/           # Language-specific rules
+~/.claude/skills/
+├── em:skill:brainstorming/
+│   └── SKILL.md  ->  /path/to/em-team/skills/foundation/brainstorming/brainstorming.md
+├── em:skill:test-driven-development/
+│   └── SKILL.md  ->  /path/to/em-team/skills/development/test-driven-development/test-driven-development.md
+├── em:skill:react/
+│   └── SKILL.md  ->  /path/to/em-team/skills/expert-react/react/react.md
+├── em:code-review/         # Agent wrappers also live here
+│   └── SKILL.md  ->  /path/to/em-team/.claude/skills/em-code-review.md
+└── ...
 ```
 
-**Naming Convention:** Uses `SKILL.md` filename within category directories
+Skills are invoked by name in Claude Code:
 
-**When to Use:**
-- When working with specific frameworks not covered in main skills
-- When framework-specific expertise is needed
-- For language-specific patterns (C#, Dart, Flutter, etc.)
-- When everything-claude-code workflows are being used
-
-**Integration:**
-- Standalone repository with its own workflows
-- Can be referenced alongside EM-Team
-- Maintained separately
-
----
-
-## Decision Matrix
-
-| Scenario | Use This System | Why |
-|----------|-----------------|-----|
-| **New feature development** | Main `skills/` | EM-Team primary skills |
-| **Product requirement analysis** | Product-Manager-Skills | Business-focused skills |
-| **Framework-specific work** | everything-claude-code | Specialized framework expertise |
-| **Legacy agent-skills reference** | agent-skills (deprecated) | Backward compatibility |
-| **CI/CD automation** | Main `skills/workflow/` | Git/CI/CD patterns |
-| **Language-specific patterns** | everything-claude-code | Comprehensive language support |
-| **Quality assurance** | Main `skills/quality/` | Code review, security, testing |
-
----
-
-## Integration Patterns
-
-### Pattern 1: EM-Team Standard Workflow
-
-```yaml
-flow:
-  1. Use "skills/foundation/spec-driven-development"
-  2. Use "skills/development/test-driven-development"
-  3. Use "agents/executor" to implement
-  4. Use "skills/quality/code-review" for review
-  5. Use "skills/workflow/git-workflow" for commits
 ```
-
-### Pattern 2: Product-Focused Workflow
-
-```yaml
-flow:
-  1. Use "Product-Manager-Skills/skills/user-story" for requirements
-  2. Use "agents/product-manager" for validation
-  3. Use main "skills/foundation/spec-driven-development" for technical spec
-  4. Continue with EM-Team standard workflow
-```
-
-### Pattern 3: Framework-Specific Workflow
-
-```yaml
-flow:
-  1. Use "everything-claude-code/skills/[framework]-patterns" for framework expertise
-  2. Use main "skills/development/test-driven-development" adapted for framework
-  3. Use framework-specific testing from everything-claude-code
-  4. Continue with EM-Team quality gates
+Use the brainstorming skill to explore this feature idea
+Use the test-driven-development skill to implement the auth module
+Use the react skill to build the dashboard component
 ```
 
 ---
 
-## Migration Guide
+## When to Use Each Category
 
-### From agent-skills to Main Skills
+### Foundation (6 skills)
 
-**Step 1: Identify Usage**
-```bash
-grep -r "agent-skills" /path/to/project
-```
+**The starting point for any work.** These skills establish shared understanding and prevent wasted effort.
 
-**Step 2: Find Equivalent**
-```bash
-# agent-skills/skills/tdd-workflow/SKILL.md
-# → skills/development/test-driven-development.md
-```
+| Skill | Use When |
+|-------|----------|
+| alignment-session | Starting a new session or onboarding to a project |
+| brainstorming | Exploring ideas, designing features, or evaluating approaches |
+| context-engineering | Setting up optimal agent context for a task |
+| spec-driven-development | Writing specifications before writing code |
+| systematic-debugging | Investigating bugs methodically (4-phase process) |
+| writing-plans | Breaking work into structured, executable tasks |
 
-**Step 3: Update References**
-```yaml
-# Before
-skills:
-  - agent-skills/skills/tdd-workflow/SKILL.md
+### Development (11 skills)
 
-# After
-skills:
-  - skills/development/test-driven-development.md
-```
+**Process-oriented skills for building software.** Apply regardless of tech stack.
 
-**Step 4: Verify**
-```bash
-# Test that workflow still works
-# Run quality gates
-# Update documentation
-```
+| Skill | Use When |
+|-------|----------|
+| architecture-improvement | Deepening a module's structure and design |
+| architecture-zoom-out | Getting a higher-level perspective on code organization |
+| diagram | Creating Excalidraw, Mermaid, or SVG diagrams |
+| figma-design | Converting Figma designs to code via MCP |
+| incremental-implementation | Building in vertical slices instead of horizontal layers |
+| issue-generator | Converting plans into structured vertical-slice issues |
+| prd-generator | Turning ideas into structured PRD documents |
+| security-hardening | Applying OWASP Top 10 protections |
+| source-driven-development | Building from official documentation |
+| subagent-driven-development | Using fresh subagent context per task |
+| test-driven-development | Following the RED-GREEN-REFACTOR TDD cycle |
 
----
+### Expert Skills (29 skills across 12 directories)
 
-## Best Practices
+**Technology-specific patterns and best practices.** Use when working within a particular framework or language.
 
-1. **Default to Main Skills** - Use main `skills/` unless specific need arises
-2. **Product Manager for Business** - Use Product-Manager-Skills for business analysis
-3. **Framework Experts** - Use everything-claude-code for framework-specific work
-4. **Avoid Duplication** - Don't duplicate skills across systems
-5. **Document Choices** - Document why a specific skill system was chosen
-6. **Keep Skills Updated** - Regularly sync with upstream repositories
+- **expert-react/** -- React fundamentals, hooks patterns, Next.js SSR/SSG, Redux state management
+- **expert-vue/** -- Vue 3 Composition API, Pinia stores, Vue Router guards
+- **expert-go/** -- Go error handling, concurrency, interfaces, Gin
+- **expert-nest/** -- NestJS controllers, modules, guards, GraphQL, microservices
+- **expert-python/** -- Python 3.10+ patterns, FastAPI, Django REST
+- **expert-database/** -- PostgreSQL indexing/EXPLAIN, Redis caching, Elasticsearch DSL
+- **expert-devops/** -- Dockerfile optimization, Docker Compose, Kubernetes, Terraform IaC, Ansible playbooks, GitHub Actions workflows
+- **expert-mobile/** -- Flutter widgets, React Native, Android Jetpack Compose, iOS SwiftUI
+- **expert-spring/** -- Spring Boot auto-config, JPA, security
+- **expert-frontend/** -- UI component patterns, responsive design, accessibility
+- **expert-backend/** -- API patterns, auth, services, contract-first API design
+- **expert-rust/** -- Ownership, traits, async tokio, FFI
+- **expert-typescript/** -- Type system patterns, async, React/Next.js TS
+
+### Quality (12 skills)
+
+**Verification, testing, and audit.** Ensure correctness, security, and usability.
+
+| Skill | Use When |
+|-------|----------|
+| api-testing | Integration testing of API endpoints |
+| browser-testing | Visual QA with DevTools MCP integration |
+| code-review | 5-axis code review framework |
+| code-simplification | Reducing complexity and improving readability |
+| e2e-testing | End-to-end testing with Playwright |
+| flow-discovery | Mapping application flows and user journeys |
+| performance-optimization | Measure-first performance tuning |
+| plan-tune | Learning and tuning output preferences over time |
+| security-audit | Vulnerability assessment and OWASP evaluation |
+| security-common | Security reference checklist |
+| test-generation | Generating test suites for existing code |
+| ux-audit | Behavioral UX audit with scored dimensions |
+
+### Workflow (6 skills)
+
+**Automation, git, and communication.** Support the development lifecycle.
+
+| Skill | Use When |
+|-------|----------|
+| ci-cd-automation | Setting up quality gates, feature flags, deployment |
+| deprecation-migration | Managing code deprecation and migration paths |
+| documentation | Writing ADRs, API docs, and guides |
+| finishing-branch | Making merge/PR decisions and cleanup |
+| git-workflow | Atomic commits, branch management |
+| style-switcher | Switching between 13 personality styles and 3 density modes |
+
+### Additional (5 skills)
+
+**Product discovery and business analysis.** Understand user needs and validate ideas.
+
+| Skill | Use When |
+|-------|----------|
+| jobs-to-be-done | Applying the JTBD framework for user needs analysis |
+| lean-ux-canvas | Lean UX hypothesis testing |
+| office-hours | YC-style brainstorming and idea validation |
+| opportunity-solution-tree | Mapping product opportunities |
+| pol-probe | Product opportunity exploration |
 
 ---
 
 ## Quick Reference
 
-### Main Skills Categories
+### All 74 Skills by Category
 
-- **Foundation** (5 skills): spec-driven-development, brainstorming, context-engineering, writing-plans, systematic-debugging
-- **Development** (8 skills): test-driven-development, frontend-patterns, backend-patterns, incremental-implementation, subagent-driven-development, source-driven-development, api-interface-design, security-hardening
-- **Quality** (7 skills): code-review, code-simplification, browser-testing, performance-optimization, e2e-testing, security-audit, api-testing
-- **Workflow** (5 skills): git-workflow, ci-cd-automation, documentation, finishing-branch, deprecation-migration
+| # | Category | Skills | Count |
+|---|----------|--------|-------|
+| 1 | foundation | alignment-session, brainstorming, context-engineering, spec-driven-development, systematic-debugging, writing-plans | 6 |
+| 2 | development | architecture-improvement, architecture-zoom-out, diagram, figma-design, incremental-implementation, issue-generator, prd-generator, security-hardening, source-driven-development, subagent-driven-development, test-driven-development | 11 |
+| 3 | expert-react | react, react-hooks, nextjs, redux | 4 |
+| 4 | expert-vue | vue3, pinia, vue-router | 3 |
+| 5 | expert-go | go-patterns | 1 |
+| 6 | expert-nest | nestjs | 1 |
+| 7 | expert-python | python-patterns, fastapi, django | 3 |
+| 8 | expert-database | postgresql, redis, elasticsearch | 3 |
+| 9 | expert-devops | docker, docker-compose, kubernetes, terraform, ansible, github-actions | 6 |
+| 10 | expert-mobile | flutter, react-native, android-kotlin, ios-swift | 4 |
+| 11 | expert-spring | spring-boot | 1 |
+| 12 | expert-frontend | frontend-patterns | 1 |
+| 13 | expert-backend | backend-patterns, api-interface-design | 2 |
+| 14 | expert-rust | rust-patterns | 1 |
+| 15 | expert-typescript | typescript-patterns | 1 |
+| 16 | drawio | drawio-architecture, drawio-flowchart | 2 |
+| 17 | tauri | tauri | 1 |
+| 18 | quality | api-testing, browser-testing, code-review, code-simplification, e2e-testing, flow-discovery, performance-optimization, plan-tune, security-audit, security-common, test-generation, ux-audit | 12 |
+| 19 | workflow | ci-cd-automation, deprecation-migration, documentation, finishing-branch, git-workflow, style-switcher | 6 |
+| 20 | additional | jobs-to-be-done, lean-ux-canvas, office-hours, opportunity-solution-tree, pol-probe | 5 |
+| | **Total** | | **74** |
 
-### Product Manager Skills Categories
+### Common Skill Combinations
 
-- User Stories, Requirements, Prioritization, Strategy, Market Analysis, etc. (47 total skills)
+| Workflow | Skills to Chain |
+|----------|----------------|
+| **New feature** | brainstorming -> spec-driven-development -> writing-plans -> test-driven-development -> code-review |
+| **Bug fix** | systematic-debugging -> test-driven-development -> code-review |
+| **Security audit** | security-audit -> security-hardening -> code-review |
+| **API development** | spec-driven-development -> api-interface-design -> backend-patterns -> api-testing |
+| **Frontend feature** | brainstorming -> figma-design -> react -> browser-testing -> ux-audit |
+| **DevOps setup** | docker -> docker-compose -> kubernetes -> github-actions -> ci-cd-automation |
+| **Product discovery** | jobs-to-be-done -> opportunity-solution-tree -> lean-ux-canvas -> prd-generator |
 
-### Everything Claude Code Categories
+### Iron Law Skills
 
-- 185+ skills across multiple languages and frameworks
+The following skills enforce EM-Team's Iron Laws:
+
+| Iron Law | Enforcing Skill |
+|----------|----------------|
+| No production code without failing test | test-driven-development |
+| No fixes without root cause | systematic-debugging |
+| No code without spec | spec-driven-development |
+| No merge without review | code-review |
 
 ---
 
-## FAQ
-
-**Q: Which skill system should I use by default?**
-A: Use main `skills/` for all EM-Team workflows.
-
-**Q: When should I use Product-Manager-Skills?**
-A: When Product Manager agent is involved or when business analysis is needed.
-
-**Q: Is agent-skills still supported?**
-A: It's deprecated. Migrate to main skills.
-
-**Q: Can I mix skill systems in one workflow?**
-A: Yes, but document the rationale and avoid duplication.
-
-**Q: How do I know if a skill exists in main skills?**
-A: Check `skills/` directory structure or use `find skills/ -name "*.md"`.
-
----
-
-**Guide Version:** 1.0.0
-**Last Updated:** 2026-04-19
+**Guide Version:** 3.0.0
+**Last Updated:** 2026-05-07
 **Maintained By:** EM-Team Project

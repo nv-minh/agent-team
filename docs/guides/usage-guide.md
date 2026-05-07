@@ -79,7 +79,7 @@ EM-Team v3.0.0 includes a unified communication control system with two independ
 
 **Rules:** CRITICAL findings always get full context. File paths never omitted. Personality and density are independent.
 
-See `skills/workflow/style-switcher/style-switcher.md` for complete documentation.
+See `/em:skill:style-switcher` for complete documentation.
 
 ---
 
@@ -101,47 +101,62 @@ Skills are reusable patterns and best practices synthesized from top AI agent re
 
 #### Development Skills
 7. **test-driven-development** - TDD: RED-GREEN-REFACTOR
-8. **frontend-patterns** - React/Next.js/Vue best practices
-9. **backend-patterns** - API/Database/NestJS patterns
-10. **incremental-implementation** - Vertical slice development
-11. **subagent-driven-development** - Fresh context per task
-12. **source-driven-development** - Code from official docs
-13. **api-interface-design** - Contract-first APIs
-14. **security-hardening** - OWASP Top 10 security
-15. **architecture-zoom-out** - Higher-level code perspective
-16. **architecture-improvement** - Systematic module deepening
-17. **issue-generator** - Plans to structured vertical-slice GitHub issues
-18. **prd-generator** - Convert ideas to structured PRD documents
+8. **incremental-implementation** - Vertical slice development
+9. **subagent-driven-development** - Fresh context per task
+10. **source-driven-development** - Code from official docs
+11. **security-hardening** - OWASP Top 10 security
+12. **architecture-zoom-out** - Higher-level code perspective
+13. **architecture-improvement** - Systematic module deepening
+14. **issue-generator** - Plans to structured vertical-slice GitHub issues
+15. **prd-generator** - Convert ideas to structured PRD documents
+16. **diagram** - Excalidraw, Mermaid, SVG diagram generation
+17. **figma-design** - Figma-to-code conversion with MCP server
+
+#### Expert Skills
+- **Expert React:** react, react-hooks, nextjs, redux
+- **Expert Vue:** vue3, pinia, vue-router
+- **Expert Go:** go-patterns
+- **Expert NestJS:** nestjs
+- **Expert Python:** python-patterns, fastapi, django
+- **Expert Database:** postgresql, redis, elasticsearch
+- **Expert DevOps:** docker, docker-compose, kubernetes, terraform, ansible, github-actions
+- **Expert Mobile:** flutter, react-native, android-kotlin, ios-swift
+- **Expert Spring:** spring-boot
+- **Expert Frontend:** frontend-patterns
+- **Expert Backend:** backend-patterns, api-interface-design
+- **Expert Rust:** rust-patterns
+- **Expert TypeScript:** typescript-patterns
+- **Drawio:** drawio-architecture, drawio-flowchart
+- **Tauri:** tauri
 
 #### Quality Skills
-19. **code-review** - 5-axis review framework
-20. **code-simplification** - Reduce complexity
-21. **browser-testing** - DevTools MCP integration
-22. **performance-optimization** - Measure-first optimization
-23. **e2e-testing** - Playwright patterns
-24. **security-audit** - Vulnerability assessment
-25. **api-testing** - Integration testing
+18. **code-review** - 5-axis review framework
+19. **code-simplification** - Reduce complexity
+20. **browser-testing** - DevTools MCP integration
+21. **performance-optimization** - Measure-first optimization
+22. **e2e-testing** - Playwright patterns
+23. **security-audit** - Vulnerability assessment
+24. **api-testing** - Integration testing
+25. **security-common** - OWASP reference and security checklist
 26. **ux-audit** - Behavioral UX audit with scored dimensions
 27. **plan-tune** - Learn and tune output preferences
+28. **flow-discovery** - Flow discovery and mapping
+29. **test-generation** - Automated test generation
 
 #### Workflow Skills
-28. **git-workflow** - Atomic commits
-29. **ci-cd-automation** - Feature flags, quality gates
-30. **documentation** - ADRs, API docs
-31. **finishing-branch** - Merge/PR decisions
-32. **deprecation-migration** - Code-as-liability mindset
-
-#### Language Skills (NEW)
-33. **typescript-patterns** - TypeScript type system, async, React/Next.js TS
-34. **python-patterns** - Python 3.10+ types, async, FastAPI, SQLAlchemy 2.0
-35. **go-patterns** - Error handling, concurrency, interfaces, testing
-36. **rust-patterns** - Ownership, traits, async tokio, smart pointers
-
-#### Communication Skills
-37. **style-switcher** - 13 personality styles + 3 density modes
+30. **git-workflow** - Atomic commits
+31. **ci-cd-automation** - Feature flags, quality gates
+32. **documentation** - ADRs, API docs
+33. **finishing-branch** - Merge/PR decisions
+34. **deprecation-migration** - Code-as-liability mindset
+35. **style-switcher** - 13 personality styles + 3 density modes
 
 #### Additional Skills
-38. **security-common** - OWASP reference and security checklist
+36. **jobs-to-be-done** - JTBD framework for understanding user needs
+37. **lean-ux-canvas** - Lean UX hypothesis testing
+38. **opportunity-solution-tree** - Product opportunity mapping
+39. **pol-probe** - Product opportunity probe
+40. **office-hours** - YC-style brainstorming and idea validation
 
 ### How to Use Skills
 
@@ -251,9 +266,18 @@ Database specialist (schema, queries, optimization)
 Coordinates distributed investigations
 
 #### New Agents (v2.0.0)
-27. **Design-Reviewer Agent** - Visual design review with 6-pillar UI audit
-28. **DevEx-Reviewer Agent** - Developer experience audit and TTHW measurement
-29. **Iron-Law-Enforcer Agent** - Gate enforcement for Iron Law compliance
+- **Design-Reviewer** - Visual design review with 6-pillar UI audit
+- **DevEx-Reviewer** - Developer experience audit and TTHW measurement
+- **Iron-Law-Enforcer** - Gate enforcement for Iron Law compliance
+
+#### Expert Agents (v3.0)
+- **react-expert** - React/Next.js, hooks, state management
+- **vue-expert** - Vue 3, Composition API, Pinia
+- **nestjs-expert** - NestJS, TypeScript, GraphQL
+- **devops-expert** - Docker, K8s, Terraform, CI/CD
+- **mobile-expert** - Flutter, React Native, Android, iOS
+- **spring-expert** - Spring Boot, JPA, security
+- **rust-expert** - Rust systems, ownership, async tokio
 
 ### How to Use Agents
 

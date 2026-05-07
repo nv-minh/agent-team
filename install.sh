@@ -62,7 +62,7 @@ cfg.setdefault('assistant', {})
 cfg['skills'] = {
     'enabled': True,
     'paths': [repo + '/.claude/skills'],
-    'description': f'EM-Team v3.0.0 — 72 skills, 35 agents, 23 workflows. See: {repo}/CLAUDE.md'
+    'description': f'EM-Team v3.0.0 — 74 skills, 35 agents, 23 workflows. See: {repo}/CLAUDE.md'
 }
 cfg['agents'] = {
     'enabled': True,
