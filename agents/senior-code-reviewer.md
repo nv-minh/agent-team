@@ -3,6 +3,10 @@ name: senior-code-reviewer
 type: specialist
 trigger: em-agent:senior-code-reviewer
 version: 1.1.0
+deprecated: true
+deprecated_since: "3.1.0"
+deprecated_reason: "Merged into code-reviewer agent as Deep mode. Use em-agent:code-reviewer with deep review instead."
+redirect_to: "em-agent:code-reviewer"
 origin: EM-Team Specialized Agents
 capabilities:
   - 9_axis_code_review
@@ -33,6 +37,10 @@ completion_marker: "CODE_REVIEW_COMPLETE"
 ---
 
 # Senior Code Reviewer Agent
+
+> **DEPRECATED** since v3.1.0 — This agent has been merged into `code-reviewer` as **Deep mode**.
+> Use `em-agent:code-reviewer` with "deep review" to get the same 9-axis review.
+> See `agents/code-reviewer.md` for the unified agent.
 
 ## Role Identity
 

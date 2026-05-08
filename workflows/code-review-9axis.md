@@ -1,11 +1,11 @@
 ---
 name: code-review-9axis
-description: Deep code review using 9-axis framework with Senior Code Reviewer and Security Reviewer
-version: "2.0.0"
+description: Deep code review using 9-axis framework with Code Reviewer (Deep mode) and Security Reviewer
+version: "2.1.0"
 category: "team"
 origin: "agent-skills"
 agents_used:
-  - senior-code-reviewer
+  - code-reviewer
   - security-reviewer
 skills_used:
   - code-review
@@ -23,7 +23,7 @@ estimated_time: "2-6 hours"
 
 ## Overview
 
-The Code Review (9-Axis) workflow provides comprehensive code quality assessment using the 9-axis review framework. It combines the Senior Code Reviewer's thorough analysis with the Security Reviewer's vulnerability assessment to ensure code is production-ready.
+The Code Review (9-Axis) workflow provides comprehensive code quality assessment using the 9-axis review framework. It uses the Code Reviewer agent in **Deep mode** (9 axes: correctness, readability, architecture, security, performance, testing, maintainability, scalability, documentation) combined with the Security Reviewer's vulnerability assessment to ensure code is production-ready.
 
 ## When to Use
 

@@ -2,12 +2,12 @@
 
 ## Overview
 
-EM-Team provides a unified skill system containing **74 skills** across **21 category directories**. Skills are the building blocks that give agents and workflows their domain expertise -- covering everything from foundational development practices to language-specific patterns, quality assurance, and workflow automation.
+EM-Team provides a unified skill system containing **75 skills** across **21 category directories**. Skills are the building blocks that give agents and workflows their domain expertise -- covering everything from foundational development practices to language-specific patterns, quality assurance, and workflow automation.
 
 Each skill is a self-contained Markdown file with YAML frontmatter metadata and structured body sections. Skills are installed globally via `bash install.sh`, which creates symlinks in `~/.claude/skills/` so they are available in any Claude Code project.
 
-**Version:** 3.0.0
-**Last Updated:** 2026-05-07
+**Version:** 3.1.0
+**Last Updated:** 2026-05-08
 
 ---
 
@@ -15,7 +15,7 @@ Each skill is a self-contained Markdown file with YAML frontmatter metadata and 
 
 ```
 skills/
-├── foundation/          # 6 skills  — Core methodology and planning
+├── foundation/          # 7 skills  — Core methodology and planning
 ├── development/         # 11 skills — Development workflows and architecture
 ├── expert-react/        # 4 skills  — React ecosystem (React, Hooks, Next.js, Redux)
 ├── expert-vue/          # 3 skills  — Vue ecosystem (Vue 3, Pinia, Vue Router)

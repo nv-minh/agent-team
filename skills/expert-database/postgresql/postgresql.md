@@ -57,14 +57,14 @@ PostgreSQL is the most advanced open-source relational database, offering JSONB,
 
 ## Anti-Patterns
 
-| Anti-Pattern | Problem | Solution |
-|---|---|---|
-| Index on every column | Slow writes, wasted disk | Index only WHERE/JOIN columns |
-| `SELECT *` everywhere | Unnecessary I/O, breaks on schema changes | Name every column explicitly |
-| TEXT for JSON data | No query operators, no validation | Use JSONB with GIN index |
-| `LIKE '%term%'` | Cannot use B-tree index | Use full-text search or pg_trgm |
-| Deep pagination with OFFSET | Scans and discards rows | Use keyset pagination with WHERE |
-| Unlogged tables for speed | Data lost on crash | Use normal tables with proper tuning |
+| Anti-Pattern                | Problem                                   | Solution                             |
+| --------------------------- | ----------------------------------------- | ------------------------------------ |
+| Index on every column       | Slow writes, wasted disk                  | Index only WHERE/JOIN columns        |
+| `SELECT *` everywhere       | Unnecessary I/O, breaks on schema changes | Name every column explicitly         |
+| TEXT for JSON data          | No query operators, no validation         | Use JSONB with GIN index             |
+| `LIKE '%term%'`             | Cannot use B-tree index                   | Use full-text search or pg_trgm      |
+| Deep pagination with OFFSET | Scans and discards rows                   | Use keyset pagination with WHERE     |
+| Unlogged tables for speed   | Data lost on crash                        | Use normal tables with proper tuning |
 
 ## Core Patterns
 

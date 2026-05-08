@@ -1,16 +1,18 @@
 # Agents Overview
 
-Complete reference for all EM-Team agents (35 agents total).
+Complete reference for all EM-Team agents (35 total: 33 active + 2 deprecated).
 
 ## Core Agents (8 agents)
 1. **planner** - Create detailed implementation plans
 2. **executor** - Execute with atomic commits
-3. **code-reviewer** - 5-axis code review (two-stage: spec compliance then quality)
+3. **code-reviewer** - Code review with Standard (5-axis) and Deep (9-axis) modes
 4. **debugger** - Systematic debugging
 5. **test-engineer** - Test strategy & generation
-6. **security-auditor** - OWASP assessment
+6. **security-reviewer** - Security review with Audit (OWASP) and Review (OWASP+STRIDE) modes
 7. **ui-auditor** - Visual QA
 8. **verifier** - Post-execution verification
+
+> **v3.1.0 Change:** `code-reviewer` now includes Deep mode (9-axis, formerly `senior-code-reviewer`). `security-reviewer` now includes Audit mode (formerly `security-auditor`).
 
 ## Optional Agents (4 agents)
 9. **researcher** - Technical exploration
@@ -23,11 +25,13 @@ Complete reference for all EM-Team agents (35 agents total).
 14. **architect** - Architecture & technical design (trigger: `em-agent:architect`)
 15. **frontend-expert** - React/Next.js, UI/UX, performance (trigger: `em-agent:frontend-expert`)
 16. **backend-expert** - API design, performance, auth, error handling (trigger: `em-agent:backend-expert`)
-17. **senior-code-reviewer** - 9-axis deep code review (trigger: `em-agent:senior-code-reviewer`)
+17. **senior-code-reviewer** - *DEPRECATED* — Use code-reviewer with Deep mode (trigger: `em-agent:senior-code-reviewer`)
 18. **database-expert** - Schema, queries, fintech patterns (trigger: `em-agent:database-expert`)
 19. **product-manager** - Requirements, GAP analysis, market fit (trigger: `em-agent:product-manager`)
-20. **security-reviewer** - OWASP Top 10, STRIDE, blocking authority (trigger: `em-agent:security-reviewer`)
+20. **security-reviewer** - OWASP Top 10 + STRIDE, blocking authority, unified with audit mode (trigger: `em-agent:security-reviewer`)
 21. **staff-engineer** - Root cause analysis, cross-service impact (trigger: `em-agent:staff-engineer`)
+
+> **Boundary:** Use **Architect** for "should we build it this way?" (design decisions). Use **Staff Engineer** for "why is this broken?" (root cause, incidents).
 
 ## New Agents (v2.0+)
 22. **market-intelligence** - Market analysis, competitive intelligence (trigger: `em-agent:market-intelligence`)
@@ -47,9 +51,16 @@ Complete reference for all EM-Team agents (35 agents total).
 34. **spring-expert** - Spring Boot, JPA, security, microservices (trigger: `em-agent:spring-expert`)
 35. **rust-expert** - Rust systems, ownership, async tokio, FFI (trigger: `em-agent:rust-expert`)
 
+## Deprecated Agents
+
+| Agent | Deprecated Since | Reason | Replacement |
+|-------|-----------------|--------|-------------|
+| senior-code-reviewer | v3.1.0 | Merged into code-reviewer as Deep mode | `em-agent:code-reviewer` with "deep review" |
+| security-auditor | v3.1.0 | Merged into security-reviewer as Audit mode | `em-agent:security-reviewer` (auto-selects Audit mode) |
+
 ---
 
-**Version:** 3.0.0
-**Last Updated:** 2026-05-07
+**Version:** 3.1.0
+**Last Updated:** 2026-05-08
 
 See [Usage Guide](../guides/usage-guide.md#using-agents) for details.

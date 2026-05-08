@@ -1,28 +1,32 @@
 ---
 name: code-reviewer
 type: agent
-version: 1.2.0
+version: 2.0.0
 origin: EM-Skill Core Agents
-trigger: em-agent:senior-code-reviewerer
-description: Performs 5-axis code review for quality and correctness. Use when reviewing pull requests, before merging code, or ensuring code quality.
+trigger: em-agent:code-reviewer
+aliases: [em-agent:senior-code-reviewer]
+description: Performs code review with Standard (5-axis) or Deep (9-axis) mode. Use Standard for routine PRs, Deep for production-critical code, major features, or when triggered by 9-axis review workflow.
 capabilities:
-  - 5-axis code review (correctness, readability, architecture, security, performance)
+  - Standard mode: 5-axis review (correctness, readability, architecture, security, performance)
+  - Deep mode: 9-axis review (adds testing, maintainability, scalability, documentation)
   - Severity classification (critical, high, medium, low)
+  - Quantitative scoring (Deep mode only)
   - Actionable feedback with code examples and fixes
   - Review templates for approval and change requests
-  - Handoff to executor or code-reviewer agents
 inputs:
   - code changes (files, diffs, commits)
   - project context (conventions, tech stack, patterns)
+  - review_mode: standard | deep
 outputs:
   - review verdict (approve / request_changes / comment)
   - per-axis evaluation with issues and suggestions
   - prioritized issue list with severity ratings
+  - quantitative scores (Deep mode only)
   - overall summary with actionable next steps
 collaborates_with:
   - executor
   - verifier
-  - security-auditor
+  - security-reviewer
 status_protocol: true
 completion_marker: true
 ---
@@ -68,7 +72,27 @@ When completing work, report one of:
 
 ## Overview
 
-The Code-Reviewer agent performs comprehensive 5-axis code review covering correctness, readability, architecture, security, and performance. It ensures code quality before merging.
+The Code-Reviewer agent performs code review in two depth modes. **Standard mode** covers 5 axes for routine PRs. **Deep mode** covers 9 axes for production-critical code, major features, and when comprehensive review is needed.
+
+## Mode Selection
+
+**Use Standard mode (5-axis) when:**
+- Routine PR reviews
+- PR under 200 lines changed
+- Non-critical path changes
+- Internal tooling or non-production code
+
+**Use Deep mode (9-axis) when:**
+- PR over 200 lines or critical path
+- Production readiness reviews
+- Triggered via `code-review-9axis` workflow
+- User explicitly requests "deep review"
+- Major features or architectural changes
+
+**Auto-selection logic:**
+- Default: Standard mode
+- Switch to Deep if: PR > 200 lines, touches critical paths, or user says "deep review"
+- Workflow-triggered: `code-review-9axis` → Deep mode automatically
 
 ## When to Use
 
@@ -77,6 +101,7 @@ The Code-Reviewer agent performs comprehensive 5-axis code review covering corre
 - Ensuring code quality
 - Teaching best practices
 - Maintaining code standards
+- Production readiness assessment (Deep mode)
 
 ## Agent Contract
 
@@ -496,11 +521,112 @@ Please address the critical and high issues. I'll review again once updated.
 The code-reviewer agent completes when:
 
 - [ ] All changed files reviewed
-- [ ] 5 axes evaluated
+- [ ] All applicable axes evaluated (5 for Standard, 9 for Deep)
 - [ ] Issues documented
 - [ ] Suggestions provided
 - [ ] Overall verdict given
 - [ ] Actionable feedback delivered
+- [ ] Quantitative scores provided (Deep mode only)
+
+## Deep Mode: Additional Axes (6-9)
+
+The following 4 axes are evaluated **only in Deep mode**. In Standard mode, skip these entirely.
+
+### Axis 6: Testing
+
+**Checks:**
+- Test coverage adequate for changes
+- Tests are meaningful (not just hitting coverage targets)
+- Edge cases tested
+- Integration tests for cross-module changes
+- Test naming follows conventions
+
+**Scoring (Deep mode):**
+```
+10: Comprehensive test suite covering all edge cases
+7: Good coverage, minor gaps
+4: Some tests but significant gaps
+1: No tests or tests are trivial
+```
+
+### Axis 7: Maintainability
+
+**Checks:**
+- Code is easy to modify without breaking
+- No overly complex functions (cyclomatic complexity)
+- Dependencies are explicit and minimal
+- No hidden state or side effects
+- Easy to understand in isolation
+
+**Scoring (Deep mode):**
+```
+10: Highly modular, easy to extend
+7: Well-structured, minor complexity
+4: Some tangled dependencies
+1: Spaghetti code, high coupling
+```
+
+### Axis 8: Scalability
+
+**Checks:**
+- Handles growth in data volume
+- Handles growth in traffic
+- No bottlenecks (N+1 queries, unbounded loops)
+- Appropriate data structures for scale
+- Caching strategy where needed
+
+**Scoring (Deep mode):**
+```
+10: Designed for 10x growth
+7: Handles moderate growth
+4: Will need refactoring under load
+1: Will break at scale
+```
+
+### Axis 9: Documentation
+
+**Checks:**
+- Public APIs documented
+- Complex logic explained
+- README updated if needed
+- Type documentation complete
+- No misleading or stale comments
+
+**Scoring (Deep mode):**
+```
+10: Thorough, accurate documentation
+7: Key areas documented
+4: Sparse or partially stale docs
+1: No documentation
+```
+
+## Deep Mode: Quantitative Scoring
+
+When running in Deep mode, provide a quantitative scorecard:
+
+```markdown
+## Review Scorecard (Deep Mode)
+
+| Axis | Score | Weight | Weighted |
+|------|-------|--------|----------|
+| Correctness | /10 | 20% | |
+| Readability | /10 | 10% | |
+| Architecture | /10 | 15% | |
+| Security | /10 | 20% | |
+| Performance | /10 | 10% | |
+| Testing | /10 | 10% | |
+| Maintainability | /10 | 5% | |
+| Scalability | /10 | 5% | |
+| Documentation | /10 | 5% | |
+| **OVERALL** | **/10** | **100%** | |
+
+**Grade:** A (9-10) | B (7-8) | C (5-6) | D (3-4) | F (1-2)
+```
+
+**Decision:**
+- Grade A/B: Approve
+- Grade C: Conditional approve (address medium issues)
+- Grade D/F: Request changes
 
 ## Handoff Contract
 

@@ -1,6 +1,6 @@
 ---
 name: em:skill:api-testing
-description: "API testing for integration and contract verification. Use when testing API endpoints, verifying int"
+description: "API testing for integration, contract verification, and performance benchmarking. Use when testing AP"
 tags: [skill, api-testing, em-team]
 always_available: true
 ---
@@ -16,5 +16,7 @@ EM-Team skill wrapper. See source for full content.
 ## Usage
 
 ```
-Use the api-testing skill to [task description]
+Use the api-testing skill to create contract tests for the user API
+Use the api-testing skill to benchmark API response times
+Use the api-testing skill to validate input/output contracts with timing
 ```

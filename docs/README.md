@@ -24,8 +24,8 @@ Welcome to the EM-Team documentation hub. This directory contains comprehensive 
 - [Workflow Reference](workflows/overview.md) - Complete workflow catalog
 
 ### 📖 Skill, Agent & Workflow Guides
-- [Skills Overview](skills/overview.md) - All 74 skills organized by category
-- [Agent Reference](agents/overview.md) - All 35 agents with descriptions
+- [Skills Overview](skills/overview.md) - All 75 skills organized by category
+- [Agent Reference](agents/overview.md) - All 35 agents with descriptions (33 active + 2 deprecated)
 - [Skill Systems Guide](skill-systems-guide.md) - How the skill system is organized
 
 ### 📝 Feature Documentation
@@ -77,5 +77,5 @@ Need help?
 
 ---
 
-**Last Updated:** 2026-05-07
-**Documentation Version:** 3.0.0
+**Last Updated:** 2026-05-08
+**Documentation Version:** 3.1.0

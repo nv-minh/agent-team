@@ -1,6 +1,6 @@
 # EM-Team System - Complete Skill Index
 
-**EM-Team** is a comprehensive fullstack engineering system with 72 skills, 35 agents, and 23 workflows. Skills are organized into 15 expert groups covering every major technology stack.
+**EM-Team** is a comprehensive fullstack engineering system with 75 skills, 35 agents, and 24 workflows. Skills are organized into 15 expert groups covering every major technology stack.
 
 ---
 
@@ -8,15 +8,15 @@
 
 EM-Team provides three powerful ways to accelerate your development:
 
-1. **Skills** - Reusable patterns & best practices for specific tasks (72 skills in 17 categories)
+1. **Skills** - Reusable patterns & best practices for specific tasks (75 skills in 17 categories)
 2. **Agents** - Specialized AI assistants for domain expertise (35 agents)
-3. **Workflows** - End-to-end processes for complete project lifecycles (23 workflows)
+3. **Workflows** - End-to-end processes for complete project lifecycles (24 workflows)
 
 ---
 
-## Available Skills (72 Skills)
+## Available Skills (74 Skills)
 
-### Foundation Skills (6 skills)
+### Foundation Skills (7 skills)
 Location: `skills/foundation/`
 
 1. **alignment-session** - Pre-coding human-AI alignment
@@ -25,6 +25,7 @@ Location: `skills/foundation/`
 4. **context-engineering** - Optimize agent context setup
 5. **writing-plans** - Break work into bite-sized tasks
 6. **systematic-debugging** - 4-phase debugging methodology
+7. **domain-modeling** - Bounded contexts, entities, relationships, ubiquitous language
 
 ### Development Skills (11 skills)
 Location: `skills/development/`
@@ -168,38 +169,40 @@ Location: `skills/tauri/`
 
 51. **tauri** - Rust backend, frontend integration, plugins, mobile builds
 
-### Quality Skills (10 skills)
+### Quality Skills (12 skills)
 Location: `skills/quality/`
 
 52. **code-review** - 5-axis review framework
 53. **code-simplification** - Reduce complexity
-54. **browser-testing** - DevTools MCP integration
+54. **browser-testing** - DevTools MCP integration, video recording, test evidence
 55. **performance-optimization** - Measure-first optimization
 56. **e2e-testing** - Playwright patterns
 57. **security-audit** - Vulnerability assessment
-58. **api-testing** - Integration testing
+58. **api-testing** - Integration testing, contract validation, response time benchmarks
 59. **security-common** - OWASP reference and security checklist
 60. **ux-audit** - Behavioral UX audit with scored dimensions
 61. **plan-tune** - Learn and tune output preferences
+62. **test-generation** - Auto-generate test cases from code & specs
+63. **flow-discovery** - Discover and document user flows with step-by-step guides
 
 ### Workflow Skills (6 skills)
 Location: `skills/workflow/`
 
-62. **git-workflow** - Atomic commits
-63. **ci-cd-automation** - Feature flags, quality gates
-64. **documentation** - ADRs, API docs
-65. **finishing-branch** - Merge/PR decisions
-66. **deprecation-migration** - Code-as-liability mindset
-67. **style-switcher** - Unified personality styles (13) and density modes (3)
+63. **git-workflow** - Atomic commits
+64. **ci-cd-automation** - Feature flags, quality gates
+65. **documentation** - ADRs, API docs
+66. **finishing-branch** - Merge/PR decisions
+67. **deprecation-migration** - Code-as-liability mindset
+68. **style-switcher** - Unified personality styles (13) and density modes (3)
 
 ### Additional Skills (5 skills)
 Location: `skills/additional/`
 
-68. **jobs-to-be-done** - JTBD framework for understanding user needs
-69. **lean-ux-canvas** - Lean UX hypothesis testing
-70. **opportunity-solution-tree** - Product opportunity mapping
-71. **pol-probe** - Product opportunity probe
-72. **office-hours** - YC-style brainstorming and idea validation
+69. **jobs-to-be-done** - JTBD framework for understanding user needs
+70. **lean-ux-canvas** - Lean UX hypothesis testing
+71. **opportunity-solution-tree** - Product opportunity mapping
+72. **pol-probe** - Product opportunity probe
+73. **office-hours** - YC-style brainstorming and idea validation
 
 ---
 

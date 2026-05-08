@@ -25,8 +25,8 @@ All EM-Skill agents and skills follow these principles (see `preambles/ethos.md`
 
 ```
 em-team/
-├── skills/              # 74 skills
-│   ├── foundation/      # 6 core foundational skills
+├── skills/              # 75 skills
+│   ├── foundation/      # 7 core foundational skills
 │   ├── development/     # 11 methodology skills (TDD, architecture, debugging, etc.)
 │   ├── expert-react/    # 4 React skills (react, react-hooks, nextjs, redux)
 │   ├── expert-vue/      # 3 Vue skills (vue3, pinia, vue-router)
@@ -46,8 +46,8 @@ em-team/
 │   ├── quality/         # 12 quality assurance skills
 │   ├── workflow/        # 6 workflow and automation skills
 │   └── additional/      # 5 product & discovery skills
-├── agents/              # 35 specialized agents (8 core + 4 optional + 9 specialized + 7 v2.0+ + 7 expert)
-├── workflows/           # 23 end-to-end workflows
+├── agents/              # 35 agents (33 active + 2 deprecated)
+├── workflows/           # 24 end-to-end workflows
 ├── .claude/
 │   ├── lib/             # Agent Trace Store (code provenance tracking)
 │   ├── mcp-servers/     # Custom MCP servers (GitHub enhanced, Project context)
@@ -68,13 +68,14 @@ em-team/
 
 ## Skill Categories
 
-### Foundation Skills (6 skills)
+### Foundation Skills (7 skills)
 1. **alignment-session** - Pre-coding human-AI alignment
 2. **spec-driven-development** - Write specs before coding
 3. **brainstorming** - Explore ideas into designs
 4. **context-engineering** - Optimize agent context setup
 5. **writing-plans** - Break work into bite-sized tasks
 6. **systematic-debugging** - 4-phase debugging methodology
+7. **domain-modeling** - Bounded contexts, entities, relationships, ubiquitous language
 
 ### Development Skills (11 methodology skills)
 7. **test-driven-development** - TDD RED-GREEN-REFACTOR
@@ -187,12 +188,14 @@ em-team/
 ### Core Agents (8 agents)
 1. **planner** - Create detailed implementation plans
 2. **executor** - Execute with atomic commits
-3. **code-reviewer** - 5-axis code review (two-stage: spec compliance then quality)
+3. **code-reviewer** - Code review with Standard (5-axis) and Deep (9-axis) modes
 4. **debugger** - Systematic debugging
 5. **test-engineer** - Test strategy & generation
-6. **security-auditor** - OWASP assessment
+6. **security-reviewer** - Security review with Audit (OWASP) and Review (OWASP+STRIDE) modes
 7. **ui-auditor** - Visual QA
 8. **verifier** - Post-execution verification
+
+> **Note:** `senior-code-reviewer` and `security-auditor` are deprecated. Their capabilities are now unified into `code-reviewer` (Deep mode) and `security-reviewer` (Audit mode) respectively.
 
 ### Optional Agents
 9. **researcher** - Technical exploration
@@ -205,10 +208,10 @@ em-team/
 14. **architect** - Architecture & technical design (trigger: `em-agent:architect`)
 15. **frontend-expert** - React/Next.js, UI/UX, performance (trigger: `em-agent:frontend-expert`)
 16. **backend-expert** - API design, performance, auth, error handling (trigger: `em-agent:backend-expert`)
-17. **senior-code-reviewer** - 9-axis deep code review (trigger: `em-agent:senior-code-reviewer`)
+17. **senior-code-reviewer** - *DEPRECATED* — Use code-reviewer with Deep mode (trigger: `em-agent:senior-code-reviewer` → redirects)
 18. **database-expert** - Schema, queries, fintech patterns (trigger: `em-agent:database-expert`)
 19. **product-manager** - Requirements, GAP analysis, market fit (trigger: `em-agent:product-manager`)
-20. **security-reviewer** - OWASP Top 10, STRIDE, blocking authority (trigger: `em-agent:security-reviewer`)
+20. **security-reviewer** - OWASP Top 10 + STRIDE, blocking authority, unified with audit mode (trigger: `em-agent:security-reviewer`)
 21. **staff-engineer** - Root cause analysis, cross-service impact (trigger: `em-agent:staff-engineer`)
 
 ### New Agents (v2.0.0)
@@ -233,38 +236,39 @@ em-team/
 
 ### Primary Workflows
 1. **new-feature** - From idea to production
-2. **bug-fix** - Investigate and fix bugs
-3. **refactoring** - Improve code quality
-4. **security-audit** - Security assessment
+2. **greenfield-app** - From blank directory to shipped application
+3. **bug-fix** - Investigate and fix bugs
+4. **refactoring** - Improve code quality
+5. **security-audit** - Security assessment
 
 ### Support Workflows
-5. **project-setup** - Initialize new projects
-6. **documentation** - Generate and update docs
-7. **deployment** - Deploy and monitor
-8. **retro** - Learn and improve
-9. **ship-workflow** - Version bump, changelog, PR creation
-10. **canary-monitoring** - Post-deploy health monitoring
+6. **project-setup** - Initialize new projects
+7. **documentation** - Generate and update docs
+8. **deployment** - Deploy and monitor
+9. **retro** - Learn and improve
+10. **ship-workflow** - Version bump, changelog, PR creation
+11. **canary-monitoring** - Post-deploy health monitoring
 
 ### Master Workflow
-11. **six-phase-lifecycle** - DEFINE → PLAN → BUILD → VERIFY → REVIEW → SHIP (all workflows inherit this)
+12. **six-phase-lifecycle** - DEFINE → PLAN → BUILD → VERIFY → REVIEW → SHIP (all workflows inherit this)
 
 ### Team Workflows (8 workflows)
-12. **team-review** - Full team review orchestrated by Team Lead
-13. **architecture-review** - Architecture review with Architect & Staff Engineer
-14. **design-review** - UI/UX design review with Frontend Expert & Product Manager
-15. **code-review-9axis** - Deep 9-axis code review with Senior Code Reviewer & Security
-16. **database-review** - Database schema & query review with Database Expert & Architect
-17. **product-review** - Product/spec review with Product Manager & Architect
-18. **security-review-advanced** - Advanced security (OWASP + STRIDE) with Security & Staff
-19. **incident-response** - Production incident handling with Staff Engineer & Security
+13. **team-review** - Full team review orchestrated by Team Lead
+14. **architecture-review** - Architecture review with Architect & Staff Engineer
+15. **design-review** - UI/UX design review with Frontend Expert & Product Manager
+16. **code-review-9axis** - Deep 9-axis code review with Code Reviewer (Deep mode) & Security
+17. **database-review** - Database schema & query review with Database Expert & Architect
+18. **product-review** - Product/spec review with Product Manager & Architect
+19. **security-review-advanced** - Advanced security (OWASP + STRIDE) with Security & Staff
+20. **incident-response** - Production incident handling with Staff Engineer & Security
 
 ### Distributed Workflows (2 workflows)
-20. **distributed-investigation** - Parallel bug investigation across full stack
-21. **distributed-development** - Parallel feature development with multiple agents
+21. **distributed-investigation** - Parallel bug investigation across full stack
+22. **distributed-development** - Parallel feature development with multiple agents
 
 ### Product Workflows (2 workflows)
-22. **discovery-process** - Product discovery and validation
-23. **market-driven-feature** - Market-driven feature development
+23. **discovery-process** - Product discovery and validation
+24. **market-driven-feature** - Market-driven feature development
 
 ### Incident Sub-Workflows (workflows/incident/)
 - **initial-triage** - First response and impact assessment
@@ -295,6 +299,15 @@ Enforced by: `agents/iron-law-enforcer.md`
 ```
 DEFINE → PLAN → BUILD → VERIFY → REVIEW → SIMPLIFY → SHIP
 ```
+
+### Workflow Selection
+
+| Starting Point | Workflow |
+|---|---|
+| Blank directory + idea | greenfield-app |
+| Existing codebase + feature | new-feature |
+| Existing codebase + market opportunity | market-driven-feature |
+| Technical bootstrapping only | project-setup |
 
 ## Three-Tier Boundary System
 
@@ -409,9 +422,9 @@ When adding new skills or agents:
 
 ## Version
 
-Current version: 3.0.0
-Last updated: 2026-05-02
-Changes: v3.0.0 — Expert group restructuring: 27 new skills from full-stack-skills, 7 new expert agents, 6 skills moved from development/ to expert-* groups. Total: 74 skills, 35 agents.
+Current version: 3.1.0
+Last updated: 2026-05-08
+Changes: v3.1.0 — Greenfield app workflow, domain-modeling skill, agent consolidation (code-reviewer + senior-code-reviewer → unified with depth modes; security-auditor + security-reviewer → unified with profiles). Total: 75 skills, 33 active agents (2 deprecated), 24 workflows.
 
 ## Automation
 

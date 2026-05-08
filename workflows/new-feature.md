@@ -12,6 +12,7 @@ agents_used:
   - market-intelligence
 skills_used:
   - brainstorming
+  - domain-modeling
   - spec-driven-development
   - writing-plans
   - test-driven-development
@@ -59,6 +60,7 @@ DEFINE ──→ PLAN ──→ BUILD ──→ VERIFY ──→ REVIEW ──�
 |---|---|---|
 | BRAINSTORM (Stage 1) | DEFINE | Explore ideas, clarify requirements, design approach |
 | MARKET VALIDATION (Stage 1.5) | DEFINE | Optional market research and competitive analysis |
+| DOMAIN MODELING (Stage 1.7) | DEFINE | Optional domain modeling for cross-context features |
 | SPEC (Stage 2) | DEFINE | Write structured specification with requirements |
 | PLAN (Stage 3) | PLAN | Break into tasks, estimate effort, map dependencies |
 | BUILD (Stage 4) | BUILD | Execute tasks with TDD and atomic commits |
@@ -72,6 +74,7 @@ DEFINE ──→ PLAN ──→ BUILD ──→ VERIFY ──→ REVIEW ──�
 - [ ] Design document written
 - [ ] Technical approach decided
 - [ ] Market validated OR strategically justified (if Stage 1.5 completed)
+- [ ] Domain model updated OR skipped with justification (if Stage 1.7 triggered)
 PASS → proceed to PLAN | FAIL → return to DEFINE
 
 #### Gate 2: Plan Complete
@@ -254,6 +257,51 @@ Sequential Execution (Deep Mode):
 
 ---
 
+## Stage 1.7: Domain Modeling (OPTIONAL)
+
+**Agent:** Architect
+
+**Trigger Conditions:**
+- Feature touches multiple bounded contexts
+- Feature introduces new entities or relationships
+- Feature changes the conceptual model
+- User explicitly requests domain modeling
+
+**When to SKIP Stage 1.7:**
+- Small feature within a single bounded context
+- No new entities or relationships
+- Internal refactoring
+- Feature scope is well-understood with no conceptual ambiguity
+
+**Process:**
+1. Invoke domain-modeling skill
+2. Identify affected bounded contexts
+3. Map new entities and relationships
+4. Update ubiquitous language glossary
+5. Validate against existing domain model (if any)
+
+**Output:**
+- Updated `docs/domain-model.md` (or new if none exists)
+- Impact assessment on existing contexts
+- Entity-relationship diagram for new/changed entities
+
+**Quality Gate:**
+- [ ] New entities documented with types (Aggregate Root / Entity / Value Object)
+- [ ] Relationships mapped with cardinality
+- [ ] Ubiquitous language updated (no synonyms)
+- [ ] User approved changes
+- [ ] Existing domain model integrity maintained
+
+**Integration with Stage 2:**
+```yaml
+Stage 1 (Brainstorm) → Stage 1.7 (Domain Model) → Stage 2 (Spec)
+                                                    ↓
+                                          Spec informed by domain model
+                                          Every entity maps to requirements
+```
+
+---
+
 ## Stage 2: Spec
 
 **Agent:** Planner
@@ -385,9 +433,25 @@ handoff:
     - design_document
     - user_approval
     - initial_market_notes (optional)
+    - domain_model (if Stage 1.7 completed)
   expects:
     - spec_document
     - requirements_defined
+```
+
+### [NEW] Brainstorm → Domain Modeling
+
+```yaml
+handoff:
+  from: brainstorming
+  to: architect
+  trigger: Feature crosses bounded contexts OR introduces new entities OR user requests
+  provides:
+    - design_document
+    - user_approval
+  expects:
+    - domain_model
+    - impact_assessment
 ```
 
 ### [NEW] Brainstorm → Market Validation
@@ -498,6 +562,7 @@ timeline:
   market_validation_quick: "< 1 hour (parallel with spec)"
   market_validation_standard: "1-2 hours (parallel with spec)"
   market_validation_deep: "3-4 hours (blocks spec)"
+  domain_modeling: "30-60 min (optional, recommended for cross-context features)"
   spec: "1-2 hours"
   plan: "2-4 hours"
   build: "1-3 days (depends on complexity)"

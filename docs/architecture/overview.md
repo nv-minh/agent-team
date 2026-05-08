@@ -1,6 +1,6 @@
 # EM-Team Architecture Overview
 
-Tổng quan kiến trúc hệ thống EM-Team v3.0.0.
+Tổng quan kiến trúc hệ thống EM-Team v3.1.0.
 
 ---
 
@@ -26,7 +26,7 @@ Tổng quan kiến trúc hệ thống EM-Team v3.0.0.
 │                                                              │
 │  ┌────────────┐  ┌────────────┐  ┌────────────┐           │
 │  │  Skills    │  │  Agents    │  │ Workflows  │           │
-│  │  (74)      │  │  (35)      │  │  (23)      │           │
+│  │  (75)      │  │  (33+2dep) │  │  (24)      │           │
 │  └─────┬──────┘  └─────┬──────┘  └─────┬──────┘           │
 │        │                │                │                  │
 │        └────────────────┴────────────────┘                  │
@@ -85,7 +85,7 @@ persistence_layer:
 **Structure:**
 ```
 skills/
-├── foundation/        # 6 core foundational skills
+├── foundation/        # 7 core foundational skills
 ├── development/       # 11 methodology skills
 ├── expert-react/      # 4 React skills
 ├── expert-vue/        # 3 Vue skills
@@ -121,12 +121,12 @@ skills/
 ```
 agents/
 ├── core (8): planner, executor, code-reviewer, debugger,
-│   test-engineer, security-auditor, ui-auditor, verifier
+│   test-engineer, security-reviewer, ui-auditor, verifier
 ├── optional (4): researcher, codebase-mapper,
 │   integration-checker, performance-auditor
 ├── specialized (9): team-lead, architect, frontend-expert,
-│   backend-expert, senior-code-reviewer, database-expert,
-│   product-manager, security-reviewer, staff-engineer
+│   backend-expert, senior-code-reviewer (deprecated), database-expert,
+│   product-manager, security-reviewer (unified), staff-engineer
 ├── v2.0+ (7): market-intelligence, learn, autoplan,
 │   techlead-orchestrator, design-reviewer, devex-reviewer,
 │   iron-law-enforcer
@@ -148,7 +148,7 @@ agents/
 **Structure:**
 ```
 workflows/
-├── primary/          # 4 primary workflows
+├── primary/          # 5 primary workflows (incl. greenfield-app)
 ├── support/          # 6 support workflows
 ├── master: six-phase-lifecycle
 ├── team/             # 8 team workflows
@@ -627,6 +627,6 @@ system_metrics:
 
 ---
 
-**Version:** 3.0.0
-**Last Updated:** 2026-05-07
+**Version:** 3.1.0
+**Last Updated:** 2026-05-08
 **Architecture Style:** Agent-Skill-Workflow (ASW)

@@ -98,6 +98,7 @@ Skills are reusable patterns and best practices synthesized from top AI agent re
 4. **writing-plans** - Break work into manageable tasks
 5. **systematic-debugging** - 4-phase debugging methodology
 6. **alignment-session** - Pre-coding human-AI alignment session
+7. **domain-modeling** - Bounded contexts, entities, relationships, ubiquitous language
 
 #### Development Skills
 7. **test-driven-development** - TDD: RED-GREEN-REFACTOR
@@ -210,9 +211,10 @@ Agents are specialized AI assistants that handle specific types of tasks. Each a
 **Best for:** Implementation with version control
 
 #### 3. Code-Reviewer Agent
-**Purpose:** 5-axis code review
+**Purpose:** Code review with Standard (5-axis) and Deep (9-axis) modes
 **Usage:** `Agent: em:code-reviewer - Review the changes in this PR`
 **Best for:** Quality assurance
+**Deep mode:** `Agent: em:code-reviewer - Deep review of production-critical changes`
 
 #### 4. Debugger Agent
 **Purpose:** Systematic debugging
@@ -224,10 +226,10 @@ Agents are specialized AI assistants that handle specific types of tasks. Each a
 **Usage:** `Agent: em:test-engineer - Create test strategy for authentication`
 **Best for:** Test planning
 
-#### 6. Security-Auditor Agent
-**Purpose:** OWASP security assessment
-**Usage:** `Agent: em:security-auditor - Audit the authentication system`
-**Best for:** Security reviews
+#### 6. Security-Reviewer Agent
+**Purpose:** Security review with Audit (OWASP scan) and Review (OWASP+STRIDE) modes
+**Usage:** `Agent: em:security-reviewer - Audit the authentication system`
+**Best for:** Security reviews (audit mode) and threat modeling (review mode)
 
 #### 7. UI-Auditor Agent
 **Purpose:** Visual QA and design review
@@ -323,74 +325,94 @@ Workflows are end-to-end processes that combine multiple skills and agents to co
 
 ### Primary Workflows
 
-#### 1. New Feature Workflow
+#### 1. Greenfield App Workflow (NEW v3.1.0)
+**Purpose:** Build an application from scratch — blank directory to shipped product
+**Usage:** `Workflow: em-greenfield-app - [app description]`
+**Stages:** Ideation → Problem Reframing → Domain Modeling → Spec → Architecture → Bootstrap → Build → Verify → Review → Launch
+
+#### 2. New Feature Workflow
 **Purpose:** Take features from idea to production
 **Usage:** `Workflow: new-feature - [feature description]`
 **Stages:** Define → Plan → Build → Verify → Review → Simplify → Ship
 
-#### 2. Bug Fix Workflow
+#### 2. New Feature Workflow
+**Purpose:** Take features from idea to production
+**Usage:** `Workflow: new-feature - [feature description]`
+**Stages:** Define → Plan → Build → Verify → Review → Simplify → Ship
+
+#### 3. Bug Fix Workflow
 **Purpose:** Investigate and fix bugs systematically
 **Usage:** `Workflow: bug-fix - [bug description]`
 **Stages:** Investigate → Analyze → Hypothesize → Implement → Verify
 
-#### 3. Refactoring Workflow
+#### 3. Bug Fix Workflow
+**Purpose:** Investigate and fix bugs systematically
+**Usage:** `Workflow: bug-fix - [bug description]`
+**Stages:** Investigate → Analyze → Hypothesize → Implement → Verify
+
+#### 4. Refactoring Workflow
 **Purpose:** Improve code quality safely
 **Usage:** `Workflow: refactoring - [refactoring goal]`
 **Stages:** Analyze → Plan → Refactor → Test → Verify
 
-#### 4. Security Audit Workflow
+#### 4. Refactoring Workflow
+**Purpose:** Improve code quality safely
+**Usage:** `Workflow: refactoring - [refactoring goal]`
+**Stages:** Analyze → Plan → Refactor → Test → Verify
+
+#### 5. Security Audit Workflow
 **Purpose:** Comprehensive security assessment
 **Usage:** `Workflow: security-audit - [system to audit]`
 **Stages:** Reconnaissance → Vulnerability Scan → Analysis → Reporting
 
 ### Support Workflows
 
-#### 5. Project Setup Workflow
+#### 6. Project Setup Workflow
 Initialize new projects with best practices
 
-#### 6. Documentation Workflow
+#### 7. Documentation Workflow
 Generate and update documentation
 
-#### 7. Deployment Workflow
+#### 8. Deployment Workflow
 Deploy and monitor features
 
-#### 8. Retro Workflow
+#### 9. Retro Workflow
 Learn and improve from completed work
 
 ### Distributed Workflows
 
-#### 9. Distributed Investigation Workflow
+#### 10. Distributed Investigation Workflow
 Parallel bug investigation across codebase
 **Usage:** `Workflow: distributed-investigation - [investigation topic]`
 
-#### 10. Distributed Development Workflow
+#### 11. Distributed Development Workflow
 Parallel feature implementation
 **Usage:** `Workflow: distributed-development - [feature description]`
 
 ### Team Workflows
 
-#### 11. Team Review Workflow
+#### 12. Team Review Workflow
 Full team review orchestrated by Team Lead
 
-#### 12. Architecture Review Workflow
+#### 13. Architecture Review Workflow
 Architecture review with Architect & Staff Engineer
 
-#### 13. Design Review Workflow
+#### 14. Design Review Workflow
 UI/UX design review with Frontend Expert & Product Manager
 
-#### 14. Code Review 9-Axis Workflow
-Deep 9-axis code review with Senior Code Reviewer & Security
+#### 15. Code Review 9-Axis Workflow
+Deep 9-axis code review with Code Reviewer (Deep mode) & Security
 
-#### 15. Database Review Workflow
+#### 16. Database Review Workflow
 Database schema & query review
 
-#### 16. Product Review Workflow
+#### 17. Product Review Workflow
 Product/spec review with Product Manager
 
-#### 17. Security Review Advanced Workflow
+#### 18. Security Review Advanced Workflow
 Advanced security (OWASP + STRIDE)
 
-#### 18. Incident Response Workflow
+#### 19. Incident Response Workflow
 Production incident handling
 
 ### How to Use Workflows
@@ -576,7 +598,7 @@ ls /tmp/claude-work-reports/database/
 
 # Step 6: Review
 "Agent: em:code-reviewer - Review authentication implementation"
-"Agent: em:security-auditor - Audit authentication security"
+"Agent: em:security-reviewer - Audit authentication security"
 
 # Step 7: Deploy
 "Workflow: em-deployment - Deploy authentication feature"
@@ -740,7 +762,7 @@ cp workflows/new-feature.md workflows/my-custom-workflow.md
 
 - name: Security Audit
   run: |
-    "Agent: em:security-auditor - Audit before deployment"
+    "Agent: em:security-reviewer - Audit before deployment"
 ```
 
 ---
@@ -760,5 +782,5 @@ cp workflows/new-feature.md workflows/my-custom-workflow.md
 
 ---
 
-**Last Updated:** 2026-05-02
-**Version:** 3.0.0
+**Last Updated:** 2026-05-08
+**Version:** 3.1.0

@@ -286,7 +286,17 @@
       "Bash(ln -sf postgresql.md /Users/abc/Desktop/EM-Team/skills/expert-database/postgresql/SKILL.md)",
       "Bash(ln -sf redis.md /Users/abc/Desktop/EM-Team/skills/expert-database/redis/SKILL.md)",
       "Bash(ln -sf elasticsearch.md /Users/abc/Desktop/EM-Team/skills/expert-database/elasticsearch/SKILL.md)",
-      "Bash(xargs -I{} basename {})"
+      "Bash(xargs -I{} basename {})",
+      "Bash(git submodule *)",
+      "Read(//private/tmp/**)",
+      "Bash(rm -rf sdlc-test)",
+      "Bash(ln -s test-generation.md SKILL.md)",
+      "Bash(npx playwright *)",
+      "Bash(node *)",
+      "Bash(npm install *)",
+      "Skill(setup-browser-cookies)",
+      "Bash(ln -s flow-discovery.md SKILL.md)",
+      "Bash([ -f \"/Users/abc/Desktop/EM-Team/$f\" ])"
     ]
   },
   "enableAllProjectMcpServers": true,

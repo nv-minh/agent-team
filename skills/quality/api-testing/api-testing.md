@@ -1,23 +1,25 @@
 ---
 name: api-testing
-description: API testing for integration and contract verification. Use when testing API endpoints, verifying integrations, or ensuring API contracts.
-version: "2.0.0"
+description: API testing for integration, contract verification, and performance benchmarking. Use when testing API endpoints, verifying integrations, ensuring API contracts, or benchmarking response times.
+version: "3.0.0"
 category: "quality"
 origin: "agent-skills"
 tools: [Read, Write, Bash, Grep, Glob]
-triggers: ["api test", "endpoint test", "contract test", "integration test"]
-intent: "Verify that APIs behave correctly under all conditions by testing contracts, error handling, and authentication boundaries."
+triggers: ["api test", "endpoint test", "contract test", "integration test", "api contract", "response time", "api performance", "api benchmark"]
+intent: "Verify that APIs behave correctly under all conditions by testing contracts, error handling, authentication boundaries, and response time SLAs."
 scenarios:
   - "Writing contract tests for a new REST endpoint before frontend integration begins"
   - "Testing authentication and authorization on protected admin API routes"
   - "Validating rate limiting and error response schemas across the user service API"
-best_for: "endpoint testing, contract validation, auth testing, error handling verification, rate limiting tests"
+  - "Benchmarking API endpoint response times against SLA thresholds"
+  - "Running a structured contract test validating input, expected output, actual output, and timing"
+best_for: "endpoint testing, contract validation, auth testing, error handling verification, rate limiting tests, API performance testing, response time validation, contract benchmarks"
 estimated_time: "15-30 min"
 anti_patterns:
   - "Testing only the happy path and ignoring error responses and edge cases"
   - "Letting tests depend on execution order or shared mutable state"
   - "Hardcoding test data that causes conflicts when tests run in parallel"
-related_skills: ["e2e-testing", "security-audit", "api-interface-design"]
+related_skills: ["e2e-testing", "security-audit", "api-interface-design", "performance-optimization", "test-generation"]
 ---
 
 # API Testing
@@ -491,6 +493,271 @@ describe('API Contract Tests', () => {
 });
 ```
 
+## API Contract Testing with Structured Validation
+
+### Contract Interface
+
+Define structured API contracts that validate input, expected output, actual output, and response time:
+
+```typescript
+interface APIContract {
+  endpoint: string;
+  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+  description: string;
+
+  request: {
+    headers?: Record<string, string>;
+    query?: Record<string, string>;
+    body?: unknown;
+  };
+
+  expected: {
+    status: number;
+    body?: unknown;
+    headers?: Record<string, string>;
+    maxResponseTime: number; // milliseconds
+  };
+
+  actual: {
+    status?: number;
+    body?: unknown;
+    headers?: Record<string, string>;
+    responseTime?: number;
+  };
+
+  result: 'PASS' | 'FAIL' | 'NOT_RUN';
+  failureReason?: string;
+}
+```
+
+### Contract Test Example
+
+```typescript
+describe('API Contract: POST /api/users', () => {
+  const contracts: APIContract[] = [
+    {
+      endpoint: '/api/users',
+      method: 'POST',
+      description: 'Create user with valid data',
+      request: {
+        body: { name: 'John Doe', email: 'john@example.com', password: 'SecurePass123!' }
+      },
+      expected: {
+        status: 201,
+        body: { success: true, data: { name: 'John Doe', email: 'john@example.com' } },
+        maxResponseTime: 500
+      },
+      actual: {},
+      result: 'NOT_RUN'
+    },
+    {
+      endpoint: '/api/users',
+      method: 'POST',
+      description: 'Reject invalid email',
+      request: {
+        body: { name: 'Jane', email: 'not-an-email', password: 'short' }
+      },
+      expected: {
+        status: 400,
+        body: { success: false, error: { code: 'VALIDATION_ERROR' } },
+        maxResponseTime: 200
+      },
+      actual: {},
+      result: 'NOT_RUN'
+    }
+  ];
+
+  for (const contract of contracts) {
+    it(contract.description, async () => {
+      const start = performance.now();
+      const response = await request(app)
+        [contract.method.toLowerCase()](contract.endpoint)
+        .set(contract.request.headers || {})
+        .query(contract.request.query || {})
+        .send(contract.request.body);
+      const responseTime = performance.now() - start;
+
+      contract.actual = {
+        status: response.status,
+        body: response.body,
+        responseTime
+      };
+
+      // Validate status
+      expect(response.status).toBe(contract.expected.status);
+
+      // Validate body shape
+      if (contract.expected.body) {
+        expect(response.body).toMatchObject(contract.expected.body);
+      }
+
+      // Validate response time SLA
+      expect(responseTime).toBeLessThan(contract.expected.maxResponseTime);
+
+      contract.result = 'PASS';
+    });
+  }
+
+  afterAll(() => {
+    // Print contract report
+    console.table(contracts.map(c => ({
+      Description: c.description,
+      Expected: c.expected.status,
+      Actual: c.actual.status,
+      'Time (ms)': c.actual.responseTime?.toFixed(1),
+      'SLA (ms)': c.expected.maxResponseTime,
+      Result: c.result
+    })));
+  });
+});
+```
+
+## Response Time Validation
+
+### Per-Endpoint Thresholds
+
+Define performance SLAs per endpoint:
+
+```typescript
+const endpointThresholds: Record<string, { p50: number; p95: number; p99: number }> = {
+  'GET /api/users':       { p50: 100, p95: 300,  p99: 500  },
+  'POST /api/users':      { p50: 200, p95: 500,  p99: 1000 },
+  'GET /api/users/:id':   { p50: 50,  p95: 150,  p99: 300  },
+  'PATCH /api/users/:id': { p50: 150, p95: 400,  p99: 800  },
+  'DELETE /api/users/:id':{ p50: 100, p95: 300,  p99: 600  },
+  'POST /api/auth/login': { p50: 100, p95: 300,  p99: 500  },
+};
+```
+
+### Percentile Timing Test
+
+```typescript
+describe('API Performance: GET /api/users', () => {
+  const THRESHOLD_P95 = 300;
+  const SAMPLE_SIZE = 50;
+  const responseTimes: number[] = [];
+
+  for (let i = 0; i < SAMPLE_SIZE; i++) {
+    it(`sample ${i + 1}`, async () => {
+      const start = performance.now();
+      await request(app).get('/api/users').set('Authorization', `Bearer ${token}`).expect(200);
+      responseTimes.push(performance.now() - start);
+    });
+  }
+
+  afterAll(() => {
+    responseTimes.sort((a, b) => a - b);
+    const p50 = responseTimes[Math.floor(SAMPLE_SIZE * 0.5)];
+    const p95 = responseTimes[Math.floor(SAMPLE_SIZE * 0.95)];
+    const p99 = responseTimes[Math.floor(SAMPLE_SIZE * 0.99)];
+
+    console.log(`P50: ${p50.toFixed(2)}ms`);
+    console.log(`P95: ${p95.toFixed(2)}ms`);
+    console.log(`P99: ${p99.toFixed(2)}ms`);
+
+    expect(p95).toBeLessThan(THRESHOLD_P95);
+  });
+});
+```
+
+## API Performance Benchmarking
+
+### Benchmark Runner
+
+```typescript
+interface BenchmarkResult {
+  endpoint: string;
+  method: string;
+  samples: number;
+  p50: number;
+  p95: number;
+  p99: number;
+  min: number;
+  max: number;
+  mean: number;
+  passed: boolean;
+}
+
+async function benchmarkEndpoint(
+  app: Express,
+  method: string,
+  endpoint: string,
+  threshold: { p95: number },
+  options: { samples?: number; headers?: Record<string, string>; body?: unknown } = {}
+): Promise<BenchmarkResult> {
+  const samples = options.samples ?? 30;
+  const times: number[] = [];
+
+  for (let i = 0; i < samples; i++) {
+    const start = performance.now();
+    await request(app)
+      [method.toLowerCase()](endpoint)
+      .set(options.headers || {})
+      .send(options.body);
+    times.push(performance.now() - start);
+  }
+
+  times.sort((a, b) => a - b);
+  const p50 = times[Math.floor(samples * 0.5)];
+  const p95 = times[Math.floor(samples * 0.95)];
+  const p99 = times[Math.floor(samples * 0.99)];
+
+  return {
+    endpoint,
+    method,
+    samples,
+    p50,
+    p95,
+    p99,
+    min: times[0],
+    max: times[samples - 1],
+    mean: times.reduce((a, b) => a + b) / samples,
+    passed: p95 < threshold.p95
+  };
+}
+```
+
+### Benchmark Suite
+
+```typescript
+describe('API Performance Benchmark Suite', () => {
+  const results: BenchmarkResult[] = [];
+
+  it('GET /api/users', async () => {
+    const result = await benchmarkEndpoint(app, 'GET', '/api/users',
+      { p95: 300 }, { headers: { Authorization: `Bearer ${token}` } });
+    results.push(result);
+    expect(result.passed).toBe(true);
+  });
+
+  it('GET /api/users/:id', async () => {
+    const result = await benchmarkEndpoint(app, 'GET', '/api/users/1',
+      { p95: 150 }, { headers: { Authorization: `Bearer ${token}` } });
+    results.push(result);
+    expect(result.passed).toBe(true);
+  });
+
+  it('POST /api/users', async () => {
+    const result = await benchmarkEndpoint(app, 'POST', '/api/users',
+      { p95: 500 }, {
+        headers: { Authorization: `Bearer ${adminToken}` },
+        body: { name: 'Benchmark User', email: `bench${Date.now()}@test.com`, password: 'TestPass123!' }
+      });
+    results.push(result);
+    expect(result.passed).toBe(true);
+  });
+
+  afterAll(() => {
+    console.log('\n## API Performance Benchmark Report\n');
+    console.log('| Endpoint | P50 | P95 | P99 | Min | Max | Mean | Status |');
+    console.log('|---|---|---|---|---|---|---|---|');
+    for (const r of results) {
+      console.log(`| ${r.method} ${r.endpoint} | ${r.p50.toFixed(0)}ms | ${r.p95.toFixed(0)}ms | ${r.p99.toFixed(0)}ms | ${r.min.toFixed(0)}ms | ${r.max.toFixed(0)}ms | ${r.mean.toFixed(0)}ms | ${r.passed ? 'PASS' : 'FAIL'} |`);
+    }
+  });
+});
+```
+
 ## Best Practices
 
 ### 1. Use Descriptive Test Names
@@ -575,3 +842,7 @@ After API testing:
 - [ ] Input validation tested
 - [ ] Tests are isolated
 - [ ] Tests are fast
+- [ ] API contracts validated (input/output/status)
+- [ ] Response time thresholds tested
+- [ ] Performance benchmarks run for critical endpoints
+- [ ] Contract test report generated

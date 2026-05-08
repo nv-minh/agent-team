@@ -2,6 +2,10 @@
 name: security-auditor
 type: agent
 version: 1.2.0
+deprecated: true
+deprecated_since: "3.1.0"
+deprecated_reason: "Merged into security-reviewer agent as Audit mode. Use em-agent:security-reviewer instead."
+redirect_to: "em-agent:security-reviewer"
 origin: EM-Skill Core Agents
 trigger: em-agent:security-auditor
 description: OWASP-based security audit for vulnerability assessment. Use when auditing code, checking security, or ensuring compliance.
@@ -27,6 +31,11 @@ completion_marker: true
 ---
 
 # Security-Auditor Agent
+
+> **DEPRECATED** since v3.1.0 — This agent has been merged into `security-reviewer` as **Audit mode**.
+> Use `em-agent:security-reviewer` to get the same OWASP Top 10 scanning.
+> For full STRIDE + blocking authority, request "review mode".
+> See `agents/security-reviewer.md` for the unified agent.
 
 ## Role Identity
 

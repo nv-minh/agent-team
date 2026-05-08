@@ -1,71 +1,56 @@
 # EM-Team - Fullstack Engineering Skill System
 
-**A comprehensive system of 25+ skills, 16 agents, and 18 workflows for fullstack engineering.**
+**A comprehensive system of 75 skills, 33 active agents, and 24 workflows for fullstack engineering.**
 
 ---
 
-## 🎯 Quick Start
+## Quick Start
 
 ```
 # Use a skill
 "Use the brainstorming skill to explore this idea"
 
 # Use an agent
-"Agent: em-planner - Create implementation plan"
+"Agent: em:planner - Create implementation plan"
 
 # Use a workflow
-"Workflow: em-new-feature - Implement from idea to production"
+"Workflow: em:new-feature - Implement from idea to production"
 ```
 
----
+## What's Available
 
-## 📚 What's Available
+### Skills (75 total)
+- **Foundation** (7): brainstorming, domain-modeling, spec-driven-development, systematic-debugging, etc.
+- **Development** (11): test-driven-development, incremental-implementation, subagent-driven-development, etc.
+- **Expert** (42): React, Vue, Go, NestJS, Python, Database, DevOps, Mobile, Spring, Frontend, Backend, Rust, TypeScript
+- **Quality** (12): code-review, security-audit, performance-optimization, e2e-testing, etc.
+- **Workflow** (6): git-workflow, ci-cd-automation, documentation, etc.
+- **Additional** (5): jobs-to-be-done, lean-ux-canvas, opportunity-solution-tree, etc.
 
-### Skills (25 total)
-- **Foundation** (5): brainstorming, spec-driven-development, systematic-debugging, etc.
-- **Development** (8): test-driven-development, frontend-patterns, backend-patterns, etc.
-- **Quality** (7): code-review, security-audit, performance-optimization, etc.
-- **Workflow** (5): git-workflow, ci-cd-automation, documentation, etc.
+### Agents (33 active + 2 deprecated)
+- **Core** (8): planner, executor, code-reviewer, debugger, test-engineer, security-reviewer, ui-auditor, verifier
+- **Specialized** (9): architect, frontend-expert, backend-expert, database-expert, etc.
+- **Expert** (7): react-expert, vue-expert, nestjs-expert, devops-expert, mobile-expert, spring-expert, rust-expert
 
-### Agents (16 total)
-- **Core** (8): planner, executor, code-reviewer, debugger, test-engineer, etc.
-- **Specialized** (8): architect, frontend-expert, database-expert, security-reviewer, etc.
+> **Note:** `senior-code-reviewer` and `security-auditor` are deprecated in v3.1.0. Use `code-reviewer` (Deep mode) and `security-reviewer` (Audit mode) instead.
 
-### Workflows (18 total)
-- **Primary** (4): new-feature, bug-fix, refactoring, security-audit
-- **Support** (4): project-setup, documentation, deployment, retro
-- **Team** (8): team-review, architecture-review, code-review-9axis, etc.
+### Workflows (24 total)
+- **Primary** (5): new-feature, greenfield-app, bug-fix, refactoring, security-audit
+- **Support** (6): project-setup, documentation, deployment, retro, ship-workflow, canary-monitoring
+- **Team** (8): team-review, architecture-review, design-review, code-review-9axis, etc.
 - **Distributed** (2): distributed-investigation, distributed-development
+- **Product** (2): discovery-process, market-driven-feature
+
+### Workflow Selection Guide
+
+| Starting Point | Use |
+|---|---|
+| Blank directory + idea | greenfield-app |
+| Existing codebase + feature | new-feature |
+| Existing codebase + market opportunity | market-driven-feature |
+| Technical bootstrapping only | project-setup |
 
 ---
 
-## 📖 Complete Documentation
-
-See **[SKILL-INDEX.md](SKILL-INDEX.md)** for complete list and usage examples.
-
----
-
-## 🚀 Installation
-
-Already installed at: `/Users/abc/Desktop/EM-Team`
-
-**Status:** ✅ Production Ready
-**Tests:** 8/8 E2E Passing
-**Version:** 1.1.0
-
----
-
-## 🌐 Distributed Mode
-
-For complex multi-domain tasks:
-
-```bash
-em-start  # Start distributed orchestration
-"Agent: em-techlead-orchestrator - Investigate across full stack"
-em-stop   # Stop distributed mode
-```
-
----
-
-**Repository:** https://github.com/nv-minh/agent-team
-**Documentation:** [docs/](../docs/)
+**Version:** 3.1.0
+**Last Updated:** 2026-05-08

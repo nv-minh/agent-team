@@ -79,6 +79,14 @@ When completing work, report one of:
 
 Architect agent reviews architecture, technical design, ADR (Architecture Decision Records), and detects architectural patterns like HEXAGONAL vs LAYERED. Ensures architectural decisions are sound, scalable, and maintainable.
 
+## Boundary: Architect vs Staff Engineer
+
+Use the **Architect** when: Making design decisions ("should we build it this way?"), evaluating patterns, reviewing architecture, planning system structure, assessing scalability.
+
+Use the **Staff Engineer** when: Investigating incidents ("why is this broken?"), analyzing root causes, debugging cross-service issues, conducting postmortems.
+
+If in doubt: If the question is about **how to build it** → Architect. If the question is about **why it's broken** → Staff Engineer.
+
 ## Responsibilities
 
 1. **Architecture Review** - Evaluate architectural design

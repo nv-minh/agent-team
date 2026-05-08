@@ -99,7 +99,15 @@ Run end-to-end processes:
 
 ## 🎯 Common Tasks
 
-### Task 1: Building a New Feature
+### Task 1: Building a New App from Scratch
+
+```bash
+# Full greenfield workflow (blank directory → shipped app)
+"Workflow: em-greenfield-app - Build a task management app with teams and projects"
+# Runs: Ideation → Domain Modeling → Spec → Architecture → Bootstrap → Build → Verify → Review → Launch
+```
+
+### Task 2: Building a New Feature
 
 ```bash
 # Step 1: Explore the idea
@@ -121,7 +129,30 @@ Run end-to-end processes:
 "Workflow: em-deployment - Deploy user profile feature"
 ```
 
-### Task 2: Fixing a Bug
+### Task 2: Building a New Feature
+
+```bash
+# Step 1: Explore the idea
+"Use the brainstorming skill to explore a user profile feature"
+
+# Step 1.7: Domain modeling (optional, for cross-context features)
+"Use the domain-modeling skill to map entities and bounded contexts"
+
+# Step 2: Create specification
+"Use the spec-driven-development skill to create a spec"
+
+# Step 3: Plan implementation
+"Agent: em:planner - Create implementation plan for user profile"
+
+# Step 4: Implement
+"Use the subagent-driven-development skill to implement the plan"
+
+# Step 5: Review
+"Agent: em:code-reviewer - Review the user profile implementation"
+
+# Step 6: Deploy
+"Workflow: em-deployment - Deploy user profile feature"
+```
 
 ```bash
 # Step 1: Debug systematically
@@ -141,10 +172,13 @@ Run end-to-end processes:
 ### Task 3: Code Review
 
 ```bash
-# Standard review
+# Standard 5-axis review
 "Agent: em:code-reviewer - Review the changes in this PR"
 
-# Deep 9-axis review
+# Deep 9-axis review (for production-critical code)
+"Agent: em:code-reviewer - Deep review of authentication changes"
+
+# Deep 9-axis workflow with security
 "Workflow: em-code-review-9axis - Deep review of authentication changes"
 
 # Team review
@@ -281,5 +315,5 @@ cd tests
 
 ---
 
-**Last Updated:** 2026-05-02
-**Version:** 3.0.0
+**Last Updated:** 2026-05-08
+**Version:** 3.1.0

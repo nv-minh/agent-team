@@ -201,6 +201,16 @@ Not every task requires all six phases. Adapt based on scope:
 | Refactor | DEFINE → PLAN → BUILD → VERIFY → SHIP | Simplify auth module |
 | Documentation | DEFINE → BUILD → SHIP | Update API docs |
 | Security patch | DEFINE → PLAN → BUILD → VERIFY → REVIEW → SHIP | Fix XSS vulnerability |
+| Greenfield app | Full lifecycle with extended DEFINE | New product from scratch |
+
+## Workflow Selection Guide
+
+| Starting Point | Use Workflow | Key Difference |
+|---|---|---|
+| Blank directory + idea | greenfield-app | Extended DEFINE with domain modeling |
+| Existing codebase + feature | new-feature | Brainstorm → Spec → Build |
+| Existing codebase + market opportunity | market-driven-feature | Market discovery first |
+| Technical bootstrapping only | project-setup | Scaffolding only |
 
 ## Rollback Protocol
 
@@ -218,4 +228,5 @@ This master lifecycle is inherited by:
 - `bug-fix.md` — Abbreviated lifecycle for bug fixes
 - `refactoring.md` — Lifecycle for code improvements
 - `security-audit.md` — Lifecycle for security assessments
+- `greenfield-app.md` — Full lifecycle for new products from scratch
 - All team workflows — Lifecycle with multi-agent coordination
