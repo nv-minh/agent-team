@@ -1,12 +1,13 @@
 #!/bin/bash
-# install.sh — Install EM-Team globally for use in any Claude Code project
+# install.sh — Install EM-Team globally for Claude Code (GSD-style)
+# Copies content + creates /em/* slash commands. No symlinks.
 # Usage: bash install.sh
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-REPO="$SCRIPT_DIR"
-CONFIG="$HOME/.claude/config.json"
-SKILLS_DIR="$HOME/.claude/skills"
+REPO="$(cd "$(dirname "$0")" && pwd)"
+CLAUDE_DIR="$HOME/.claude"
+CONTENT_DIR="$CLAUDE_DIR/em-team"
+COMMANDS_DIR="$CLAUDE_DIR/commands/em"
 
 # Colors
 RED='\033[0;31m'
@@ -22,239 +23,235 @@ err()   { echo -e "${RED}[ERROR]${NC} $1" >&2; exit 1; }
 
 echo ""
 echo "  ╔══════════════════════════════════════╗"
-echo "  ║       EM-Team v3.0.0 Installer       ║"
+echo "  ║       EM-Team v3.1.0 Installer       ║"
 echo "  ╚══════════════════════════════════════╝"
 echo ""
 
-# ─── Step 1: Verify repo exists ───
+# ─── Step 1: Verify repo ───
 if [[ ! -f "$REPO/CLAUDE.md" ]]; then
   err "Not an EM-Team repo (missing CLAUDE.md). Run from EM-Team root."
 fi
 
-info "EM-Team repo: $REPO"
-info "Config target: $CONFIG"
+info "Repo: $REPO"
+info "Target: $CLAUDE_DIR"
 echo ""
 
-# ─── Step 2: Ensure ~/.claude/ exists ───
-mkdir -p "$HOME/.claude"
-mkdir -p "$SKILLS_DIR"
+# ─── Step 2: Clean old installs ───
+info "Cleaning old installs ..."
 
-# ─── Step 3: Update ~/.claude/config.json ───
-info "Updating ~/.claude/config.json ..."
-
-if [[ -f "$CONFIG" ]]; then
-  # Read existing config (may have other settings like model, max_tokens)
-  EXISTING=$(cat "$CONFIG")
-else
-  EXISTING='{}'
+# Remove old content directory
+if [[ -d "$CONTENT_DIR" ]]; then
+  rm -rf "$CONTENT_DIR"
+  ok "Removed old ~/.claude/em-team/"
 fi
 
-if command -v python3 &>/dev/null; then
-  python3 - "$CONFIG" "$REPO" <<'PYEOF'
+# Remove old command directory
+if [[ -d "$COMMANDS_DIR" ]]; then
+  rm -rf "$COMMANDS_DIR"
+  ok "Removed old ~/.claude/commands/em/"
+fi
+
+# Remove old skill symlinks (em:* and em-* directories with SKILL.md)
+OLD_SKILLS=$(find "$CLAUDE_DIR/skills" -mindepth 1 -maxdepth 1 -type d -name 'em:*' -o -name 'em-*' 2>/dev/null || true)
+if [[ -n "$OLD_SKILLS" ]]; then
+  echo "$OLD_SKILLS" | while read -r dir; do
+    rm -rf "$dir"
+  done
+  COUNT=$(echo "$OLD_SKILLS" | wc -l | tr -d ' ')
+  ok "Removed $COUNT old skill directories"
+fi
+
+# Remove old config.json entries (skills/agents/workflows paths)
+CONFIG="$CLAUDE_DIR/config.json"
+if [[ -f "$CONFIG" ]] && command -v python3 &>/dev/null; then
+  python3 - "$CONFIG" <<'PYEOF'
 import json, sys
-config_path, repo = sys.argv[1], sys.argv[2]
+config_path = sys.argv[1]
 try:
     with open(config_path) as f:
         cfg = json.load(f)
 except Exception:
     cfg = {}
-cfg.setdefault('assistant', {})
-cfg['skills'] = {
-    'enabled': True,
-    'paths': [repo + '/.claude/skills'],
-    'description': f'EM-Team v3.0.0 — 74 skills, 35 agents, 23 workflows. See: {repo}/CLAUDE.md'
-}
-cfg['agents'] = {
-    'enabled': True,
-    'paths': [repo + '/agents'],
-    'description': f'EM-Team Agents — 35 specialized agents. See: {repo}/agents/'
-}
-cfg['workflows'] = {
-    'enabled': True,
-    'paths': [repo + '/workflows'],
-    'description': f'EM-Team Workflows — 23 end-to-end workflows. See: {repo}/workflows/'
-}
-with open(config_path, 'w') as f:
-    json.dump(cfg, f, indent=2)
-    f.write('\n')
+changed = False
+for key in ['skills', 'agents', 'workflows']:
+    if key in cfg:
+        del cfg[key]
+        changed = True
+if changed:
+    with open(config_path, 'w') as f:
+        json.dump(cfg, f, indent=2)
+        f.write('\n')
 PYEOF
-else
-  err "Need python3 to update config.json. Install: brew install python3"
+  ok "Cleaned old config.json entries"
 fi
 
-ok "config.json updated — paths → $REPO"
+# ─── Step 3: Copy content to ~/.claude/em-team/ ───
+info "Copying content to ~/.claude/em-team/ ..."
 
-# ─── Step 4: Create symlinks for skill wrappers ───
-info "Creating skill symlinks in ~/.claude/skills/ ..."
+mkdir -p "$CONTENT_DIR"
 
-# Helper: extract source path from wrapper's "## Source" section
-# Returns the backtick-enclosed path, e.g. skills/foundation/brainstorming/brainstorming.md
-extract_source_path() {
+# Copy agents, workflows, preambles, protocols, references
+cp -R "$REPO/agents"       "$CONTENT_DIR/agents"
+cp -R "$REPO/workflows"    "$CONTENT_DIR/workflows"
+cp -R "$REPO/preambles"    "$CONTENT_DIR/preambles"
+cp -R "$REPO/protocols"    "$CONTENT_DIR/protocols" 2>/dev/null || true
+cp -R "$REPO/references"   "$CONTENT_DIR/references" 2>/dev/null || true
+
+# Copy skills (flatten to skills/<name>/<name>.md structure)
+mkdir -p "$CONTENT_DIR/skills"
+find "$REPO/skills" -name '*.md' -not -name 'SKILL.md' | while read -r src; do
+  # Get just the filename (e.g., brainstorming.md)
+  filename=$(basename "$src")
+  # Create a flat directory
+  mkdir -p "$CONTENT_DIR/skills"
+  # Preserve category structure
+  relpath=${src#$REPO/skills/}
+  destdir=$(dirname "$CONTENT_DIR/skills/$relpath")
+  mkdir -p "$destdir"
+  cp "$src" "$destdir/$filename"
+done
+
+AGENT_COUNT=$(ls "$CONTENT_DIR/agents/"*.md 2>/dev/null | wc -l | tr -d ' ')
+WORKFLOW_COUNT=$(ls "$CONTENT_DIR/workflows/"*.md 2>/dev/null | wc -l | tr -d ' ')
+SKILL_COUNT=$(find "$CONTENT_DIR/skills" -name '*.md' | wc -l | tr -d ' ')
+
+ok "Content copied:"
+ok "  $AGENT_COUNT agents"
+ok "  $WORKFLOW_COUNT workflows"
+ok "  $SKILL_COUNT skills"
+
+# ─── Step 4: Create command wrappers ───
+info "Creating slash commands in ~/.claude/commands/em/ ..."
+
+mkdir -p "$COMMANDS_DIR"
+
+CMD_COUNT=0
+
+# Helper: resolve wrapper's "## Source" to get actual skill file path
+resolve_source_path() {
   local wrapper="$1"
   grep -A2 '## Source' "$wrapper" | grep -oE '`[^`]+\.md`' | head -1 | tr -d '`'
 }
 
-# Collect both em-*.md (agents/workflows) and em-skill-*.md (skills)
-AGENT_FILES=($(ls "$REPO/.claude/skills/"em-*.md 2>/dev/null | grep -v 'em-skill-' || true))
-SKILL_FILES=($(ls "$REPO/.claude/skills/"em-skill-*.md 2>/dev/null || true))
-ALL_FILES=("${AGENT_FILES[@]}" "${SKILL_FILES[@]}")
+# --- Agent commands ---
+# Wrapper em-X.md → look for agents/X.md
+for wrapper in "$REPO/.claude/skills/"em-*.md; do
+  [[ ! -f "$wrapper" ]] && continue
+  basename=$(basename "$wrapper" .md)    # e.g., em-planner
+  name="${basename#em-}"                  # e.g., planner
 
-if [[ ${#ALL_FILES[@]} -eq 0 ]]; then
-  warn "No em-*.md or em-skill-*.md wrappers found in $REPO/.claude/skills/"
-else
-  AGENT_COUNT=0
-  SKILL_COUNT=0
-  SOURCE_LINKED=0
+  # Skip skill wrappers (handled separately)
+  [[ "$name" == skill-* ]] && continue
 
-  for src in "${AGENT_FILES[@]}"; do
-    basename=$(basename "$src" .md)
-    skill_name="${basename#em-}"
-    link_dir="$SKILLS_DIR/em-$skill_name"
-    link_file="$link_dir/SKILL.md"
-
-    if [[ -d "$link_dir" && ! -L "$link_dir" ]]; then
-      rm -rf "$link_dir"
+  # Determine source: agent or workflow?
+  source_file=""
+  if [[ -f "$CONTENT_DIR/agents/$name.md" ]]; then
+    source_file="agents/$name.md"
+  elif [[ -f "$CONTENT_DIR/workflows/$name.md" ]]; then
+    source_file="workflows/$name.md"
+  else
+    # Try alias: search agents/ and workflows/ by filename
+    found=$(find "$CONTENT_DIR/agents" "$CONTENT_DIR/workflows" -name "$name.md" 2>/dev/null | head -1)
+    if [[ -n "$found" ]]; then
+      source_file="${found#$CONTENT_DIR/}"
     fi
+  fi
 
-    mkdir -p "$link_dir"
-    # Agent/workflow wrappers are self-contained — symlink directly
-    ln -sf "$src" "$link_file"
-    AGENT_COUNT=$((AGENT_COUNT + 1))
-  done
+  if [[ -n "$source_file" ]]; then
+    # Get description from wrapper frontmatter
+    desc=$(grep '^description:' "$wrapper" | head -1 | sed 's/^description: *//' | sed 's/^"//' | sed 's/"$//')
+    [[ -z "$desc" ]] && desc="$name"
 
-  for src in "${SKILL_FILES[@]}"; do
-    basename=$(basename "$src" .md)
-    skill_name="${basename#em-skill-}"
-    link_dir="$SKILLS_DIR/em-skill-$skill_name"
-    link_file="$link_dir/SKILL.md"
+    cat > "$COMMANDS_DIR/$name.md" <<CMD
+---
+name: em-$name
+description: $desc
+---
+<execution_context>
+@\$HOME/.claude/em-team/$source_file
+</execution_context>
+CMD
+    CMD_COUNT=$((CMD_COUNT + 1))
+  fi
+done
 
-    if [[ -d "$link_dir" && ! -L "$link_dir" ]]; then
-      rm -rf "$link_dir"
-    fi
+# --- Skill commands ---
+# Wrapper em-skill-X.md → resolve source path
+for wrapper in "$REPO/.claude/skills/"em-skill-*.md; do
+  [[ ! -f "$wrapper" ]] && continue
+  basename=$(basename "$wrapper" .md)    # e.g., em-skill-brainstorming
+  name="${basename#em-skill-}"            # e.g., brainstorming
 
-    mkdir -p "$link_dir"
+  # Resolve source path from wrapper (e.g., "skills/foundation/brainstorming/brainstorming.md")
+  rel_source=$(resolve_source_path "$wrapper")
 
-    # Skill wrappers have a "## Source" pointing to the full content file.
-    # Resolve and symlink directly to source for maximum context.
-    relative_source=$(extract_source_path "$src")
-    if [[ -n "$relative_source" && -f "$REPO/$relative_source" ]]; then
-      ln -sf "$REPO/$relative_source" "$link_file"
-      SOURCE_LINKED=$((SOURCE_LINKED + 1))
+  if [[ -n "$rel_source" ]] && [[ -f "$CONTENT_DIR/$rel_source" ]]; then
+    source_file="$rel_source"
+  else
+    # Fallback: try flat name
+    if [[ -f "$CONTENT_DIR/skills/$name.md" ]]; then
+      source_file="skills/$name.md"
     else
-      # Fallback: symlink to wrapper (old behavior)
-      ln -sf "$src" "$link_file"
-    fi
-    SKILL_COUNT=$((SKILL_COUNT + 1))
-  done
-
-  ok "Created $AGENT_COUNT agent/workflow symlinks (em-*) + $SKILL_COUNT skill symlinks (em-skill-*)"
-  ok "  $SOURCE_LINKED/$SKILL_COUNT skills linked directly to source content"
-fi
-
-# ─── Step 5: Clean up old installs ───
-info "Cleaning up old installs ..."
-
-ORPHANS_REMOVED=0
-
-# Clean OLD em:* directories (from v3.0.0 install with colon separator)
-for candidate in "$SKILLS_DIR"/em:*; do
-  if [[ -d "$candidate" ]]; then
-    rm -rf "$candidate"
-    ORPHANS_REMOVED=$((ORPHANS_REMOVED + 1))
-  fi
-done
-
-# Clean old flat files (not directories, not symlinks to directories)
-for candidate in "$SKILLS_DIR"/em-*.md; do
-  if [[ -f "$candidate" ]]; then
-    rm -f "$candidate"
-    ORPHANS_REMOVED=$((ORPHANS_REMOVED + 1))
-  fi
-done
-
-# Clean orphaned em-* directories with broken SKILL.md symlinks
-for candidate in "$SKILLS_DIR"/em-*/; do
-  if [[ -d "$candidate" ]]; then
-    link_file="$candidate/SKILL.md"
-    if [[ ! -f "$link_file" ]] || [[ -L "$link_file" && ! -e "$link_file" ]]; then
-      rm -rf "$candidate"
-      ORPHANS_REMOVED=$((ORPHANS_REMOVED + 1))
+      # Try finding by filename anywhere in skills/
+      found=$(find "$CONTENT_DIR/skills" -name "$name.md" | head -1)
+      if [[ -n "$found" ]]; then
+        source_file="${found#$CONTENT_DIR/}"
+      else
+        continue
+      fi
     fi
   fi
+
+  desc=$(grep '^description:' "$wrapper" | head -1 | sed 's/^description: *//' | sed 's/^"//' | sed 's/"$//')
+  [[ -z "$desc" ]] && desc="$name"
+
+  cat > "$COMMANDS_DIR/$name.md" <<CMD
+---
+name: em-skill-$name
+description: $desc
+---
+<execution_context>
+@\$HOME/.claude/em-team/$source_file
+</execution_context>
+CMD
+  CMD_COUNT=$((CMD_COUNT + 1))
 done
 
-if [[ "$ORPHANS_REMOVED" -gt 0 ]]; then
-  ok "Removed $ORPHANS_REMOVED orphaned entries"
-fi
+ok "Created $CMD_COUNT slash commands"
 
-# ─── Step 6: Verify installation ───
+# ─── Step 5: Verify ───
 echo ""
 info "Verifying installation ..."
 echo ""
 
 ERRORS=0
 
-# Check config.json is valid JSON
-if command -v jq &>/dev/null; then
-  if ! jq empty "$CONFIG" 2>/dev/null; then
-    err "  config.json is not valid JSON"
+# Check content exists
+if [[ -d "$CONTENT_DIR/agents" && -d "$CONTENT_DIR/workflows" && -d "$CONTENT_DIR/skills" ]]; then
+  ok "  Content directory: $CONTENT_DIR"
+else
+  warn "  Content directory incomplete"
+  ERRORS=$((ERRORS + 1))
+fi
+
+# Check commands exist
+CMD_TOTAL=$(ls "$COMMANDS_DIR/"*.md 2>/dev/null | wc -l | tr -d ' ')
+if [[ "$CMD_TOTAL" -gt 0 ]]; then
+  ok "  $CMD_TOTAL slash commands in $COMMANDS_DIR"
+else
+  warn "  No slash commands created"
+  ERRORS=$((ERRORS + 1))
+fi
+
+# Check a sample command has valid @file reference
+SAMPLE="$COMMANDS_DIR/planner.md"
+if [[ -f "$SAMPLE" ]]; then
+  if grep -q '@.*/em-team/' "$SAMPLE"; then
+    ok "  @file references valid"
+  else
+    warn "  @file reference missing in planner.md"
     ERRORS=$((ERRORS + 1))
   fi
-fi
-
-# Check paths point to correct repo
-EXPECTED_SKILLS="$REPO/.claude/skills"
-EXPECTED_AGENTS="$REPO/agents"
-EXPECTED_WORKFLOWS="$REPO/workflows"
-
-if grep -q "$EXPECTED_SKILLS" "$CONFIG" 2>/dev/null; then
-  ok "  skills.paths  → $EXPECTED_SKILLS"
-else
-  warn "  skills.paths may not be set correctly"
-  ERRORS=$((ERRORS + 1))
-fi
-
-if grep -q "$EXPECTED_AGENTS" "$CONFIG" 2>/dev/null; then
-  ok "  agents.paths  → $EXPECTED_AGENTS"
-else
-  warn "  agents.paths may not be set correctly"
-  ERRORS=$((ERRORS + 1))
-fi
-
-if grep -q "$EXPECTED_WORKFLOWS" "$CONFIG" 2>/dev/null; then
-  ok "  workflows.paths → $EXPECTED_WORKFLOWS"
-else
-  warn "  workflows.paths may not be set correctly"
-  ERRORS=$((ERRORS + 1))
-fi
-
-# Check symlinks (count unique em:* and em:skill:* directories)
-SYMLINK_COUNT=$(find "$SKILLS_DIR" -mindepth 1 -maxdepth 1 -type d -name 'em-*' | wc -l | tr -d ' ')
-BROKEN_LINKS=0
-for dir in "$SKILLS_DIR"/em-*; do
-  if [[ -d "$dir" && -L "$dir/SKILL.md" && ! -e "$dir/SKILL.md" ]]; then
-    BROKEN_LINKS=$((BROKEN_LINKS + 1))
-  fi
-done
-
-if [[ "$SYMLINK_COUNT" -gt 0 ]]; then
-  ok "  $SYMLINK_COUNT skill symlinks active"
-else
-  warn "  No skill symlinks found"
-fi
-
-if [[ "$BROKEN_LINKS" -gt 0 ]]; then
-  warn "  $BROKEN_LINKS broken symlinks detected"
-  ERRORS=$((ERRORS + 1))
-fi
-
-# Check for remaining broken entries
-ORPHAN_COUNT=$(find "$SKILLS_DIR" -maxdepth 1 -name "em-*" -type f 2>/dev/null | wc -l | tr -d ' ')
-if [[ "$ORPHAN_COUNT" -gt 0 ]]; then
-  warn "  $ORPHAN_COUNT orphaned em-* flat files found (run install.sh again to clean)"
-  ERRORS=$((ERRORS + 1))
-else
-  ok "  No orphaned entries"
 fi
 
 # ─── Summary ───
@@ -262,21 +259,18 @@ echo ""
 if [[ $ERRORS -eq 0 ]]; then
   echo -e "  ${GREEN}Installation complete!${NC}"
   echo ""
-  echo "  What's configured:"
-  echo "    Skills:    $EXPECTED_SKILLS"
-  echo "    Agents:    $EXPECTED_AGENTS"
-  echo "    Workflows: $EXPECTED_WORKFLOWS"
-  echo "    Symlinks:  $SYMLINK_COUNT total (em-* agents + em-skill-* skills)"
+  echo "  Installed:"
+  echo "    Content:  $CONTENT_DIR/ ($AGENT_COUNT agents, $WORKFLOW_COUNT workflows, $SKILL_COUNT skills)"
+  echo "    Commands: $COMMANDS_DIR/ ($CMD_TOTAL slash commands)"
   echo ""
   echo "  Next steps:"
   echo "    1. Restart Claude Code"
-  echo "    2. Type / to see all available EM-Team skills"
-  echo "    3. Try: /em-quick fix typo in README"
-  echo "    4. Try: /em-planner Create implementation plan"
+  echo "    2. Type /em- to see all EM-Team commands"
+  echo "    3. Try: /em-planner Create implementation plan"
+  echo "    4. Try: /em-skill-brainstorming Explore feature ideas"
   echo ""
   echo "  To uninstall: bash $REPO/uninstall.sh"
 else
   echo -e "  ${YELLOW}Installed with $ERRORS warnings.${NC}"
-  echo "  Check the output above for details."
 fi
 echo ""
