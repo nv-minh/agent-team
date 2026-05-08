@@ -109,7 +109,7 @@ else
   for src in "${AGENT_FILES[@]}"; do
     basename=$(basename "$src" .md)
     skill_name="${basename#em-}"
-    link_dir="$SKILLS_DIR/em:$skill_name"
+    link_dir="$SKILLS_DIR/em-$skill_name"
     link_file="$link_dir/SKILL.md"
 
     if [[ -d "$link_dir" && ! -L "$link_dir" ]]; then
@@ -125,7 +125,7 @@ else
   for src in "${SKILL_FILES[@]}"; do
     basename=$(basename "$src" .md)
     skill_name="${basename#em-skill-}"
-    link_dir="$SKILLS_DIR/em:skill:$skill_name"
+    link_dir="$SKILLS_DIR/em-skill-$skill_name"
     link_file="$link_dir/SKILL.md"
 
     if [[ -d "$link_dir" && ! -L "$link_dir" ]]; then
@@ -147,26 +147,33 @@ else
     SKILL_COUNT=$((SKILL_COUNT + 1))
   done
 
-  ok "Created $AGENT_COUNT agent/workflow symlinks (em:*) + $SKILL_COUNT skill symlinks (em:skill:*)"
+  ok "Created $AGENT_COUNT agent/workflow symlinks (em-*) + $SKILL_COUNT skill symlinks (em-skill-*)"
   ok "  $SOURCE_LINKED/$SKILL_COUNT skills linked directly to source content"
 fi
 
-# ─── Step 5: Clean up orphaned flat symlinks ───
-info "Cleaning up orphaned flat files (invalid skill format) ..."
+# ─── Step 5: Clean up old installs ───
+info "Cleaning up old installs ..."
 
 ORPHANS_REMOVED=0
-for candidate in "$SKILLS_DIR"/em-*; do
-  if [[ -f "$candidate" && ! -L "$candidate" ]]; then
-    rm -f "$candidate"
+
+# Clean OLD em:* directories (from v3.0.0 install with colon separator)
+for candidate in "$SKILLS_DIR"/em:*; do
+  if [[ -d "$candidate" ]]; then
+    rm -rf "$candidate"
     ORPHANS_REMOVED=$((ORPHANS_REMOVED + 1))
-  elif [[ -L "$candidate" ]]; then
+  fi
+done
+
+# Clean old flat files (not directories, not symlinks to directories)
+for candidate in "$SKILLS_DIR"/em-*.md; do
+  if [[ -f "$candidate" ]]; then
     rm -f "$candidate"
     ORPHANS_REMOVED=$((ORPHANS_REMOVED + 1))
   fi
 done
 
-# Also clean orphaned em:skill:* directories from old installs
-for candidate in "$SKILLS_DIR"/em:skill:*; do
+# Clean orphaned em-* directories with broken SKILL.md symlinks
+for candidate in "$SKILLS_DIR"/em-*/; do
   if [[ -d "$candidate" ]]; then
     link_file="$candidate/SKILL.md"
     if [[ ! -f "$link_file" ]] || [[ -L "$link_file" && ! -e "$link_file" ]]; then
@@ -177,7 +184,7 @@ for candidate in "$SKILLS_DIR"/em:skill:*; do
 done
 
 if [[ "$ORPHANS_REMOVED" -gt 0 ]]; then
-  ok "Removed $ORPHANS_REMOVED orphaned entries (will be recreated as em:*/SKILL.md or em:skill:*/SKILL.md)"
+  ok "Removed $ORPHANS_REMOVED orphaned entries"
 fi
 
 # ─── Step 6: Verify installation ───
@@ -222,9 +229,9 @@ else
 fi
 
 # Check symlinks (count unique em:* and em:skill:* directories)
-SYMLINK_COUNT=$(find "$SKILLS_DIR" -mindepth 1 -maxdepth 1 -type d -name 'em:*' | wc -l | tr -d ' ')
+SYMLINK_COUNT=$(find "$SKILLS_DIR" -mindepth 1 -maxdepth 1 -type d -name 'em-*' | wc -l | tr -d ' ')
 BROKEN_LINKS=0
-for dir in "$SKILLS_DIR"/em:*; do
+for dir in "$SKILLS_DIR"/em-*; do
   if [[ -d "$dir" && -L "$dir/SKILL.md" && ! -e "$dir/SKILL.md" ]]; then
     BROKEN_LINKS=$((BROKEN_LINKS + 1))
   fi
@@ -241,10 +248,10 @@ if [[ "$BROKEN_LINKS" -gt 0 ]]; then
   ERRORS=$((ERRORS + 1))
 fi
 
-# Check for remaining orphaned flat files
-ORPHAN_COUNT=$(find "$SKILLS_DIR" -maxdepth 1 -name "em-*" 2>/dev/null | wc -l | tr -d ' ')
+# Check for remaining broken entries
+ORPHAN_COUNT=$(find "$SKILLS_DIR" -maxdepth 1 -name "em-*" -type f 2>/dev/null | wc -l | tr -d ' ')
 if [[ "$ORPHAN_COUNT" -gt 0 ]]; then
-  warn "  $ORPHAN_COUNT orphaned em-* entries found (run install.sh again to clean)"
+  warn "  $ORPHAN_COUNT orphaned em-* flat files found (run install.sh again to clean)"
   ERRORS=$((ERRORS + 1))
 else
   ok "  No orphaned entries"
@@ -259,13 +266,13 @@ if [[ $ERRORS -eq 0 ]]; then
   echo "    Skills:    $EXPECTED_SKILLS"
   echo "    Agents:    $EXPECTED_AGENTS"
   echo "    Workflows: $EXPECTED_WORKFLOWS"
-  echo "    Symlinks:  $SYMLINK_COUNT total (em:* agents + em:skill:* skills)"
+  echo "    Symlinks:  $SYMLINK_COUNT total (em-* agents + em-skill-* skills)"
   echo ""
   echo "  Next steps:"
-  echo "    1. Open any project in Claude Code"
+  echo "    1. Restart Claude Code"
   echo "    2. Type / to see all available EM-Team skills"
-  echo "    3. Try: /em:quick fix typo in README"
-  echo "    4. Try: /style-switcher to switch communication style"
+  echo "    3. Try: /em-quick fix typo in README"
+  echo "    4. Try: /em-planner Create implementation plan"
   echo ""
   echo "  To uninstall: bash $REPO/uninstall.sh"
 else
