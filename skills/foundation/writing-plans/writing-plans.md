@@ -218,3 +218,17 @@ Before handing off for execution:
 - [ ] Test steps follow TDD (RED-GREEN-REFACTOR)
 - [ ] Commit messages are included
 - [ ] Self-review completed and issues fixed
+
+## Artifact Export
+
+When `EM_TEAM_ARTIFACT_EXPORT` is enabled ("true"):
+
+After completing this skill, export the plan to:
+`plans/YYYY-MM-DD-HHMM-<feature>.md` (in current working directory)
+
+Format the exported file with:
+- YAML frontmatter: skill name, date, session ID
+- Full plan content: all tasks with file paths, code snippets, test steps
+- Metadata: related files, decisions made
+
+If the env var is not set or is "false", skip export.

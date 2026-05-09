@@ -1,6 +1,8 @@
 {
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "EM_TEAM_SESSION_AUDIT": "true",
+    "EM_TEAM_ARTIFACT_EXPORT": "true"
   },
   "permissions": {
     "allow": [
@@ -296,7 +298,10 @@
       "Bash(npm install *)",
       "Skill(setup-browser-cookies)",
       "Bash(ln -s flow-discovery.md SKILL.md)",
-      "Bash([ -f \"/Users/abc/Desktop/EM-Team/$f\" ])"
+      "Bash([ -f \"/Users/abc/Desktop/EM-Team/$f\" ])",
+      "Bash(git status *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(git checkout *)"
     ]
   },
   "enableAllProjectMcpServers": true,

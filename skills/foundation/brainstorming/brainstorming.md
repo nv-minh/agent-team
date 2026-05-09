@@ -227,3 +227,17 @@ After completing brainstorming:
 - [ ] Spec self-review completed
 - [ ] User reviewed and approved written spec
 - [ ] writing-plans skill invoked
+
+## Artifact Export
+
+When `EM_TEAM_ARTIFACT_EXPORT` is enabled ("true"):
+
+After completing this skill, export the brainstorm output to:
+`brainstorm/YYYY-MM-DD-HHMM-<topic>.md` (in current working directory)
+
+Format the exported file with:
+- YAML frontmatter: skill name, date, session ID
+- Full brainstorm content: context explored, approaches proposed, design decisions
+- Metadata: related files, key decisions made
+
+If the env var is not set or is "false", skip export.

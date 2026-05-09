@@ -242,3 +242,17 @@ After completing an architecture zoom-out:
 - **code-simplification** - Zoom-out often reveals simplification opportunities at boundaries
 - **architecture-improvement** - If zoom-out reveals shallow modules or poor boundaries, follow up with architecture improvement
 - **alignment-session** - Use when zoom-out reveals ambiguities that need resolution before proceeding
+
+## Artifact Export
+
+When `EM_TEAM_ARTIFACT_EXPORT` is enabled ("true"):
+
+After completing this skill, export the architecture map to:
+`architecture/YYYY-MM-DD-HHMM-<area>.md` (in current working directory)
+
+Format the exported file with:
+- YAML frontmatter: skill name, date, session ID
+- Full architecture map: module table, relationships, boundaries, glossary
+- Metadata: related files, key insights
+
+If the env var is not set or is "false", skip export.

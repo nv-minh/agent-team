@@ -422,3 +422,17 @@ After code review:
 - [ ] Suggestions for improvement
 - [ ] Overall assessment given
 - [ ] Follow-up on fixes
+
+## Artifact Export
+
+When `EM_TEAM_ARTIFACT_EXPORT` is enabled ("true"):
+
+After completing this skill, export the review report to:
+`reviews/YYYY-MM-DD-HHMM-<component>.md` (in current working directory)
+
+Format the exported file with:
+- YAML frontmatter: skill name, date, session ID
+- Full review report: all 5 axes with issues and suggestions
+- Metadata: files reviewed, overall assessment
+
+If the env var is not set or is "false", skip export.

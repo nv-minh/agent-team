@@ -234,3 +234,17 @@ Before proceeding to implementation, confirm:
 - [ ] Success criteria are specific and testable
 - [ ] Boundaries (Always/Ask First/Never) are defined
 - [ ] The spec is saved to a file in the repository
+
+## Artifact Export
+
+When `EM_TEAM_ARTIFACT_EXPORT` is enabled ("true"):
+
+After completing this skill, export the spec to:
+`specs/YYYY-MM-DD-HHMM-<feature>.md` (in current working directory)
+
+Format the exported file with:
+- YAML frontmatter: skill name, date, session ID
+- Full spec content: all six core areas, success criteria, boundaries
+- Metadata: related files, decisions made
+
+If the env var is not set or is "false", skip export.

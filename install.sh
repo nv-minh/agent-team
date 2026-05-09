@@ -23,7 +23,7 @@ err()   { echo -e "${RED}[ERROR]${NC} $1" >&2; exit 1; }
 
 echo ""
 echo "  ╔══════════════════════════════════════╗"
-echo "  ║       EM-Team v3.1.0 Installer       ║"
+echo "  ║       EM-Team v3.2.0 Installer       ║"
 echo "  ╚══════════════════════════════════════╝"
 echo ""
 
@@ -96,6 +96,17 @@ cp -R "$REPO/workflows"    "$CONTENT_DIR/workflows"
 cp -R "$REPO/preambles"    "$CONTENT_DIR/preambles"
 cp -R "$REPO/protocols"    "$CONTENT_DIR/protocols" 2>/dev/null || true
 cp -R "$REPO/references"   "$CONTENT_DIR/references" 2>/dev/null || true
+
+# Copy lib (session-audit, artifact-store, trace-store)
+mkdir -p "$CONTENT_DIR/lib"
+cp "$REPO/.claude/lib/session-audit.ts"   "$CONTENT_DIR/lib/" 2>/dev/null || true
+cp "$REPO/.claude/lib/artifact-store.ts"  "$CONTENT_DIR/lib/" 2>/dev/null || true
+cp "$REPO/.claude/lib/trace-store.ts"     "$CONTENT_DIR/lib/" 2>/dev/null || true
+
+# Copy scripts (session-audit, artifact-register)
+mkdir -p "$CONTENT_DIR/scripts"
+cp "$REPO/scripts/session-audit.sh"       "$CONTENT_DIR/scripts/" 2>/dev/null || true
+cp "$REPO/scripts/artifact-register.sh"   "$CONTENT_DIR/scripts/" 2>/dev/null || true
 
 # Copy skills (flatten to skills/<name>/<name>.md structure)
 mkdir -p "$CONTENT_DIR/skills"
@@ -217,6 +228,66 @@ CMD
   CMD_COUNT=$((CMD_COUNT + 1))
 done
 
+# --- Alias shortcuts ---
+# Short names that map to longer agent/workflow names
+for pair in \
+  "backend:backend-expert" "frontend:frontend-expert" "debug:debugger" \
+  "security:security-auditor" "ship:ship-workflow" "team:team-lead" \
+  "test:test-engineer" "verify:verifier" "database:database-expert" \
+  "incident:incident-response" "performance:performance-auditor" \
+  "refactor:refactoring" "research:researcher" \
+  "distributed:distributed-investigation" "code-review-deep:code-review-9axis"; do
+  alias="${pair%%:*}"
+  target="${pair##*:}"
+
+  # Skip if alias already exists as a command
+  [[ -f "$COMMANDS_DIR/$alias.md" ]] && continue
+
+  if [[ -f "$CONTENT_DIR/agents/$target.md" ]]; then
+    source_file="agents/$target.md"
+  elif [[ -f "$CONTENT_DIR/workflows/$target.md" ]]; then
+    source_file="workflows/$target.md"
+  else
+    continue
+  fi
+
+  desc=$(grep '^description:' "$REPO/.claude/skills/em-$alias.md" 2>/dev/null | head -1 | sed 's/^description: *//' | sed 's/^"//' | sed 's/"$//')
+  [[ -z "$desc" ]] && desc="Shortcut for $target"
+
+  cat > "$COMMANDS_DIR/$alias.md" <<CMD
+---
+name: em-$alias
+description: $desc
+---
+<execution_context>
+@\$HOME/.claude/em-team/$source_file
+</execution_context>
+CMD
+  CMD_COUNT=$((CMD_COUNT + 1))
+done
+
+# --- Standalone command shortcuts (qa, quick, health, checkpoint) ---
+# These are thin commands without a separate source file
+for name in qa quick health checkpoint; do
+  wrapper="$REPO/.claude/skills/em-$name.md"
+  [[ ! -f "$wrapper" ]] && continue
+  [[ -f "$COMMANDS_DIR/$name.md" ]] && continue
+
+  desc=$(grep '^description:' "$wrapper" | head -1 | sed 's/^description: *//' | sed 's/^"//' | sed 's/"$//')
+  [[ -z "$desc" ]] && desc="$name"
+
+  # Copy wrapper content as the full command (it's self-contained)
+  cat > "$COMMANDS_DIR/$name.md" <<CMD
+---
+name: em-$name
+description: $desc
+---
+CMD
+  # Append the rest of the wrapper (after frontmatter)
+  sed '1,/^---$/d' "$wrapper" | sed '1,/^---$/d' >> "$COMMANDS_DIR/$name.md"
+  CMD_COUNT=$((CMD_COUNT + 1))
+done
+
 ok "Created $CMD_COUNT slash commands"
 
 # ─── Step 5: Verify ───
@@ -252,6 +323,14 @@ if [[ -f "$SAMPLE" ]]; then
     warn "  @file reference missing in planner.md"
     ERRORS=$((ERRORS + 1))
   fi
+fi
+
+# Check lib files
+LIB_COUNT=$(ls "$CONTENT_DIR/lib/"*.ts 2>/dev/null | wc -l | tr -d ' ')
+if [[ "$LIB_COUNT" -gt 0 ]]; then
+  ok "  $LIB_COUNT lib files (session-audit, artifact-store, trace-store)"
+else
+  warn "  No lib files copied"
 fi
 
 # ─── Summary ───
