@@ -36,6 +36,12 @@ Git workflow with atomic commits ensures clean, understandable project history. 
 
 ## Atomic Commits
 
+### Configuration
+
+Set `EM_TEAM_ATOMIC_COMMITS` in `.claude/settings.local.json` env block:
+- `"true"` (default) — Create one atomic commit per task
+- `"false"` — Skip per-task commits, commit once at the end
+
 ### What is an Atomic Commit?
 
 An atomic commit is a single, complete unit of work that:

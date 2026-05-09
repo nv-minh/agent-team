@@ -2,7 +2,8 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "EM_TEAM_SESSION_AUDIT": "true",
-    "EM_TEAM_ARTIFACT_EXPORT": "true"
+    "EM_TEAM_ARTIFACT_EXPORT": "true",
+    "EM_TEAM_ATOMIC_COMMITS": "true"
   },
   "permissions": {
     "allow": [

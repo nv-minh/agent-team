@@ -175,6 +175,15 @@ quality_gates:
 
 ## Atomic Commit Protocol
 
+### Configuration
+
+Atomic commits are controlled by the `EM_TEAM_ATOMIC_COMMITS` environment variable:
+- `"true"` (default) — Create one atomic commit per task
+- `"false"` — Skip atomic commits, implement all tasks then commit once at the end
+
+When `$EM_TEAM_ATOMIC_COMMITS` is not set or is `"true"`, follow the atomic commit protocol below.
+When set to `"false"`, complete all tasks first, then create a single summary commit at the end.
+
 ### Commit Structure
 
 Each task results in one atomic commit:
