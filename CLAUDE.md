@@ -49,7 +49,7 @@ em-team/
 ├── agents/              # 35 agents (33 active + 2 deprecated)
 ├── workflows/           # 24 end-to-end workflows
 ├── .claude/
-│   ├── lib/             # Agent Trace Store (code provenance tracking)
+│   ├── lib/             # Libraries (trace-store, session-audit, artifact-store)
 │   ├── mcp-servers/     # Custom MCP servers (GitHub enhanced, Project context)
 │   └── rules/           # Operational rules (mistakes ledger, context management)
 ├── templates/           # Reusable templates + context artifacts
@@ -422,9 +422,9 @@ When adding new skills or agents:
 
 ## Version
 
-Current version: 3.1.0
-Last updated: 2026-05-08
-Changes: v3.1.0 — Greenfield app workflow, domain-modeling skill, agent consolidation (code-reviewer + senior-code-reviewer → unified with depth modes; security-auditor + security-reviewer → unified with profiles). Total: 75 skills, 33 active agents (2 deprecated), 24 workflows.
+Current version: 3.2.0
+Last updated: 2026-05-09
+Changes: v3.2.0 — Session audit logging (JSONL, toggle via EM_TEAM_SESSION_AUDIT), skill artifact export (Markdown, toggle via EM_TEAM_ARTIFACT_EXPORT), new CLI scripts (session-audit.sh, artifact-register.sh), artifact export instructions in 5 key skills. Total: 82 skills, 35 agents, 24 workflows.
 
 ## Automation
 
@@ -450,6 +450,18 @@ Changes: v3.1.0 — Greenfield app workflow, domain-modeling skill, agent consol
 - **trace-store.ts** - Agent Trace Store following Agent Trace spec v0.1.0
 - Tracks AI-generated code: contributor type, model, file ranges, commit/branch
 - Usage: `const store = new TraceStore(projectRoot); store.saveFileEditTrace(filePath, 'ai', model, description);`
+
+### Session Audit Logging (v3.2.0)
+- **session-audit.ts** - Append-only JSONL audit log for user-AI conversations
+- Toggle: `EM_TEAM_SESSION_AUDIT` env var in `.claude/settings.local.json`
+- Log location: `.em-team/logs/audit-YYYY-MM-DD.jsonl` (gitignored)
+- CLI: `bash scripts/session-audit.sh {status|stats|recent|by-skill|rotate}`
+
+### Artifact Export (v3.2.0)
+- **artifact-store.ts** - Export skill outputs (specs, plans, reviews) as Markdown
+- Toggle: `EM_TEAM_ARTIFACT_EXPORT` env var in `.claude/settings.local.json`
+- Output dirs: `brainstorm/`, `specs/`, `plans/`, `reviews/`, `architecture/` (in cwd)
+- CLI: `bash scripts/artifact-register.sh {list|stats|recent|by-skill|clean}`
 
 ### Custom MCP Servers (.claude/mcp-servers/)
 - **github-enhanced.js** - Extended GitHub: auto-labeled issues, agent task tracking, PR creation with quality reports, review status

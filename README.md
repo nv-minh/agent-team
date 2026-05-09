@@ -28,6 +28,8 @@ EM-Team provides a complete toolkit for fullstack engineering with:
 - **Browser Automation** - Headless browser for E2E testing
 - **MCP Integrations** - GitHub, Context7, Exa, Memory, Playwright
 - **Memory System** - Cross-session learning and knowledge building
+- **Session Audit** (NEW v3.2.0) - JSONL audit log for user-AI conversations with enable/disable toggle
+- **Artifact Export** (NEW v3.2.0) - Export skill outputs (specs, plans, reviews) as Markdown files with enable/disable toggle
 
 ---
 
@@ -216,22 +218,23 @@ bash install.sh
 ```
 
 `install.sh` automatically:
-- Updates `~/.claude/config.json` — points skills/agents/workflows to EM-Team
-- Creates 156 symlinks in `~/.claude/skills/em:*/SKILL.md` — available in any Claude Code project
+- Copies content to `~/.claude/em-team/` (agents, workflows, skills, lib, scripts)
+- Creates 149+ slash commands in `~/.claude/commands/em/`
+- Copies audit/artifact libraries (`session-audit.ts`, `artifact-store.ts`)
 - Cleans up orphaned entries from previous installs
-- Preserves existing settings (model, max_tokens, etc.)
 
 ### Verify
 
 ```bash
-# Check config paths point to EM-Team
-cat ~/.claude/config.json | grep "paths" -A2
+# Check commands exist (should show 149+ files)
+ls ~/.claude/commands/em/*.md | wc -l
 
-# Check symlinks (should show 156 directories)
-ls -d ~/.claude/skills/em:* | wc -l
+# Check content directory
+ls ~/.claude/em-team/agents/ | wc -l   # 35 agents
+ls ~/.claude/em-team/workflows/ | wc -l # 24 workflows
 
-# Check no broken symlinks
-for d in ~/.claude/skills/em:*; do [ -L "$d/SKILL.md" ] && [ ! -e "$d/SKILL.md" ] && echo "BROKEN: $d"; done
+# Check lib files
+ls ~/.claude/em-team/lib/*.ts           # session-audit.ts, artifact-store.ts, trace-store.ts
 ```
 
 To uninstall: `bash uninstall.sh`
@@ -1156,6 +1159,52 @@ git commit -m "feat: Add new feature"
 - Track project conventions
 - Build knowledge base
 
+### ✅ Session Audit Logging (NEW v3.2.0)
+
+Append-only JSONL audit log tracking user-AI conversations and skill invocations.
+
+- **Toggle**: `EM_TEAM_SESSION_AUDIT` env var in `.claude/settings.local.json`
+- **Log location**: `.em-team/logs/audit-YYYY-MM-DD.jsonl` (gitignored)
+- **Tracks**: user messages, AI responses, skill start/end, artifact exports
+- **CLI**: `bash scripts/session-audit.sh {status|stats|recent|by-skill|rotate}`
+
+```bash
+# Check audit status
+bash scripts/session-audit.sh status
+
+# View recent entries
+bash scripts/session-audit.sh recent 7
+
+# View statistics
+bash scripts/session-audit.sh stats
+
+# Rotate old logs (keep 30 days)
+bash scripts/session-audit.sh rotate 30
+```
+
+### ✅ Skill Artifact Export (NEW v3.2.0)
+
+Export skill outputs (specs, plans, reviews, brainstorm) as Markdown files to current working directory.
+
+- **Toggle**: `EM_TEAM_ARTIFACT_EXPORT` env var in `.claude/settings.local.json`
+- **Output dirs**: `brainstorm/`, `specs/`, `plans/`, `reviews/`, `architecture/`
+- **Format**: Markdown with YAML frontmatter (skill name, date, session)
+- **CLI**: `bash scripts/artifact-register.sh {list|stats|recent|by-skill|clean}`
+
+```bash
+# List all exported artifacts
+bash scripts/artifact-register.sh list
+
+# Show statistics
+bash scripts/artifact-register.sh stats
+
+# Find artifacts by skill
+bash scripts/artifact-register.sh by-skill brainstorming
+
+# Clean artifacts older than 90 days
+bash scripts/artifact-register.sh clean 90
+```
+
 ## Iron Laws
 
 1. **TDD Iron Law**: NO PRODUCTION CODE WITHOUT FAILING TEST
@@ -1512,8 +1561,19 @@ When adding new skills or agents:
 
 ## Version
 
-Current version: **3.0.0**
-Last updated: 2026-05-02
+Current version: **3.2.0**
+Last updated: 2026-05-09
+
+**Changes in v3.2.0:**
+- Session audit logging — JSONL append-only log for user-AI conversations (`.em-team/logs/`)
+- Skill artifact export — Export specs, plans, reviews, brainstorm as Markdown files
+- Enable/disable toggles via `EM_TEAM_SESSION_AUDIT` and `EM_TEAM_ARTIFACT_EXPORT` env vars
+- New CLI scripts: `scripts/session-audit.sh`, `scripts/artifact-register.sh`
+- New libraries: `.claude/lib/session-audit.ts`, `.claude/lib/artifact-store.ts`
+- Artifact export instructions added to 5 key skills (brainstorming, spec-driven, writing-plans, architecture-zoom-out, code-review)
+
+**Changes in v3.1.0:**
+- Greenfield app workflow, domain-modeling skill, agent consolidation
 
 **Changes in v3.0.0:**
 - Expert group restructuring: 15 expert skill groups replacing flat development/ structure
@@ -1634,8 +1694,8 @@ em-team/
 
 ### Version Information
 
-- **Current Version:** 3.0.0
-- **Last Updated:** 2026-05-02
+- **Current Version:** 3.2.0
+- **Last Updated:** 2026-05-09
 - **Status:** Production Ready
 - **License:** MIT
 
